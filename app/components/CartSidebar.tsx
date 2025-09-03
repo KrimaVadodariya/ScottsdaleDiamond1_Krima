@@ -85,7 +85,7 @@ export default function CartSidebar({ isOpen, onClose }: CartSidebarProps) {
                       <div className="flex-1">
                         <h3 className="font-medium text-gray-800 text-sm">{item.name}</h3>
                         <p className="text-yellow-600 font-bold">
-                          {typeof item.price === 'string' ? item.price : `$${item.price.toLocaleString()}`}
+                          {typeof item.price === 'string' ? item.price : `$${(item.price as number).toLocaleString()}`}
                         </p>
                         
                         <div className="flex items-center space-x-2 mt-2">

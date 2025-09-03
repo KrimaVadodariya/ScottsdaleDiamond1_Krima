@@ -73,7 +73,7 @@ export default function CartPage() {
                         {item.length && `Length: ${item.length}`}
                       </p>
                       <p className="text-lg sm:text-xl font-bold text-yellow-600">
-                        {typeof item.price === 'string' ? item.price : `$${item.price.toLocaleString()}`}
+                        {typeof item.price === 'string' ? item.price : `$${(item.price as number).toLocaleString()}`}
                       </p>
                     </div>
                     
