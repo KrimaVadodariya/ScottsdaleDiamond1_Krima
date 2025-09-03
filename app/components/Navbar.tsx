@@ -52,7 +52,7 @@ export default function Navbar() {
             >
               <Gem className="h-8 w-8 text-[#D4AF37]" />
               <span className="text-2xl font-bold text-[#D4AF37]">
-                Heritage Jewelers
+                 Scottsdale Diamond
               </span>
             </motion.div>
           </Link>
