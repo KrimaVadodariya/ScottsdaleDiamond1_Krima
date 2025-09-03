@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useWishlist } from '../context/WishlistContext'
 import { useCart } from '../context/CartContext'
+import Footer from '../components/Footer'
 
 export default function WishlistPage() {
   const { items, removeFromWishlist, clearWishlist } = useWishlist()
@@ -17,7 +18,7 @@ export default function WishlistPage() {
   }
 
   return (
-    <div className="min-h-screen pt-20 pb-12 bg-gradient-to-br from-amber-50 via-yellow-100 to-orange-50 relative">
+    <div className="min-h-screen pt-20  bg-gradient-to-br from-amber-50 via-yellow-100 to-orange-50 relative">
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-10 w-32 h-32 bg-yellow-300 rounded-full blur-3xl"></div>
         <div className="absolute top-40 right-20 w-24 h-24 bg-amber-400 rounded-full blur-2xl"></div>
@@ -115,6 +116,7 @@ export default function WishlistPage() {
           </>
         )}
       </div>
+      <Footer />
     </div>
   )
 }

@@ -6,37 +6,34 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import Footer from './components/Footer'
+import TrustSection from './components/TrustSection'
 
 const categories = [
   {
     id: 1,
     name: 'RINGS',
-    image: 'https://www.davidyurman.com/on/demandware.static/-/Library-Sites-DavidYurmanSharedLibrary/default/dw8fb96691/images/2025/7-14-Amulets/Womens-LP/2025_Summer4_WLP_Promo4_1_Desktop.jpg'
+    image: '/ring1.webp'
   },
   {
     id: 2,
     name: 'NECKLACES',
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdQ1FwzqazZbbBtHRePxcDbrD_4AtIhno6x5gC2u9BTbfsvDviL_nOSaLaA-JTPcW-hkE&usqp=CAU'
+    image: '/nacklace1.webp'
   },
   {
     id: 3,
     name: 'EARRINGS',
-    image: 'https://i.etsystatic.com/12190216/r/il/cc6d0a/3491076281/il_570xN.3491076281_dpvj.jpg'
+    image: '/earring1.jpeg'
   },
   {
     id: 4,
     name: 'BRACELETS',
-    image: 'https://m.media-amazon.com/images/I/8105Yyl1IGL._UY350_.jpg'
+    image: '/bracelet.avif'
   },
+  
   {
     id: 5,
-    name: 'WATCHES',
-    image: 'https://jokerandwitch.com/cdn/shop/products/x-min_1080x.jpg?v=1591790629'
-  },
-  {
-    id: 6,
-    name: 'PERSONALIZED',
-    image: 'https://5.imimg.com/data5/SELLER/Default/2022/7/VO/MJ/GD/110514042/screenshot-20220602-192310-meesho-500x500.jpg'
+    name: 'PENDENT',
+    image: '/pendent1.jpg'
   }
 ]
 
@@ -97,7 +94,7 @@ export default function HomePage() {
   }, [])
 
   return (
-    <div className="min-h-screen mx-6 mt-12">
+    <div className="min-h-screen">
       {/* Hero Section */}
       <motion.section
         initial={{ opacity: 0 }}
@@ -193,11 +190,11 @@ export default function HomePage() {
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-6 gap-4">
+          <div className="grid grid-cols-5 gap-4">
             {categories.map((category) => (
               <div key={category.id} className="text-center">
                 <Link 
-                  href={`/jewelry?category=${category.name.toLowerCase().replace(' ', '-')}`}
+                  href={`/category/${category.name.toLowerCase().replace(' ', '-')}`}
                   className="relative aspect-square cursor-pointer group rounded-lg overflow-hidden block"
                 >
                   <Image
@@ -265,6 +262,118 @@ export default function HomePage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Jewelry Gallery Section */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100">
+        <div className="mx-8">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-5xl font-space font-bold text-gray-800 mb-4">
+              Our Craftsmanship
+            </h2>
+            <p className="text-xl text-gray-600">
+              Discover the artistry behind every piece
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Left Side - Main Image */}
+            <div className="relative flex items-center justify-center">
+              <Image
+                src="/Model2.webp"
+                alt="Featured Jewelry"
+                width={600}
+                height={300}
+                className="object-cover"
+              />
+             
+            </div>
+
+            {/* Right Side - 2x2 Grid with Hidden Scroll */}
+            <div className="h-[700px] overflow-hidden">
+              <div 
+                className="h-full overflow-y-scroll" 
+                style={{
+                  scrollbarWidth: 'none',
+                  msOverflowStyle: 'none'
+                }}
+              >
+                <style jsx>{`
+                  div::-webkit-scrollbar {
+                    display: none;
+                  }
+                `}</style>
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    {
+                      src: "/ring2.jpg",
+                      price: "$2,499"
+                    },
+                    {
+                      src:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPoqUKBLzRlSzsrBlCzPYAvT3YEoI5emBGzReALDoD8LIOcN3ku_88IzfXpiZwx2w2OZg&usqp=CAU",
+                      title: "Gold Necklace",
+                      price: "$1,899"
+                    },
+                    {
+                      src:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9r6zg2mgRV8E3Eh_8X6vqbVQAjths7d5YKw&s",
+                      title: "Pearl Earrings",
+                      price: "$899"
+                    },
+                    {
+                      src: "https://nemichandjewels.com/cdn/shop/files/850_6499.jpg?v=1696850594&width=1946",
+                      title: "Silver Bracelet",
+                      price: "$599"
+                    },
+                    
+                    {
+                      src: "data:image/jpeg;base64,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",
+                      title: "Custom Ring",
+                      price: "$4,999"
+                    },
+                    
+                    {
+                      src:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtsZDS9Ax1WKWIoIMNG1R7L1kFUyJpTcJCdA&s",
+                      title: "Wedding Band",
+                      price: "$799"
+                    }
+                  ].map((item, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.3, delay: index * 0.1 }}
+                      className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    >
+                      <div className="p-4">
+                        <div className="relative aspect-square w-50 h-50 mx-auto mb-3">
+                          <Image
+                            src={item.src}
+                            alt={item.title}
+                            fill
+                            className="object-cover rounded-lg"
+                          />
+                        </div>
+                      </div>
+                      <div className="px-3 pb-3">
+                        <h3 className="font-bold text-gray-800 text-sm mb-1">{item.title}</h3>
+                        <p className="text-yellow-600 font-bold text-lg">{item.price}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <TrustSection />
 
       {/* Customer Reviews Section */}
       <section className="py-24 bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-50 relative overflow-hidden">
@@ -422,143 +531,9 @@ export default function HomePage() {
             </motion.div>
           </div>
           
-          
         </div>
       </section>
-
-      {/* Contact Section */}
-      <section className="py-20 bg-gradient-to-br from-yellow-50 via-white to-amber-50">
-        <div className="mx-8">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <motion.div
-              animate={{ rotate: [0, 5, -5, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
-              className="inline-block mb-4"
-            >
-              <MessageCircle className="text-yellow-600" size={50} />
-            </motion.div>
-            <h2 className="text-5xl font-space font-bold text-gray-800 mb-4">
-              Let's Connect 
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Ready to find your perfect piece? We're here to help make your jewelry dreams come true!
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            {/* Contact Cards */}
-            <div className="space-y-6">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ duration: 0.6 }}
-                className="group p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-yellow-200/50 hover:shadow-xl hover:border-yellow-300 cursor-pointer"
-              >
-                <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-gradient-to-r from-yellow-500 to-amber-500 rounded-full group-hover:scale-110 transition-transform duration-300">
-                    <Mail className="text-white" size={24} />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-1">Email Us</h3>
-                    <p className="text-gray-600">hello@luxejewelry.com</p>
-                    <p className="text-sm text-yellow-600 group-hover:text-yellow-700">We reply within 24 hours!</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                className="group p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-yellow-200/50 hover:shadow-xl hover:border-yellow-300 cursor-pointer"
-              >
-                <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full group-hover:scale-110 transition-transform duration-300">
-                    <Phone className="text-white" size={24} />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-1">Call Us</h3>
-                    <p className="text-gray-600">+1 (555) 123-4567</p>
-                    <p className="text-sm text-green-600 group-hover:text-green-700">Mon-Sat 9AM-7PM EST</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                whileHover={{ scale: 1.02, y: -5 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="group p-6 bg-white/80 backdrop-blur-sm rounded-2xl shadow-lg border border-yellow-200/50 hover:shadow-xl hover:border-yellow-300 cursor-pointer"
-              >
-                <div className="flex items-center space-x-4">
-                  <div className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full group-hover:scale-110 transition-transform duration-300">
-                    <MapPin className="text-white" size={24} />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-1">Visit Our Boutique</h3>
-                    <p className="text-gray-600">123 Luxury Ave, NYC 10001</p>
-                    <p className="text-sm text-purple-600 group-hover:text-purple-700">Private appointments available</p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Quick Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl border border-yellow-200/50 p-8"
-            >
-              <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
-                Quick Message 💌
-              </h3>
-              <form className="space-y-4">
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Your Name"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-200 outline-none transition-all duration-300"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="email"
-                    placeholder="Your Email"
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-200 outline-none transition-all duration-300"
-                  />
-                </div>
-                <div>
-                  <textarea
-                    placeholder="Tell us about your dream jewelry piece..."
-                    rows={4}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-yellow-400 focus:ring-2 focus:ring-yellow-200 outline-none transition-all duration-300 resize-none"
-                  />
-                </div>
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-yellow-600 to-amber-600 text-white py-3 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
-                >
-                  Send Message
-                  <Send className="ml-2" size={18} />
-                </motion.button>
-              </form>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      <Footer />
+      <Footer />      
     </div>
   )
 }
