@@ -77,14 +77,20 @@ export default function AboutPage() {
           </motion.div>
             {/* <h2 className="text-4xl font-light text-[#A89F91] mb-8">Our Heritage</h2> */}
             <p className="text-xl text-[#A89F91] leading-relaxed">
-              For over three decades, Scottsdale Diamond has been at the forefront of luxury jewelry design. 
-              What began as a passion for exceptional craftsmanship has evolved into a legacy of creating 
-              timeless pieces that celebrate life's most precious moments.
+              At Scottsdale Diamond Company, heritage is more than the past—it is the quiet confidence we inherit, 
+              the timeless beauty we choose, and the elegance we carry forward. Our story begins with a reverence for craftsmanship. Every diamond, every gold setting, every clasp 
+              is a testament to artistry passed down through generations of jewelers who understood that true luxury 
+              is not loud—it is enduring.
             </p>
             <p className="text-lg text-[#A89F91] leading-relaxed">
-              Every diamond we select, every setting we craft, and every design we create is a testament 
-              to our unwavering commitment to excellence and our dedication to making your dreams a reality.
+              We draw inspiration from Scottsdale itself—a place where desert light meets refined leisure, where 
+              moments are savored, and elegance is lived, not performed. This spirit informs every collection we 
+              create: classic, sunlit, and sophisticated, with a touch of old-world grace. Heritage also means responsibility. Each piece is thoughtfully sourced and ethically crafted, designed 
+              to be as lasting as the memories it celebrates. Jewelry that begins with one generation and becomes 
+              the treasure of the next.Scottsdale Diamond Company is not just about the jewelry you wear today—it's about the story you pass on tomorrow.
+
             </p>
+            
           </motion.div>
         </div>
       </section>
@@ -126,13 +132,11 @@ export default function AboutPage() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-center max-w-2xl mx-auto px-8 space-y-8"
+            className="text-center max-w-6xl mx-auto px-8 space-y-8"
           >
-            <p className="text-xl text-[#A89F91] leading-relaxed">
-              "We create jewelry that lasts for generations—crafted with uncompromising quality, precious materials, and timeless design. Each piece is more than an accessory; it’s a story waiting to be told, becoming more meaningful with every wear."            </p>
-            
-            <p className="text-xl text-[#A89F91] leading-relaxed">
-              "More than adornment, our jewelry is an expression of identity—crafted with precision, authenticity, and soul. Designed to live with you daily, each piece evolves into a timeless keepsake of your journey."            </p>
+            <p className="text-4xl text-[#A89F91] leading-relaxed">
+              "We design jewelry meant to be lived in—crafted with enduring quality and understated elegance. Each piece carries quiet confidence, becoming part of your story today and a treasure for tomorrow."            
+            </p>
           </motion.div>
         </div>
 
@@ -157,17 +161,23 @@ export default function AboutPage() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="max-w-xs"
+            className="max-w-xl"
           >
             <h3 className="text-4xl font-light text-gray-800 italic mb-6 leading-tight">
-              Thoughtful<br/>
-              Design,<br/>
-              Conscious<br/>
-              Expansion
+              Timeless Craft, Ethical Care
             </h3>
             
+            <p className="text-xl text-[#A89F91] leading-relaxed mb-5" >
+                  In a world where fine jewelry often hides behind inflated markups and opaque 
+                  practices, Scottsdale Diamond Company chooses a different path. We believe luxury 
+                  should feel effortless and honest, rooted in integrity as much as in beauty.            
+            </p>
+
             <p className="text-xl text-[#A89F91] leading-relaxed">
-              In an opaque industry veiled with steep markups and unfavorable manufacturing practices, Kinn stands apart. Guided by our ethos, we act as stewards of our planet, creating jewelry with a conscience for the ever-evolving needs of our modern world. We use recycled 14k gold and ethically sourced gemstones, ensuring each piece meets our high standards of quality and supports responsible production.
+                  Our pieces are thoughtfully crafted with ethically sourced diamonds and responsibly 
+                  refined metals, designed to reflect both sophistication and conscience. Every creation 
+                  meets the highest standards of quality while honoring the trust of our customers—and the 
+                  generations who will wear our jewelry after them.
             </p>
           </motion.div>
         </div>
@@ -185,31 +195,32 @@ export default function AboutPage() {
             <div className="w-24 h-px bg-[#D4AF37] mx-auto"></div>
           </motion.div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+          <div className="grid md:grid-cols-1 lg:grid-cols-5 gap-12 mb-20">
             {[
               {
-                step: "01",
-                title: "Let's Chat",
-                description: "Schedule a one-on-one design appointment in person or virtually. Tell us what you love, what inspires you, or what you've been dreaming of.",
-                image: "/about4.webp"
+                step: "1",
+                title: "Discover",
+                description: "Explore our collection of timeless diamond and gold essentials, crafted to embody effortless luxury."
               },
               {
-                step: "02",
-                title: "We Sketch & Source",
-                description: "Our team will create a custom design and select exceptional diamonds or gemstones that align with your aesthetic, budget, and timeline.",
-                image: "/about5.jpg"
+                step: "2",
+                title: "Select",
+                description: "Choose the piece that speaks to you—whether for a milestone, a gift, or simply a moment of self-celebration."
               },
               {
-                step: "03",
-                title: "You Approve the Magic",
-                description: "We'll share a 3D render or sketch for approval. Once it feels perfect, we bring it to life in our studio.",
-                image: "/about6.jpg"
+                step: "3",
+                title: "Craft",
+                description: "Your jewelry is ethically sourced and meticulously crafted with uncompromising quality and care."
               },
               {
-                step: "04",
-                title: "Your Piece, Delivered",
-                description: "Crafted with care and precision, your one-of-a-kind piece arrives ready to wear, gift, or celebrate.",
-                image: "/about7.webp"
+                step: "4",
+                title: "Deliver",
+                description: "Each order arrives in signature packaging that feels like a gift—because it is."
+              },
+              {
+                step: "5",
+                title: "Treasure",
+                description: "Wear it daily, live with it fully, and let it become part of your story for generations to come."
               }
             ].map((item, index) => (
               <motion.div
@@ -218,24 +229,13 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 whileHover={{ y: -10 }}
                 transition={{ delay: index * 0.15, duration: 0.6 }}
-                className="group"
+                className="text-center p-6 border border-[#CBAE8E]/30 rounded-lg hover:border-[#D4AF37]/50 transition-colors"
               >
-                <div className="relative h-64 mb-8 overflow-hidden">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="w-16 h-16 bg-[#D4AF37] text-white rounded-full flex items-center justify-center text-lg font-bold mx-auto mb-6">
+                  {item.step}
                 </div>
-                <div className="relative pt-6">
-                  <div className="absolute -top-2 left-0 w-12 h-12 bg-[#D4AF37] text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    {item.step}
-                  </div>
-                  <h3 className="text-2xl font-light text-[#A89F91] mb-4 tracking-wide ml-16">{item.title}</h3>
-                  <p className="text-[#A89F91] leading-relaxed opacity-80">{item.description}</p>
-                </div>
+                <h3 className="text-2xl font-light text-[#A89F91] mb-4 tracking-wide">{item.title}</h3>
+                <p className="text-[#A89F91] leading-relaxed opacity-80">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -287,15 +287,15 @@ export default function AboutPage() {
             {[
               {
                 title: "Quality",
-                description: "We source only the finest materials and employ time-honored techniques to ensure each piece meets our exacting standards."
+                description: "We believe true luxury is built to last. That’s why we use only the finest diamonds and precious metals, crafted with meticulous care to meet the highest standards."
               },
               {
                 title: "Authenticity",
-                description: "Every design tells a story, reflecting genuine craftsmanship and the unique vision of our artisans."
+                description: "Every piece carries intention—an honest reflection of artistry, integrity, and timeless design. Nothing superfluous, only the essential made beautiful."
               },
               {
                 title: "Legacy",
-                description: "We create jewelry meant to be treasured for generations, becoming part of your family's story."
+                description: "Our jewelry is created not just for today, but for tomorrow. Made to be lived in, loved, and passed down, each piece becomes part of a story greater than itself."
               }
             ].map((value, index) => (
               <motion.div

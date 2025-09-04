@@ -1,14 +1,7 @@
 {
-  "/_not-found": "app/_not-found.js",
-  "/admin/page": "app/admin/page.js",
-  "/api/booking/route": "app/api/booking/route.js",
-  "/blog/[id]/page": "app/blog/[id]/page.js",
-  "/boutique/page": "app/boutique/page.js",
-  "/blog/page": "app/blog/page.js",
-  "/cart/page": "app/cart/page.js",
-  "/login/page": "app/login/page.js",
-  "/category/[slug]/page": "app/category/[slug]/page.js",
   "/jewelry/page": "app/jewelry/page.js",
-  "/wishlist/page": "app/wishlist/page.js",
-  "/page": "app/page.js"
+  "/checkout/page": "app/checkout/page.js",
+  "/page": "app/page.js",
+  "/cart/page": "app/cart/page.js",
+  "/product/[id]/page": "app/product/[id]/page.js"
 }

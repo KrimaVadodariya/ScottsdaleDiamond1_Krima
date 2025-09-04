@@ -1,13 +1,14 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { ArrowLeft, Heart, Star } from 'lucide-react'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { ArrowLeft, Heart, Star, ChevronDown, ChevronUp } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useCart } from '../../context/CartContext'
 import { useWishlist } from '../../context/WishlistContext'
-import { jewelryItems, jewelryCategories } from '../../data/jewelryData'
+import { jewelryItems, jewelryCategories, materials, priceRanges, sortOptions } from '../../data/jewelryData'
 import Footer from '../../components/Footer'
 
 const categoryMapping: { [key: string]: string } = {
@@ -24,19 +25,46 @@ export default function CategoryPage() {
   const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist()
   const slug = params.slug as string
   
+  // Filter states
+  const [selectedMaterials, setSelectedMaterials] = useState<string[]>(['all'])
+  const [selectedPriceRange, setSelectedPriceRange] = useState(priceRanges[0])
+  const [sortBy, setSortBy] = useState('newest')
+
+  
   // Map slug to category
   const categoryType = categoryMapping[slug]
   const categoryInfo = jewelryCategories.find(cat => cat.slug === categoryType)
   
-  // Filter items by category
-  const categoryItems = jewelryItems.filter(item => item.category === categoryType)
+
   
-  if (!categoryInfo || categoryItems.length === 0) {
+  // Filter and sort items
+  const filteredItems = jewelryItems.filter(item => {
+    const categoryMatch = item.category === categoryType
+    const materialMatch = selectedMaterials.includes('all') || selectedMaterials.includes(item.material)
+    const priceMatch = item.priceValue >= selectedPriceRange.min && item.priceValue <= selectedPriceRange.max
+    
+    return categoryMatch && materialMatch && priceMatch
+  }).sort((a, b) => {
+    switch (sortBy) {
+      case 'price-low':
+        return a.priceValue - b.priceValue
+      case 'price-high':
+        return b.priceValue - a.priceValue
+      case 'popular':
+        return b.reviews - a.reviews
+      case 'rating':
+        return b.rating - a.rating
+      default:
+        return a.id - b.id
+    }
+  })
+  
+  if (!categoryInfo) {
     return (
-      <div className="min-h-screen pt-20  bg-gradient-to-br from-amber-50 via-yellow-100 to-orange-50 flex items-center justify-center">
+      <div className="min-h-screen pt-20 bg-gradient-to-br from-[#FFFAF3] via-[#F5F2EB] to-[#CBAE8E]/20 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-800 mb-4">Category Not Found</h1>
-          <Link href="/" className="text-yellow-600 hover:underline">Return to Home</Link>
+          <h1 className="text-4xl font-bold text-[#A89F91] mb-4">Category Not Found</h1>
+          <Link href="/" className="text-[#D4AF37] hover:underline">Return to Home</Link>
         </div>
       </div>
     )
@@ -57,28 +85,211 @@ export default function CategoryPage() {
   }
 
   return (
-    <div className="min-h-screen pt-20  bg-gradient-to-br from-amber-50 via-yellow-100 to-orange-50">
-      <div className="w-full px-4">
-        {/* Header */}
-        <div className="mb-8">
-         
-          <div className="text-center">
-            <h1 className="text-4xl font-space font-bold text-gray-800">{categoryInfo.name}</h1>
-            <p className="text-gray-600 mt-2">{categoryInfo.description}</p>
-            <p className="text-sm text-gray-500 mt-1">{categoryItems.length} items available</p>
-          </div>
-        </div>
+    <div className="min-h-screen pt-20 bg-gradient-to-br from-[#FFFAF3] via-[#F5F2EB] to-[#CBAE8E]/20">
+      {/* Header */}
+      <div className="text-center py-8">
+        <h1 className="text-4xl font-bold text-[#A89F91] mb-4">FOR EVERY YOU</h1>
+        <p className="text-[#A89F91]/70 text-lg">Discover jewelry that matches your style</p>
+      </div>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {categoryItems.map((item) => (
+      {/* Category Filters - Horizontal */}
+      <div className="max-w-7xl mx-auto px-6 mb-8">
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link href='/jewelry'>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`px-6 py-3 rounded-full font-semibold text-sm uppercase tracking-wide transition-all ${
+                !categoryType
+                  ? 'bg-[#D4AF37] text-[#FFFAF3] shadow-lg'
+                  : 'bg-[#FFFAF3] text-[#A89F91] hover:bg-[#F5F2EB] border border-[#CBAE8E]/30'
+              }`}
+            >
+              All Jewelry
+            </motion.button>
+          </Link>
+          <Link href='/category/rings'>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`px-6 py-3 rounded-full font-semibold text-sm uppercase tracking-wide transition-all ${
+                categoryType === 'ring'
+                  ? 'bg-[#D4AF37] text-[#FFFAF3] shadow-lg'
+                  : 'bg-[#FFFAF3] text-[#A89F91] hover:bg-[#F5F2EB] border border-[#CBAE8E]/30'
+              }`}
+            >
+              Rings
+            </motion.button>
+          </Link>
+          <Link href='/category/necklaces'>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`px-6 py-3 rounded-full font-semibold text-sm uppercase tracking-wide transition-all ${
+                categoryType === 'necklace'
+                  ? 'bg-[#D4AF37] text-[#FFFAF3] shadow-lg'
+                  : 'bg-[#FFFAF3] text-[#A89F91] hover:bg-[#F5F2EB] border border-[#CBAE8E]/30'
+              }`}
+            >
+              Necklaces
+            </motion.button>
+          </Link>
+          <Link href='/category/earrings'>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`px-6 py-3 rounded-full font-semibold text-sm uppercase tracking-wide transition-all ${
+                categoryType === 'earrings'
+                  ? 'bg-[#D4AF37] text-[#FFFAF3] shadow-lg'
+                  : 'bg-[#FFFAF3] text-[#A89F91] hover:bg-[#F5F2EB] border border-[#CBAE8E]/30'
+              }`}
+            >
+              Earrings
+            </motion.button>
+          </Link>
+          <Link href='/category/bracelets'>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`px-6 py-3 rounded-full font-semibold text-sm uppercase tracking-wide transition-all ${
+                categoryType === 'bracelet'
+                  ? 'bg-[#D4AF37] text-[#FFFAF3] shadow-lg'
+                  : 'bg-[#FFFAF3] text-[#A89F91] hover:bg-[#F5F2EB] border border-[#CBAE8E]/30'
+              }`}
+            >
+              Bracelets
+            </motion.button>
+          </Link>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 flex gap-8">
+        {/* Sidebar Filters */}
+        <motion.div
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="w-80 flex-shrink-0"
+        >
+          <div className="bg-[#FFFAF3] rounded-2xl p-6 shadow-lg border border-[#CBAE8E]/30 sticky top-24">
+            <h2 className="text-xl font-bold text-[#A89F91] mb-6">Filters</h2>
+            
+            {/* Material */}
+            <div className="mb-6">
+              <h3 className="font-bold text-[#A89F91] mb-3">Material</h3>
+              <div className="space-y-2">
+                {materials.map((material) => (
+                  <label key={material} className="flex items-center space-x-2 px-3 py-2 hover:bg-[#F5F2EB] rounded-lg cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={selectedMaterials.includes(material)}
+                      onChange={(e) => {
+                        if (material === 'all') {
+                          setSelectedMaterials(['all'])
+                        } else {
+                          if (e.target.checked) {
+                            setSelectedMaterials(prev => prev.filter(m => m !== 'all').concat(material))
+                          } else {
+                            const newMaterials = selectedMaterials.filter(m => m !== material)
+                            setSelectedMaterials(newMaterials.length === 0 ? ['all'] : newMaterials)
+                          }
+                        }
+                      }}
+                      className="w-4 h-4 text-[#D4AF37] bg-[#FFFAF3] border-[#CBAE8E] rounded focus:ring-[#D4AF37] focus:ring-2"
+                    />
+                    <span className="text-sm text-[#A89F91]">
+                      {material.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+                    </span>
+                  </label>
+                ))}
+              </div>
+            </div>
+
+            {/* Price Range */}
+            <div className="mb-6">
+              <h3 className="font-bold text-[#A89F91] mb-3">Price Range</h3>
+              <div className="space-y-2">
+                {priceRanges.map((range) => (
+                  <motion.button
+                    key={range.label}
+                    whileHover={{ scale: 1.02 }}
+                    onClick={() => setSelectedPriceRange(range)}
+                    className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-all ${
+                      selectedPriceRange.label === range.label
+                        ? 'bg-[#D4AF37] text-[#FFFAF3]'
+                        : 'bg-[#F5F2EB] text-[#A89F91] hover:bg-[#CBAE8E]/30'
+                    }`}
+                  >
+                    {range.label}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
+
+            {/* Clear Filters */}
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              onClick={() => {
+                setSelectedMaterials(['all'])
+                setSelectedPriceRange(priceRanges[0])
+                setSortBy('newest')
+              }}
+              className="w-full bg-[#CBAE8E] hover:bg-[#D4AF37] text-[#FFFAF3] px-4 py-2 rounded-lg font-medium transition-colors"
+            >
+              Clear All Filters
+            </motion.button>
+          </div>
+        </motion.div>
+
+        {/* Main Content */}
+        <div className="flex-1">
+          {/* Results Header */}
+          <div className="flex justify-between items-center mb-6">
+            <span className="text-[#A89F91] font-medium text-lg">
+              {filteredItems.length} items found
+            </span>
+            
+            {/* Sort Dropdown */}
+            <div className="relative">
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="bg-[#FFFAF3] border border-[#CBAE8E]/30 rounded-lg px-4 py-2 text-[#A89F91] font-medium focus:outline-none focus:ring-2 focus:ring-[#D4AF37] focus:border-transparent"
+              >
+                <option value="newest">Newest</option>
+                <option value="popular">Popular</option>
+                <option value="rating">Best Seller</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Products Grid */}
+          {filteredItems.length === 0 ? (
+            <div className="text-center py-16">
+              <div className="bg-[#FFFAF3] rounded-lg p-12 shadow-sm border border-[#CBAE8E]/30 max-w-md mx-auto">
+                <div className="text-6xl mb-4">💎</div>
+                <h3 className="text-2xl font-bold text-[#A89F91] mb-4">No Items Found</h3>
+                <p className="text-[#A89F91]/70 mb-6">No items match your current selection. Try adjusting your filters.</p>
+              </div>
+            </div>
+          ) : (
+            <motion.div
+              layout
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+            {filteredItems.map((item, index) => (
             <Link href={`/product/${item.id}`} key={item.id}>
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                layout
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group cursor-pointer"
+                transition={{ delay: index * 0.05 }}
+                whileHover={{ y: -4 }}
+                className="bg-gradient-to-br from-[#FFFAF3] to-[#F5F2EB] rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer group border border-[#CBAE8E]/20"
               >
-              <div className="relative h-80 overflow-hidden">
+              {/* Image Container */}
+              <div className="relative aspect-square overflow-hidden rounded-t-3xl">
                 <Image
                   src={item.image}
                   alt={item.name}
@@ -86,81 +297,85 @@ export default function CategoryPage() {
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 
-                {/* Category Badge */}
-                <div className="absolute top-3 left-3">
-                  <span className="bg-yellow-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">
-                    {item.category}
-                  </span>
-                </div>
-                
                 {/* Wishlist Button */}
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
-                  onClick={() => handleWishlistToggle(item)}
-                  className="absolute top-3 right-3 p-2 bg-white rounded-full shadow-md"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    if (isInWishlist(item.id)) {
+                      removeFromWishlist(item.id)
+                    } else {
+                      addToWishlist({
+                        id: item.id,
+                        name: item.name,
+                        price: item.price,
+                        image: item.image,
+                        category: item.category
+                      })
+                    }
+                  }}
+                  className={`absolute top-4 right-4 p-2 rounded-full transition-all shadow-md ${
+                    isInWishlist(item.id) 
+                      ? 'bg-[#D4AF37] text-[#FFFAF3]' 
+                      : 'bg-[#FFFAF3] text-[#A89F91] hover:bg-[#F5F2EB]'
+                  }`}
                 >
-                  <Heart 
-                    size={18} 
-                    className={isInWishlist(item.id) ? "text-red-500 fill-red-500" : "text-gray-600"} 
-                  />
+                  <Heart className={isInWishlist(item.id) ? 'fill-current' : ''} size={18} />
                 </motion.button>
                 
-                {/* Rating Badge */}
-                <div className="absolute bottom-3 right-3 bg-white rounded-full px-2 py-1 flex items-center space-x-1 shadow-md">
-                  <Star size={14} className="text-yellow-400 fill-yellow-400" />
-                  <span className="text-sm font-semibold">{item.rating}</span>
+                {/* Category Badge */}
+                <div className="absolute top-4 left-4">
+                  <span className="bg-[#D4AF37] text-[#FFFAF3] px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    {item.category}
+                  </span>
                 </div>
                 
-                {!item.inStock && (
-                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                    <span className="text-white font-semibold">Out of Stock</span>
-                  </div>
-                )}
+                {/* Rating */}
+                <div className="absolute bottom-4 right-4 bg-[#FFFAF3]/95 backdrop-blur-sm px-3 py-1 rounded-full flex items-center space-x-1 shadow-md">
+                  <Star className="text-yellow-400 fill-current" size={14} />
+                  <span className="text-sm font-semibold text-[#A89F91]">{item.rating}</span>
+                </div>
               </div>
               
+              {/* Product Info */}
               <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">{item.name}</h3>
-                <p className="text-sm text-gray-600 mb-3 line-clamp-2">{item.description}</p>
+                <div className="mb-4">
+                  <h3 className="font-bold text-[#A89F91] text-lg mb-2 line-clamp-1">
+                    {item.name}
+                  </h3>
+                  <p className="text-[#A89F91]/70 text-sm line-clamp-2">
+                    {item.description}
+                  </p>
+                </div>
                 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-3">
-                  <span className="bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
-                    {item.material}
+                <div className="flex gap-2 mb-4">
+                  <span className="px-3 py-1 bg-[#F5F2EB] text-[#A89F91] text-xs rounded-full font-medium">
+                    {item.material.replace('-', ' ')}
                   </span>
-                  <span className="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded-full">
+                  <span className="px-3 py-1 bg-[#CBAE8E]/30 text-[#A89F91] text-xs rounded-full font-medium">
                     {item.subcategory}
                   </span>
                 </div>
                 
                 {/* Price and Rating */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-2xl font-bold text-gray-800">{item.price}</span>
-                  <div className="flex items-center space-x-1">
-                    <Star size={16} className="text-yellow-400 fill-yellow-400" />
-                    <span className="text-sm font-medium">{item.rating} ({item.reviews})</span>
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-2xl font-bold text-[#A89F91]">
+                    {item.price}
+                  </span>
+                  <div className="flex items-center text-sm text-[#A89F91]/70">
+                    <Star className="text-yellow-400 fill-current mr-1" size={16} />
+                    <span className="font-semibold">{item.rating} ({item.reviews})</span>
                   </div>
                 </div>
-                
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={() => addToCart({
-                    id: item.id,
-                    name: item.name,
-                    price: item.price,
-                    image: item.image,
-                    category: item.category
-                  })}
-                  disabled={!item.inStock}
-                  className="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {item.inStock ? 'Add to Cart' : 'Out of Stock'}
-                </motion.button>
               </div>
               </motion.div>
             </Link>
-          ))}
+            ))}
+            </motion.div>
+          )}
         </div>
       </div>
       <Footer />

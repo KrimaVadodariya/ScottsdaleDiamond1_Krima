@@ -26,10 +26,10 @@ export default function ProductDetailPage() {
   
   if (!product) {
     return (
-      <div className="min-h-screen pt-20 bg-gradient-to-br from-pearl-white via-antique-white to-vintage-cream flex items-center justify-center">
+      <div className="min-h-screen pt-20 bg-gradient-to-br from-[#FFFAF3] via-[#F5F2EB] to-[#CBAE8E]/20 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-classic-navy mb-4">Product Not Found</h1>
-          <Link href="/" className="text-classic-gold hover:underline">Return to Home</Link>
+          <h1 className="text-4xl font-bold text-[#A89F91] mb-4">Product Not Found</h1>
+          <Link href="/" className="text-[#D4AF37] hover:underline">Return to Home</Link>
         </div>
       </div>
     )
@@ -52,11 +52,11 @@ export default function ProductDetailPage() {
   }
 
   return (
-    <div className="min-h-screen pt-20 bg-gradient-to-br from-vintage-cream via-antique-white to-pearl-white mt-6">
+    <div className="min-h-screen pt-20 bg-gradient-to-br from-[#FFFAF3] via-[#F5F2EB] to-[#CBAE8E]/20 mt-6">
       <div className="max-w-7xl mx-auto px-4">
  
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-amber-200">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-[#FFFAF3]/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-[#CBAE8E]/30">
           {/* Left - Images */}
           <div className="space-y-4">
             <div className="relative aspect-square rounded-2xl overflow-hidden">
@@ -73,7 +73,7 @@ export default function ProductDetailPage() {
                   key={index}
                   onClick={() => setSelectedImage(index)}
                   className={`relative aspect-square rounded-lg overflow-hidden border-2 ${
-                    selectedImage === index ? 'border-yellow-500' : 'border-gray-200'
+                    selectedImage === index ? 'border-[#D4AF37]' : 'border-[#CBAE8E]/30'
                   }`}
                 >
                   <Image src={img} alt="" fill className="object-cover" />
@@ -85,8 +85,8 @@ export default function ProductDetailPage() {
           {/* Right - Product Info */}
           <div className="space-y-6">
             <div>
-              <p className="text-gray-600 text-sm uppercase tracking-wide">{product.category}s</p>
-              <h1 className="text-4xl font-bold text-gray-800 mt-2">{product.name}</h1>
+              <p className="text-[#A89F91]/70 text-sm uppercase tracking-wide">{product.category}s</p>
+              <h1 className="text-4xl font-bold text-[#A89F91] mt-2">{product.name}</h1>
               
               <div className="flex items-center space-x-2 mt-4">
                 <div className="flex text-yellow-400">
@@ -94,15 +94,15 @@ export default function ProductDetailPage() {
                     <Star key={i} size={20} className={i < Math.floor(product.rating) ? "fill-yellow-400" : "text-gray-300"} />
                   ))}
                 </div>
-                <span className="text-gray-600">({product.reviews} reviews)</span>
-                <button className="text-amber-600 hover:underline ml-4">Write a review</button>
+                <span className="text-[#A89F91]/70">({product.reviews} reviews)</span>
+                <button className="text-[#D4AF37] hover:underline ml-4">Write a review</button>
               </div>
             </div>
 
             {/* Price */}
             <div className="flex items-center space-x-4">
-              <span className="text-4xl font-bold text-amber-600">${product.priceValue}</span>
-              <span className="text-2xl text-gray-400 line-through">${originalPrice.toFixed(0)}</span>
+              <span className="text-4xl font-bold text-[#D4AF37]">${product.priceValue}</span>
+              <span className="text-2xl text-[#A89F91]/50 line-through">${originalPrice.toFixed(0)}</span>
               <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                 Save ${savings.toFixed(0)}
               </span>
@@ -119,15 +119,15 @@ export default function ProductDetailPage() {
                       onClick={() => setSelectedSize(size)}
                       className={`py-2 px-4 rounded-lg border text-center ${
                         selectedSize === size
-                          ? 'border-amber-500 bg-amber-50 text-amber-700'
-                          : 'border-gray-300 hover:border-amber-400'
+                          ? 'border-[#D4AF37] bg-[#F5F2EB] text-[#D4AF37]'
+                          : 'border-[#CBAE8E]/30 hover:border-[#D4AF37]'
                       }`}
                     >
                       {size}
                     </button>
                   ))}
                 </div>
-                <button className="text-amber-600 hover:underline text-sm">Size Guide</button>
+                <button className="text-[#D4AF37] hover:underline text-sm">Size Guide</button>
               </div>
             )}
 
@@ -135,17 +135,17 @@ export default function ProductDetailPage() {
             <div>
               <h3 className="text-lg font-semibold mb-3">Quantity</h3>
               <div className="flex items-center space-x-4">
-                <div className="flex items-center border border-gray-300 rounded-lg">
+                <div className="flex items-center border border-[#CBAE8E]/30 rounded-lg">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="p-2 hover:bg-gray-100"
+                    className="p-2 hover:bg-[#F5F2EB]"
                   >
                     <Minus size={16} />
                   </button>
                   <span className="px-4 py-2 min-w-[60px] text-center">{quantity}</span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="p-2 hover:bg-gray-100"
+                    className="p-2 hover:bg-[#F5F2EB]"
                   >
                     <Plus size={16} />
                   </button>
@@ -171,7 +171,7 @@ export default function ProductDetailPage() {
                     })
                   }
                 }}
-                className="flex-1 bg-amber-600 hover:bg-amber-700 text-white py-4 px-6 rounded-lg font-semibold text-lg flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="flex-1 bg-[#D4AF37] hover:bg-[#CBAE8E] text-[#FFFAF3] py-4 px-6 rounded-lg font-semibold text-lg flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <span>Add to Cart</span>
               </motion.button>
@@ -186,27 +186,27 @@ export default function ProductDetailPage() {
                     addToWishlist(product)
                   }
                 }}
-                className="p-4 border border-deep-brown/30 rounded-lg hover:bg-antique-white/50 transition-colors"
+                className="p-4 border border-[#CBAE8E]/30 rounded-lg hover:bg-[#F5F2EB] transition-colors"
               >
                 <Heart 
                   size={24} 
-                  className={isInWishlist(product.id) ? "text-classic-burgundy fill-classic-burgundy" : "text-deep-brown"} 
+                  className={isInWishlist(product.id) ? "text-[#D4AF37] fill-[#D4AF37]" : "text-[#A89F91]"} 
                 />
               </motion.button>
               
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-4 border border-gray-300 rounded-lg hover:bg-gray-50"
+                className="p-4 border border-[#CBAE8E]/30 rounded-lg hover:bg-[#F5F2EB]"
               >
-                <Share2 size={24} className="text-gray-600" />
+                <Share2 size={24} className="text-[#A89F91]" />
               </motion.button>
             </div>
 
             {/* Description */}
             <div>
               <h3 className="text-lg font-semibold mb-3">Description</h3>
-              <p className="text-gray-700 leading-relaxed">{product.description}</p>
+              <p className="text-[#A89F91]/80 leading-relaxed">{product.description}</p>
             </div>
 
             {/* Product Details */}
