@@ -42,7 +42,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
           <div>
             <div className="flex items-center space-x-2 mb-4">
               <Link href="/">
@@ -51,7 +51,7 @@ export default function Footer() {
               className="flex items-center space-x-2 cursor-pointer"
             >
               <Image src="/logo.png" alt="Logo" width={32} height={52} />
-              <span className="text-2xl font-bold text-[#D4AF37]">
+              <span className="text-lg sm:text-xl lg:text-2xl font-bold text-[#D4AF37]">
                  Scottsdale Diamond
               </span>
             </motion.div>
@@ -112,10 +112,10 @@ export default function Footer() {
 
         <div className="border-t border-[#A89F91]/20 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-[#A89F91]/70 text-sm mb-4 md:mb-0">
+            <p className="text-[#A89F91]/70 text-xs sm:text-sm mb-4 md:mb-0 text-center md:text-left">
               © 2024 Scottsdale Diamond Company. All rights reserved.
             </p>
-            <div className="flex space-x-6 text-sm text-[#A89F91]/70">
+            <div className="flex flex-wrap justify-center space-x-4 sm:space-x-6 text-xs sm:text-sm text-[#A89F91]/70">
               <a href="#" className="hover:text-[#D4AF37] transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-[#D4AF37] transition-colors">Terms of Service</a>
               <a href="#" className="hover:text-[#D4AF37] transition-colors">Size Guide</a>

@@ -48,7 +48,7 @@ export default function CheckoutPage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
           {/* Payment Form */}
           <div className="bg-[#FFFAF3]/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-[#CBAE8E]/30">
             <h2 className="text-2xl font-bold text-[#A89F91] mb-6 flex items-center">
@@ -74,7 +74,7 @@ export default function CheckoutPage() {
               {/* Shipping Address */}
               <div>
                 <h3 className="text-lg font-semibold text-[#A89F91] mb-3">Shipping Address</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <input
                     type="text"
                     name="firstName"
@@ -103,7 +103,7 @@ export default function CheckoutPage() {
                   className="w-full p-3 rounded-lg border border-[#CBAE8E]/30 focus:border-[#D4AF37] focus:outline-none mt-4"
                   required
                 />
-                <div className="grid grid-cols-2 gap-4 mt-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                   <input
                     type="text"
                     name="city"
@@ -128,7 +128,7 @@ export default function CheckoutPage() {
               {/* Payment Method Selection */}
               <div>
                 <h3 className="text-lg font-semibold text-[#A89F91] mb-3">Payment Method</h3>
-                <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                   <button
                     type="button"
                     onClick={() => setPaymentMethod('card')}
@@ -189,7 +189,7 @@ export default function CheckoutPage() {
                     className="w-full p-3 rounded-lg border border-[#CBAE8E]/30 focus:border-[#D4AF37] focus:outline-none mt-4"
                     required
                   />
-                  <div className="grid grid-cols-2 gap-4 mt-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                     <input
                       type="text"
                       name="expiryDate"

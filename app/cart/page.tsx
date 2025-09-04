@@ -109,8 +109,8 @@ export default function CartPage() {
           </div>
 
           {/* Order Summary */}
-          <div className="bg-[#FFFAF3]/95 backdrop-blur-sm rounded-2xl p-6 shadow-xl border border-[#CBAE8E]/30 h-fit">
-            <h2 className="text-2xl font-bold text-[#A89F91] mb-6">Order Summary</h2>
+          <div className="bg-[#FFFAF3]/95 backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-xl border border-[#CBAE8E]/30 h-fit">
+            <h2 className="text-xl sm:text-2xl font-bold text-[#A89F91] mb-6">Order Summary</h2>
             
             <div className="space-y-4 mb-6">
               <div className="flex justify-between">

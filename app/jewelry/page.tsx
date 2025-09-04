@@ -54,13 +54,13 @@ export default function JewelryPage() {
     <div className="min-h-screen pt-20 bg-gradient-to-br from-[#FFFAF3] via-[#F5F2EB] to-[#CBAE8E]/20">
       {/* Header */}
       <div className="text-center py-8">
-        <h1 className="text-4xl font-bold text-[#A89F91] mb-4">FOR EVERY YOU</h1>
-        <p className="text-[#A89F91]/70 text-lg">Discover jewelry that matches your style</p>
+        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#A89F91] mb-4">FOR EVERY YOU</h1>
+        <p className="text-[#A89F91]/70 text-base sm:text-lg">Discover jewelry that matches your style</p>
       </div>
 
       {/* Category Filters - Horizontal */}
       <div className="max-w-7xl mx-auto px-6 mb-8">
-        <div className="flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
@@ -124,14 +124,14 @@ export default function JewelryPage() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 flex gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col lg:flex-row gap-6 lg:gap-8">
         {/* Sidebar Filters */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="w-80 flex-shrink-0"
+          className="w-full lg:w-80 flex-shrink-0"
         >
-          <div className="bg-[#FFFAF3] rounded-2xl p-6 shadow-lg border border-[#CBAE8E]/30 sticky top-24">
+          <div className="bg-[#FFFAF3] rounded-2xl p-4 sm:p-6 shadow-lg border border-[#CBAE8E]/30 lg:sticky lg:top-24">
             <h2 className="text-xl font-bold text-[#A89F91] mb-6">Filters</h2>
             
             {/* Material */}
@@ -208,7 +208,7 @@ export default function JewelryPage() {
         {/* Main Content */}
         <div className="flex-1">
           {/* Results Header */}
-          <div className="flex justify-between items-center mb-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 sm:gap-0">
             <span className="text-[#A89F91] font-medium text-lg">
               {filteredItems.length} items found
             </span>
@@ -241,7 +241,7 @@ export default function JewelryPage() {
           ) : (
             <motion.div
               layout
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6"
             >
             {filteredItems.map((item, index) => (
             <Link href={`/product/${item.id}`} key={item.id}>

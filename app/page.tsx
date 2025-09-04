@@ -136,13 +136,13 @@ export default function HomePage() {
             {/*<Sparkles className="text-yellow-400" size={60} /> */}
           </motion.div>
           
-           <h1 className="text-5xl pt-6 font-space font-black text-white mb-6 leading-tight text-start">
+           <h1 className="text-3xl sm:text-4xl lg:text-5xl pt-6 font-space font-black text-white mb-6 leading-tight text-start">
             NOW TRENDING
             <br />
             {/* <span className="text-yellow-400">JEWELRY</span> */}
           </h1>
           
-          <p className="text-2xl text-gray-200 mb-8 font-light">
+          <p className="text-lg sm:text-xl lg:text-2xl text-gray-200 mb-8 font-light">
             Stack it. Layer it. Own it.
           </p> 
 
@@ -180,15 +180,15 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl font-space font-bold text-[#A89F91] mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-space font-bold text-[#A89F91] mb-4">
              Shop By Category
             </h2>
-            <p className="text-xl text-[#A89F91]/70">
+            <p className="text-lg sm:text-xl text-[#A89F91]/70">
               Discover the perfect piece for every moment
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
             {categories.map((category) => (
               <div key={category.id} className="text-center">
                 <Link 
@@ -228,9 +228,9 @@ export default function HomePage() {
                 </span>
               </div>
               
-              <h2 className="text-5xl font-bold text-[#A89F91] leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#A89F91] leading-tight">
                 At Scottsdale Diamond Company,
-                <span className="block text-[#D4AF37] text-3xl mt-2">what kind of life will this belong to?</span>
+                <span className="block text-[#D4AF37] text-2xl sm:text-3xl mt-2">what kind of life will this belong to?</span>
               </h2>
               
               <div className="space-y-6 text-lg text-[#A89F91]/80 leading-relaxed">
@@ -251,7 +251,7 @@ export default function HomePage() {
                 </p>
               </div>
               
-              <div className="flex space-x-4 pt-4">
+              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
                 <Link href="/jewelry">
                   <motion.button
                     whileHover={{ scale: 1.05 }}
@@ -318,10 +318,10 @@ export default function HomePage() {
               className="inline-block mb-6"
             >
             </motion.div>
-            <h2 className="text-5xl font-space font-bold bg-gradient-to-r from-[#D4AF37] via-[#CBAE8E] to-[#A89F91] bg-clip-text text-transparent mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-space font-bold bg-gradient-to-r from-[#D4AF37] via-[#CBAE8E] to-[#A89F91] bg-clip-text text-transparent mb-6">
               What Our Customers Say
             </h2>
-            <p className="text-xl text-[#A89F91]/70 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-[#A89F91]/70 max-w-2xl mx-auto">
               Real stories from our jewelry lovers around the world 
             </p>
           </motion.div>

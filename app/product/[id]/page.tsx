@@ -56,7 +56,7 @@ export default function ProductDetailPage() {
       <div className="max-w-7xl mx-auto px-4">
  
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-[#FFFAF3]/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-[#CBAE8E]/30">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 bg-[#FFFAF3]/90 backdrop-blur-sm rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xl border border-[#CBAE8E]/30">
           {/* Left - Images */}
           <div className="space-y-4">
             <div className="relative aspect-square rounded-2xl overflow-hidden">
@@ -67,7 +67,7 @@ export default function ProductDetailPage() {
                 className="object-cover"
               />
             </div>
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
               {images.map((img, index) => (
                 <button
                   key={index}
@@ -86,7 +86,7 @@ export default function ProductDetailPage() {
           <div className="space-y-6">
             <div>
               <p className="text-[#A89F91]/70 text-sm uppercase tracking-wide">{product.category}s</p>
-              <h1 className="text-4xl font-bold text-[#A89F91] mt-2">{product.name}</h1>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#A89F91] mt-2">{product.name}</h1>
               
               <div className="flex items-center space-x-2 mt-4">
                 <div className="flex text-yellow-400">
@@ -101,8 +101,8 @@ export default function ProductDetailPage() {
 
             {/* Price */}
             <div className="flex items-center space-x-4">
-              <span className="text-4xl font-bold text-[#D4AF37]">${product.priceValue}</span>
-              <span className="text-2xl text-[#A89F91]/50 line-through">${originalPrice.toFixed(0)}</span>
+              <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#D4AF37]">${product.priceValue}</span>
+              <span className="text-lg sm:text-xl lg:text-2xl text-[#A89F91]/50 line-through">${originalPrice.toFixed(0)}</span>
               <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                 Save ${savings.toFixed(0)}
               </span>
@@ -112,7 +112,7 @@ export default function ProductDetailPage() {
             {product.category === 'ring' && (
               <div>
                 <h3 className="text-lg font-semibold mb-3">Ring Size</h3>
-                <div className="grid grid-cols-5 gap-2 mb-2">
+                <div className="grid grid-cols-3 sm:grid-cols-5 gap-2 mb-2">
                   {sizes.map((size) => (
                     <button
                       key={size}
@@ -155,7 +155,7 @@ export default function ProductDetailPage() {
             </div>
 
             {/* Action Buttons */}
-            <div className="flex space-x-4">
+            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -212,7 +212,7 @@ export default function ProductDetailPage() {
             {/* Product Details */}
             <div>
               <h3 className="text-lg font-semibold mb-4">Product Details</h3>
-              <div className="grid grid-cols-2 gap-4 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                 <div>
                   <span className="text-gray-500">Material:</span>
                   <span className="ml-2 font-medium capitalize">{product.material}</span>

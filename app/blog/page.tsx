@@ -116,11 +116,11 @@ export default function BlogPage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent w-20" />
               </div>
               
-              <h1 className="text-6xl font-space font-bold text-[#D4AF37] mb-4">
+              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-space font-bold text-[#D4AF37] mb-4">
                 Jewelry Journal
               </h1>
               
-              <p className="text-xl text-[#A89F91] max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
+              <p className="text-base sm:text-lg lg:text-xl text-[#A89F91] max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
                 Stories, tips, and inspiration from the world of fine jewelry
               </p>
               
@@ -158,7 +158,7 @@ export default function BlogPage() {
         {/* Blog Grid */}
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-9"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 mx-4 sm:mx-6 lg:mx-9"
         >
           {filteredPosts.slice(0, visiblePosts).map((post, index) => (
             <motion.article
@@ -184,7 +184,7 @@ export default function BlogPage() {
                 </div>
               </div>
 
-              <div className="p-6">
+              <div className="p-4 sm:p-6">
                 <div className="flex items-center text-[#A89F91]/70 text-sm mb-3">
                   <User size={14} className="mr-2" />
                   <span className="mr-4">{post.author}</span>
@@ -193,11 +193,11 @@ export default function BlogPage() {
                   <span>{post.readTime}</span>
                 </div>
 
-                <h2 className="text-xl font-bold text-[#A89F91] mb-3 group-hover:text-[#D4AF37] transition-colors">
+                <h2 className="text-lg sm:text-xl font-bold text-[#A89F91] mb-3 group-hover:text-[#D4AF37] transition-colors">
                   {post.title}
                 </h2>
 
-                <p className="text-[#A89F91]/70 mb-4 line-clamp-3">
+                <p className="text-sm sm:text-base text-[#A89F91]/70 mb-4 line-clamp-3">
                   {post.excerpt}
                 </p>
 
@@ -261,15 +261,15 @@ export default function BlogPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="mt-20 bg-[#FFFAF3]/95 backdrop-blur-sm rounded-2xl p-8 text-center shadow-xl border border-[#CBAE8E]/30"
+          className="mt-20 bg-[#FFFAF3]/95 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 text-center shadow-xl border border-[#CBAE8E]/30 mx-4 sm:mx-6 lg:mx-9"
         >
-          <h3 className="text-2xl font-bold text-[#A89F91] mb-4">
+          <h3 className="text-xl sm:text-2xl font-bold text-[#A89F91] mb-4">
             Stay in the Loop
           </h3>
           <p className="text-[#A89F91]/70 mb-6">
             Get the latest jewelry trends and styling tips delivered to your inbox
           </p>
-          <div className="flex max-w-md mx-auto">
+          <div className="flex flex-col sm:flex-row max-w-md mx-auto gap-2 sm:gap-0">
             <input
               type="email"
               placeholder="Enter your email"

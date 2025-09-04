@@ -71,11 +71,11 @@ export default function BoutiquePage() {
                 <div className="h-px bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent w-20" />
               </div>
               
-              <h1 className="text-4xl font-bold text-[#D4AF37] mb-4">
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#D4AF37] mb-4">
                 Personal Styling Sessions
               </h1>
               
-              <p className="text-lg text-[#A89F91] max-w-2xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg text-[#A89F91] max-w-2xl mx-auto leading-relaxed">
                 Book your appointment for expert jewelry consultation
               </p>
               
@@ -86,15 +86,15 @@ export default function BoutiquePage() {
           </motion.div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 max-w-6xl px-6 mx-auto gap-12">
+        <div className="grid lg:grid-cols-2 max-w-6xl px-4 sm:px-6 mx-auto gap-6 lg:gap-12">
           {/* Booking Form */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-[#FFFAF3]/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-[#CBAE8E]/30"
+            className="bg-[#FFFAF3]/95 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl border border-[#CBAE8E]/30"
           >
-            <h2 className="text-2xl font-bold text-[#A89F91] mb-6 flex items-center">
+            <h2 className="text-xl sm:text-2xl font-bold text-[#A89F91] mb-6 flex items-center">
               <Calendar className="mr-3 text-[#D4AF37]" />
               Book Your Session
             </h2>
@@ -152,7 +152,7 @@ export default function BoutiquePage() {
                   <Clock className="mr-2 text-[#D4AF37]" size={16} />
                   Preferred Time
                 </label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {timeSlots.map((time) => (
                     <motion.button
                       key={time}
@@ -214,8 +214,8 @@ export default function BoutiquePage() {
             transition={{ delay: 0.4 }}
             className="space-y-6"
           >
-            <div className="bg-[#FFFAF3]/95 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-[#CBAE8E]/30">
-              <h3 className="text-2xl font-bold text-[#A89F91] mb-6 flex items-center">
+            <div className="bg-[#FFFAF3]/95 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl border border-[#CBAE8E]/30">
+              <h3 className="text-xl sm:text-2xl font-bold text-[#A89F91] mb-6 flex items-center">
                 <Star className="mr-3 text-[#D4AF37]" />
                 What to Expect
               </h3>
@@ -266,7 +266,7 @@ export default function BoutiquePage() {
             <motion.div
               animate={{ y: [0, -5, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              className="bg-gradient-to-br from-[#F5F2EB] to-[#CBAE8E]/20 rounded-2xl p-8 text-center shadow-lg border border-[#CBAE8E]/30"
+              className="bg-gradient-to-br from-[#F5F2EB] to-[#CBAE8E]/20 rounded-2xl p-4 sm:p-6 lg:p-8 text-center shadow-lg border border-[#CBAE8E]/30"
             >
               <div className="text-4xl mb-4">🥂</div>
               <h3 className="text-xl font-bold text-[#A89F91] mb-2">

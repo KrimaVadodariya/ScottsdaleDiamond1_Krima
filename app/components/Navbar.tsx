@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { ShoppingCart, Heart, Search, User } from 'lucide-react'
+import { ShoppingCart, Heart, Search, User, Menu, X } from 'lucide-react'
 import { useCart } from '../context/CartContext'
 import { useWishlist } from '../context/WishlistContext'
 
@@ -20,6 +20,7 @@ const navItems = [
 export default function Navbar() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { items } = useCart()
   const { items: wishlistItems } = useWishlist()
   const isCategoryPage = pathname.startsWith('/category/')
@@ -49,15 +50,15 @@ export default function Navbar() {
               whileHover={{ scale: 1.02 }}
               className="flex items-center space-x-2 cursor-pointer"
             >
-              <Image src="/logo.png" alt="Logo" width={32} height={52}  />
-              <span className="text-2xl font-bold text-[#D4AF37]">
+              <Image src="/logo.png" alt="Logo" width={32} height={32} className="h-6 w-6 sm:h-8 sm:w-8" />
+              <span className="text-lg sm:text-2xl font-bold text-[#D4AF37]">
                  Scottsdale Diamond
               </span>
             </motion.div>
           </Link>
           
-          {/* Center - Navigation Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
               <Link key={item.name} href={item.href}>
                 <motion.div
@@ -74,10 +75,9 @@ export default function Navbar() {
             ))}
           </div>
           
-          {/* Right Side - Modern Search and Icons */}
-          <div className="flex items-center space-x-4">
-            {/* Modern Search */}
-            <div className="relative group">
+          {/* Desktop Icons */}
+          <div className="hidden md:flex items-center space-x-2">
+            <div className="hidden lg:block relative group">
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 className="flex items-center space-x-2 px-4 py-2 rounded-full border bg-[#F5F2EB] border-[#CBAE8E] hover:border-[#D4AF37] transition-all duration-300"
@@ -85,30 +85,17 @@ export default function Navbar() {
                 <Search className="h-4 w-4 text-[#A89F91]" />
                 <input
                   type="text"
-                  placeholder="Search jewelry..."
-                  className="bg-transparent border-none outline-none text-sm w-40 text-[#A89F91] placeholder:text-[#A89F91]/60 placeholder:transition-colors"
+                  placeholder="Search..."
+                  className="bg-transparent border-none outline-none text-sm w-32 text-[#A89F91] placeholder:text-[#A89F91]/60"
                 />
               </motion.div>
             </div>
-
-            {/* Icons */}
-            <motion.button 
-              whileHover={{ scale: 1.1 }} 
-              whileTap={{ scale: 0.95 }}
-              className="p-2 rounded-full transition-colors hover:bg-[#F5F2EB]"
-            >
-              <User className="h-5 w-5 text-[#A89F91]" />
-            </motion.button>
             
             <Link href="/wishlist">
-              <motion.button 
-                whileHover={{ scale: 1.1 }} 
-                whileTap={{ scale: 0.95 }}
-                className="relative p-2 rounded-full transition-colors hover:bg-[#F5F2EB]"
-              >
+              <motion.button className="relative p-2 rounded-full hover:bg-[#F5F2EB]">
                 <Heart className="h-5 w-5 text-[#A89F91]" />
                 {wishlistItems.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold">
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
                     {wishlistItems.length}
                   </span>
                 )}
@@ -116,21 +103,68 @@ export default function Navbar() {
             </Link>
             
             <Link href="/cart">
-              <motion.button 
-                whileHover={{ scale: 1.1 }} 
-                whileTap={{ scale: 0.95 }}
-                className="relative p-2 rounded-full transition-colors hover:bg-[#F5F2EB]"
-              >
+              <motion.button className="relative p-2 rounded-full hover:bg-[#F5F2EB]">
                 <ShoppingCart className="h-5 w-5 text-[#A89F91]" />
                 {items.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-amber-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold">
+                  <span className="absolute -top-1 -right-1 bg-amber-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
                     {items.length}
                   </span>
                 )}
               </motion.button>
             </Link>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 rounded-full hover:bg-[#F5F2EB]"
+          >
+            {isMobileMenuOpen ? <X className="h-6 w-6 text-[#A89F91]" /> : <Menu className="h-6 w-6 text-[#A89F91]" />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="md:hidden bg-[#FFFAF3] border-t border-[#CBAE8E]/30 py-4"
+          >
+            <div className="flex flex-col space-y-4">
+              {navItems.map((item) => (
+                <Link key={item.name} href={item.href} onClick={() => setIsMobileMenuOpen(false)}>
+                  <div className={`px-4 py-2 text-base font-medium ${
+                    pathname === item.href ? 'text-[#D4AF37]' : 'text-[#A89F91]'
+                  }`}>
+                    {item.name}
+                  </div>
+                </Link>
+              ))}
+              <div className="flex items-center justify-center space-x-4 pt-4 border-t border-[#CBAE8E]/30">
+                <Link href="/wishlist" onClick={() => setIsMobileMenuOpen(false)}>
+                  <button className="relative p-2 rounded-full hover:bg-[#F5F2EB]">
+                    <Heart className="h-5 w-5 text-[#A89F91]" />
+                    {wishlistItems.length > 0 && (
+                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
+                        {wishlistItems.length}
+                      </span>
+                    )}
+                  </button>
+                </Link>
+                <Link href="/cart" onClick={() => setIsMobileMenuOpen(false)}>
+                  <button className="relative p-2 rounded-full hover:bg-[#F5F2EB]">
+                    <ShoppingCart className="h-5 w-5 text-[#A89F91]" />
+                    {items.length > 0 && (
+                      <span className="absolute -top-1 -right-1 bg-amber-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
+                        {items.length}
+                      </span>
+                    )}
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        )}
       </div>
     </motion.nav>
   )
