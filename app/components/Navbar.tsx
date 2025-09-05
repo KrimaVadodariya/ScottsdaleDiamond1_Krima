@@ -92,8 +92,8 @@ export default function Navbar() {
             ))}
           </div>
           
-          {/* Desktop Icons */}
-          <div className="hidden md:flex items-center space-x-2">
+          {/* Icons & Menu */}
+          <div className="flex items-center space-x-2">
             <div className="hidden lg:block relative group">
               <motion.div
                 whileHover={{ scale: 1.02 }}
@@ -129,15 +129,14 @@ export default function Navbar() {
                 )}
               </motion.button>
             </Link>
+            
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="lg:hidden p-2 rounded-full hover:bg-gray-100 ml-2"
+            >
+              {isMobileMenuOpen ? <X className="h-6 w-6 text-gray-600" /> : <Menu className="h-6 w-6 text-gray-600" />}
+            </button>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-full hover:bg-gray-100"
-          >
-            {isMobileMenuOpen ? <X className="h-6 w-6 text-gray-600" /> : <Menu className="h-6 w-6 text-gray-600" />}
-          </button>
         </div>
 
         {/* Mobile Menu */}
@@ -145,7 +144,7 @@ export default function Navbar() {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden bg-white border-t border-gray-300 py-4"
+            className="lg:hidden bg-white border-t border-gray-300 py-4"
           >
             <div className="flex flex-col space-y-4">
               {navItems.map((item) => (
@@ -157,28 +156,6 @@ export default function Navbar() {
                   </div>
                 </Link>
               ))}
-              <div className="flex items-center justify-center space-x-4 pt-4 border-t border-gray-300">
-                <Link href="/wishlist" onClick={() => setIsMobileMenuOpen(false)}>
-                  <button className="relative p-2 rounded-full hover:bg-gray-100">
-                    <Heart className="h-5 w-5 text-gray-600" />
-                    {wishlistItems.length > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
-                        {wishlistItems.length}
-                      </span>
-                    )}
-                  </button>
-                </Link>
-                <Link href="/cart" onClick={() => setIsMobileMenuOpen(false)}>
-                  <button className="relative p-2 rounded-full hover:bg-gray-100">
-                    <ShoppingCart className="h-5 w-5 text-gray-600" />
-                    {items.length > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-gray-800 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
-                        {items.length}
-                      </span>
-                    )}
-                  </button>
-                </Link>
-              </div>
             </div>
           </motion.div>
         )}
