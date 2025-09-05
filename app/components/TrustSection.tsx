@@ -49,7 +49,7 @@ const TrustSection = () => {
   ];
 
   return (
-    <section className="section-luxury bg-secondary/20 py-12" style={{backgroundColor: '#F0EEE4'}}>
+    <section className="section-luxury bg-white py-12">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <motion.div
@@ -59,8 +59,8 @@ const TrustSection = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-10"
         >
-          <h2 className="text-5xl font-light text-[#A89F91] mb-6">Why Choose Scottsdale Diamond</h2>
-            <p className="text-lg text-[#A89F91] opacity-80">
+          <h2 className="text-5xl font-light text-gray-800 mb-6">Why Choose Scottsdale & Diamond Company</h2>
+            <p className="text-lg text-gray-600 opacity-80">
               We're committed to providing you with the finest jewelry experience from selection to aftercare.
             </p>
         </motion.div>
@@ -80,8 +80,8 @@ const TrustSection = () => {
           speed={2000}
           allowTouchMove={false}
           breakpoints={{
-            480: { slidesPerView: 1 },
-            768: { slidesPerView: 2 },
+            320: { slidesPerView: 1 },
+            640: { slidesPerView: 2 },
             1024: { slidesPerView: 3 },
           }}
           className="overflow-hidden"
@@ -94,13 +94,12 @@ const TrustSection = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="flex flex-col items-center text-center bg-background/50 p-3 sm:p-4 rounded-2xl shadow group mx-auto w-full border-2"
-                  style={{ borderColor: '#deab1233', height: '120px', minHeight: '120px', maxHeight: '120px' }}
+                  className="flex flex-col items-center text-center bg-white p-4 sm:p-6 rounded-2xl shadow-lg group mx-auto w-full border border-gray-300 min-h-[140px] h-auto"
                 >
-                  <h3 className="text-lg font-playfair font-semibold text-[#A89F91] mb-2">
+                  <h3 className="text-lg font-playfair font-semibold text-gray-800 mb-2">
                     {feature.title}
                   </h3>
-                  <p className="text-sm text-[#A89F91] font-inter leading-relaxed">
+                  <p className="text-sm text-gray-600 font-inter leading-relaxed">
                     {feature.description}
                   </p>
                 </motion.div>

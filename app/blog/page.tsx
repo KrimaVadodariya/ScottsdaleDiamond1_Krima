@@ -85,8 +85,8 @@ export default function BlogPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col pt-19 bg-[#FFFAF3]">
-      <div className="max-w mx-auto flex-1">
+    <div className="min-h-screen flex flex-col pt-19 bg-white">
+      <div className="max-w mx-auto flex-1 mb-6">
         {/* Hero Section */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -100,7 +100,7 @@ export default function BlogPage() {
                 backgroundImage: 'url(https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80)'
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-br from-[#CBAE8E]/80 via-[#F5F2EB]/70 to-[#CBAE8E]/80" />
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-800/80 via-gray-100/70 to-gray-800/80" />
           </div>
           
           <motion.div
@@ -111,21 +111,21 @@ export default function BlogPage() {
           >
             <div>
               <div className="flex items-center justify-center mb-6">
-                <div className="h-px bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent w-20" />
+                <div className="h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent w-20" />
                 <span className="mx-4 text-3xl">💎</span>
-                <div className="h-px bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent w-20" />
+                <div className="h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent w-20" />
               </div>
               
-              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-space font-bold text-[#D4AF37] mb-4">
+              <h1 className="text-3xl sm:text-4xl lg:text-6xl font-space font-bold text-gray-800 mb-4">
                 Jewelry Journal
               </h1>
               
-              <p className="text-base sm:text-lg lg:text-xl text-[#A89F91] max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
                 Stories, tips, and inspiration from the world of fine jewelry
               </p>
               
               <div className="flex items-center justify-center mt-6">
-                <div className="h-px bg-gradient-to-r from-transparent via-[#D4AF37] to-transparent w-32" />
+                <div className="h-px bg-gradient-to-r from-transparent via-gray-800 to-transparent w-32" />
               </div>
             </div>
           </motion.div>
@@ -146,8 +146,8 @@ export default function BlogPage() {
               onClick={() => setSelectedCategory(category)}
               className={`px-6 py-3 rounded-full font-medium transition-all backdrop-blur-sm ${
                 selectedCategory === category
-                  ? 'bg-[#D4AF37] text-[#FFFAF3] shadow-lg shadow-[#D4AF37]/30'
-                  : 'bg-[#F5F2EB] text-[#A89F91] hover:bg-[#CBAE8E]/30 border border-[#CBAE8E]/30'
+                  ? 'bg-gray-800 text-white shadow-lg'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200 border border-gray-300'
               }`}
             >
               {category}
@@ -168,7 +168,7 @@ export default function BlogPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               whileHover={{ y: -10 }}
-              className="bg-[#FFFAF3]/95 backdrop-blur-sm rounded-2xl overflow-hidden group cursor-pointer shadow-xl border border-[#CBAE8E]/30"
+              className="bg-white backdrop-blur-sm rounded-2xl overflow-hidden group cursor-pointer shadow-xl border border-gray-300"
             >
               <div className="relative h-48 overflow-hidden">
                 <Image
@@ -178,14 +178,14 @@ export default function BlogPage() {
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute top-4 left-4">
-                  <span className="bg-[#D4AF37]/90 backdrop-blur-sm text-[#FFFAF3] px-3 py-1 rounded-full text-xs font-medium">
+                  <span className="bg-gray-800/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-medium">
                     {post.category}
                   </span>
                 </div>
               </div>
 
               <div className="p-4 sm:p-6">
-                <div className="flex items-center text-[#A89F91]/70 text-sm mb-3">
+                <div className="flex items-center text-gray-500 text-sm mb-3">
                   <User size={14} className="mr-2" />
                   <span className="mr-4">{post.author}</span>
                   <Calendar size={14} className="mr-2" />
@@ -193,11 +193,11 @@ export default function BlogPage() {
                   <span>{post.readTime}</span>
                 </div>
 
-                <h2 className="text-lg sm:text-xl font-bold text-[#A89F91] mb-3 group-hover:text-[#D4AF37] transition-colors">
+                <h2 className="text-lg sm:text-xl font-bold text-gray-800 mb-3 group-hover:text-gray-600 transition-colors">
                   {post.title}
                 </h2>
 
-                <p className="text-sm sm:text-base text-[#A89F91]/70 mb-4 line-clamp-3">
+                <p className="text-sm sm:text-base text-gray-600 mb-4 line-clamp-3">
                   {post.excerpt}
                 </p>
 
@@ -205,7 +205,7 @@ export default function BlogPage() {
                   <Link href={`/blog/${post.id}`}>
                     <motion.button
                       whileHover={{ x: 5 }}
-                      className="flex items-center text-[#D4AF37] hover:text-[#CBAE8E] font-medium"
+                      className="flex items-center text-gray-800 hover:text-gray-600 font-medium"
                     >
                       Read More
                       <ArrowRight size={16} className="ml-2" />
@@ -215,19 +215,19 @@ export default function BlogPage() {
                   <div className="flex space-x-2">
                     <motion.button
                       whileHover={{ scale: 1.1 }}
-                      className="p-2 bg-[#F5F2EB] hover:bg-[#CBAE8E]/30 rounded-full text-[#A89F91] hover:text-[#D4AF37]"
+                      className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-600 hover:text-gray-800"
                     >
                       <Share2 size={14} />
                     </motion.button>
                     <motion.button
                       whileHover={{ scale: 1.1 }}
-                      className="p-2 bg-[#F5F2EB] hover:bg-[#CBAE8E]/30 rounded-full text-[#A89F91] hover:text-[#D4AF37]"
+                      className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-600 hover:text-gray-800"
                     >
                       <Instagram size={14} />
                     </motion.button>
                     <motion.button
                       whileHover={{ scale: 1.1 }}
-                      className="p-2 bg-[#F5F2EB] hover:bg-[#CBAE8E]/30 rounded-full text-[#A89F91] hover:text-[#D4AF37]"
+                      className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-600 hover:text-gray-800"
                     >
                       <Twitter size={14} />
                     </motion.button>
@@ -261,24 +261,24 @@ export default function BlogPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="mt-20 bg-[#FFFAF3]/95 backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 text-center shadow-xl border border-[#CBAE8E]/30 mx-4 sm:mx-6 lg:mx-9"
+          className="mt-20 bg-white backdrop-blur-sm rounded-2xl p-4 sm:p-6 lg:p-8 text-center shadow-xl border border-gray-300 mx-4 sm:mx-6 lg:mx-9"
         >
-          <h3 className="text-xl sm:text-2xl font-bold text-[#A89F91] mb-4">
+          <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-4">
             Stay in the Loop
           </h3>
-          <p className="text-[#A89F91]/70 mb-6">
+          <p className="text-gray-600 mb-6">
             Get the latest jewelry trends and styling tips delivered to your inbox
           </p>
           <div className="flex flex-col sm:flex-row max-w-md mx-auto gap-2 sm:gap-0">
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-1 bg-[#F5F2EB] border border-[#CBAE8E] rounded-l-lg px-4 py-3 text-[#A89F91] placeholder-[#A89F91]/60 focus:border-[#D4AF37] focus:outline-none"
+              className="flex-1 bg-gray-100 border border-gray-300 rounded-l-lg px-4 py-3 text-gray-800 placeholder-gray-500 focus:border-gray-800 focus:outline-none"
             />
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-[#D4AF37] hover:bg-[#CBAE8E] text-[#FFFAF3] px-6 py-3 rounded-r-lg font-medium"
+              className="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-r-lg font-medium"
             >
               Subscribe
             </motion.button>

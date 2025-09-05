@@ -16,18 +16,13 @@ export default function CartPage() {
   const total = subtotal + shipping + tax
 
   return (
-    <div className="min-h-screen pt-20 bg-gradient-to-br from-[#FFFAF3] via-[#F5F2EB] to-[#CBAE8E]/20 relative">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-[#D4AF37]/30 rounded-full blur-3xl"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 bg-[#CBAE8E]/40 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-[#F5F2EB]/50 rounded-full blur-3xl"></div>
-      </div>
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+    <div className="min-h-screen pt-20 bg-white relative">
+      <div className="max-w-6xl mx-auto px-6 relative z-10 mb-6">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 space-y-4 sm:space-y-0">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 mt-6 sm:mb-8 space-y-4 sm:space-y-0">
           
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-space font-bold text-[#A89F91]">Shopping Cart</h1>
-          <div className="flex items-center space-x-2 text-[#A89F91]">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-space font-bold text-gray-800">Shopping Cart</h1>
+          <div className="flex items-center space-x-2 text-gray-600">
             <ShoppingBag size={20} />
             <span className="text-sm sm:text-base">{items.length} items</span>
           </div>
@@ -37,17 +32,26 @@ export default function CartPage() {
           {/* Cart Items */}
           <div className="lg:col-span-2 space-y-4">
             {items.length === 0 ? (
-              <div className="text-center py-12 bg-[#FFFAF3]/80 backdrop-blur-sm rounded-2xl border border-[#CBAE8E]/30">
-                <ShoppingBag className="mx-auto text-[#D4AF37] mb-4" size={64} />
-                <h3 className="text-xl font-semibold text-[#A89F91] mb-2">Your cart is empty</h3>
-                <p className="text-[#A89F91]/70">Add some beautiful jewelry to get started!</p>
+              <div className="text-center py-12 bg-white backdrop-blur-sm rounded-2xl border border-gray-300">
+                <ShoppingBag className="mx-auto text-gray-800 mb-4" size={64} />
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">Your cart is empty</h3>
+                <p className="text-gray-600 mb-6">Add some beautiful jewelry to get started!</p>
+                <Link href="/jewelry">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium"
+                  >
+                    Continue Shopping
+                  </motion.button>
+                </Link>
               </div>
             ) : (
               items.map((item) => (
                 <motion.div
                   key={item.id}
                   layout
-                  className="bg-[#FFFAF3]/95 backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-lg border border-[#CBAE8E]/30"
+                  className="bg-white backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-300"
                 >
                   <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
                     <div className="relative w-full sm:w-24 h-48 sm:h-24 rounded-xl overflow-hidden">
@@ -109,8 +113,8 @@ export default function CartPage() {
           </div>
 
           {/* Order Summary */}
-          <div className="bg-[#FFFAF3]/95 backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-xl border border-[#CBAE8E]/30 h-fit">
-            <h2 className="text-xl sm:text-2xl font-bold text-[#A89F91] mb-6">Order Summary</h2>
+          <div className="bg-white backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-xl border border-gray-300 h-fit">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-6">Order Summary</h2>
             
             <div className="space-y-4 mb-6">
               <div className="flex justify-between">
@@ -133,16 +137,27 @@ export default function CartPage() {
               </div>
             </div>
             
-            <Link href={items.length > 0 ? "/checkout" : "#"}>
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                disabled={items.length === 0}
-                className="w-full bg-gradient-to-r from-[#D4AF37] to-[#CBAE8E] text-[#FFFAF3] py-4 rounded-xl font-semibold text-lg shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Proceed to Checkout
-              </motion.button>
-            </Link>
+            <div className="space-y-3">
+              <Link href="/jewelry">
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-white hover:bg-gray-50 text-gray-800 py-3 rounded-xl font-semibold border border-gray-300 hover:border-gray-400 mb-6"
+                >
+                  Continue Shopping
+                </motion.button>
+              </Link>
+              <Link href={items.length > 0 ? "/checkout" : "#"}>
+                <motion.button
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  disabled={items.length === 0}
+                  className="w-full bg-gray-800 hover:bg-gray-700 text-white py-4 rounded-xl font-semibold text-lg shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  Proceed to Checkout
+                </motion.button>
+              </Link>
+            </div>
             
             <p className="text-center text-sm text-[#A89F91]/60 mt-4">
               Free shipping on orders over $1,000

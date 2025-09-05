@@ -18,29 +18,33 @@ export default function WishlistPage() {
   }
 
   return (
-    <div className="min-h-screen pt-20 bg-gradient-to-br from-[#FFFAF3] via-[#F5F2EB] to-[#CBAE8E]/20 relative">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-[#D4AF37]/30 rounded-full blur-3xl"></div>
-        <div className="absolute top-40 right-20 w-24 h-24 bg-[#CBAE8E]/40 rounded-full blur-2xl"></div>
-        <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-[#F5F2EB]/50 rounded-full blur-3xl"></div>
-      </div>
+    <div className="min-h-screen pt-20 bg-white relative">
       
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="max-w-6xl mx-auto px-6 relative z-10 mb-6">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 sm:mb-8 space-y-4 sm:space-y-0">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 mt-6 sm:mb-8 space-y-4 sm:space-y-0">
           
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-space font-bold text-[#A89F91]">My Wishlist</h1>
-          <div className="flex items-center space-x-2 text-[#A89F91]">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-space font-bold text-gray-800">My Wishlist</h1>
+          <div className="flex items-center space-x-2 text-gray-600">
             <Heart size={20} />
             <span className="text-sm sm:text-base">{items.length} items</span>
           </div>
         </div>
 
         {items.length === 0 ? (
-          <div className="text-center py-12 bg-[#FFFAF3]/80 backdrop-blur-sm rounded-2xl border border-[#CBAE8E]/30">
-            <Heart className="mx-auto text-[#D4AF37] mb-4" size={64} />
-            <h3 className="text-xl font-semibold text-[#A89F91] mb-2">Your wishlist is empty</h3>
-            <p className="text-[#A89F91]/70">Add some beautiful jewelry to your wishlist!</p>
+          <div className="text-center py-12 bg-white backdrop-blur-sm rounded-2xl border border-gray-300">
+            <Heart className="mx-auto text-gray-800 mb-4" size={64} />
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">Your wishlist is empty</h3>
+            <p className="text-gray-600 mb-6">Add some beautiful jewelry to your wishlist!</p>
+            <Link href="/jewelry">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium"
+              >
+                Continue Shopping
+              </motion.button>
+            </Link>
           </div>
         ) : (
           <>
@@ -51,7 +55,7 @@ export default function WishlistPage() {
                   layout
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-[#FFFAF3]/95 backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-lg border border-[#CBAE8E]/30"
+                  className="bg-white backdrop-blur-sm rounded-2xl p-4 sm:p-6 shadow-lg border border-gray-300"
                 >
                   <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-4">
                     <div className="relative w-full sm:w-24 h-48 sm:h-24 rounded-xl overflow-hidden">
@@ -64,9 +68,9 @@ export default function WishlistPage() {
                     </div>
                     
                     <div className="flex-1 w-full sm:w-auto">
-                      <h3 className="text-base sm:text-lg font-semibold text-[#A89F91]">{item.name}</h3>
-                      <p className="text-sm sm:text-base text-[#A89F91]/70">{item.category}</p>
-                      <p className="text-lg sm:text-xl font-bold text-[#D4AF37]">{item.price}</p>
+                      <h3 className="text-base sm:text-lg font-semibold text-gray-800">{item.name}</h3>
+                      <p className="text-sm sm:text-base text-gray-600">{item.category}</p>
+                      <p className="text-lg sm:text-xl font-bold text-gray-800">{item.price}</p>
                     </div>
                     
                     <div className="flex items-center justify-between sm:justify-start space-x-3 w-full sm:w-auto">
@@ -74,7 +78,7 @@ export default function WishlistPage() {
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                         onClick={() => moveToCart(item)}
-                        className="w-10 h-10 rounded-full bg-[#D4AF37] flex items-center justify-center hover:bg-[#CBAE8E] text-[#FFFAF3]"
+                        className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gray-700 text-white"
                       >
                         <ShoppingCart size={16} />
                       </motion.button>
@@ -94,12 +98,21 @@ export default function WishlistPage() {
             </div>
             
             {items.length > 0 && (
-              <div className="mt-8 text-center">
+              <div className="mt-8 text-center space-y-4">
+                <Link href="/jewelry">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium mr-4"
+                  >
+                    Continue Shopping
+                  </motion.button>
+                </Link>
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={clearWishlist}
-                  className="bg-[#A89F91] hover:bg-[#CBAE8E] text-[#FFFAF3] px-6 py-2 rounded-lg font-medium"
+                  className="bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded-lg font-medium"
                 >
                   Clear Wishlist
                 </motion.button>

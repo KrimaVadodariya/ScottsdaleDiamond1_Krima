@@ -26,10 +26,10 @@ export default function ProductDetailPage() {
   
   if (!product) {
     return (
-      <div className="min-h-screen pt-20 bg-gradient-to-br from-[#FFFAF3] via-[#F5F2EB] to-[#CBAE8E]/20 flex items-center justify-center">
+      <div className="min-h-screen pt-20 bg-white flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-[#A89F91] mb-4">Product Not Found</h1>
-          <Link href="/" className="text-[#D4AF37] hover:underline">Return to Home</Link>
+          <h1 className="text-4xl font-bold text-gray-800 mb-4">Product Not Found</h1>
+          <Link href="/" className="text-gray-800 hover:underline">Return to Home</Link>
         </div>
       </div>
     )
@@ -52,11 +52,19 @@ export default function ProductDetailPage() {
   }
 
   return (
-    <div className="min-h-screen pt-20 bg-gradient-to-br from-[#FFFAF3] via-[#F5F2EB] to-[#CBAE8E]/20 mt-6">
+    <div className="min-h-screen pt-20 bg-white mt-6">
       <div className="max-w-7xl mx-auto px-4">
  
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 bg-[#FFFAF3]/90 backdrop-blur-sm rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xl border border-[#CBAE8E]/30">
+        <Link href="/jewelry">
+                  <motion.button
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium mb-6"
+                  >
+                    Continue Shopping
+                  </motion.button>
+                </Link>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 bg-white backdrop-blur-sm rounded-3xl p-4 sm:p-6 lg:p-8 shadow-xl border border-gray-300">
           {/* Left - Images */}
           <div className="space-y-4">
             <div className="relative aspect-square rounded-2xl overflow-hidden">
@@ -73,7 +81,7 @@ export default function ProductDetailPage() {
                   key={index}
                   onClick={() => setSelectedImage(index)}
                   className={`relative aspect-square rounded-lg overflow-hidden border-2 ${
-                    selectedImage === index ? 'border-[#D4AF37]' : 'border-[#CBAE8E]/30'
+                    selectedImage === index ? 'border-gray-800' : 'border-gray-300'
                   }`}
                 >
                   <Image src={img} alt="" fill className="object-cover" />
@@ -85,8 +93,8 @@ export default function ProductDetailPage() {
           {/* Right - Product Info */}
           <div className="space-y-6">
             <div>
-              <p className="text-[#A89F91]/70 text-sm uppercase tracking-wide">{product.category}s</p>
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#A89F91] mt-2">{product.name}</h1>
+              <p className="text-gray-600 text-sm uppercase tracking-wide">{product.category}s</p>
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800 mt-2">{product.name}</h1>
               
               <div className="flex items-center space-x-2 mt-4">
                 <div className="flex text-yellow-400">
@@ -94,15 +102,15 @@ export default function ProductDetailPage() {
                     <Star key={i} size={20} className={i < Math.floor(product.rating) ? "fill-yellow-400" : "text-gray-300"} />
                   ))}
                 </div>
-                <span className="text-[#A89F91]/70">({product.reviews} reviews)</span>
-                <button className="text-[#D4AF37] hover:underline ml-4">Write a review</button>
+                <span className="text-gray-600">({product.reviews} reviews)</span>
+                <button className="text-gray-800 hover:underline ml-4">Write a review</button>
               </div>
             </div>
 
             {/* Price */}
             <div className="flex items-center space-x-4">
-              <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#D4AF37]">${product.priceValue}</span>
-              <span className="text-lg sm:text-xl lg:text-2xl text-[#A89F91]/50 line-through">${originalPrice.toFixed(0)}</span>
+              <span className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-800">${product.priceValue}</span>
+              <span className="text-lg sm:text-xl lg:text-2xl text-gray-400 line-through">${originalPrice.toFixed(0)}</span>
               <span className="bg-red-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
                 Save ${savings.toFixed(0)}
               </span>
@@ -119,15 +127,15 @@ export default function ProductDetailPage() {
                       onClick={() => setSelectedSize(size)}
                       className={`py-2 px-4 rounded-lg border text-center ${
                         selectedSize === size
-                          ? 'border-[#D4AF37] bg-[#F5F2EB] text-[#D4AF37]'
-                          : 'border-[#CBAE8E]/30 hover:border-[#D4AF37]'
+                          ? 'border-gray-800 bg-gray-100 text-gray-800'
+                          : 'border-gray-300 hover:border-gray-800'
                       }`}
                     >
                       {size}
                     </button>
                   ))}
                 </div>
-                <button className="text-[#D4AF37] hover:underline text-sm">Size Guide</button>
+                <button className="text-gray-800 hover:underline text-sm">Size Guide</button>
               </div>
             )}
 
@@ -135,17 +143,17 @@ export default function ProductDetailPage() {
             <div>
               <h3 className="text-lg font-semibold mb-3">Quantity</h3>
               <div className="flex items-center space-x-4">
-                <div className="flex items-center border border-[#CBAE8E]/30 rounded-lg">
+                <div className="flex items-center border border-gray-300 rounded-lg">
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                    className="p-2 hover:bg-[#F5F2EB]"
+                    className="p-2 hover:bg-gray-100"
                   >
                     <Minus size={16} />
                   </button>
                   <span className="px-4 py-2 min-w-[60px] text-center">{quantity}</span>
                   <button
                     onClick={() => setQuantity(quantity + 1)}
-                    className="p-2 hover:bg-[#F5F2EB]"
+                    className="p-2 hover:bg-gray-100"
                   >
                     <Plus size={16} />
                   </button>
@@ -171,7 +179,7 @@ export default function ProductDetailPage() {
                     })
                   }
                 }}
-                className="flex-1 bg-[#D4AF37] hover:bg-[#CBAE8E] text-[#FFFAF3] py-4 px-6 rounded-lg font-semibold text-lg flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
+                className="flex-1 bg-gray-800 hover:bg-gray-700 text-white py-4 px-6 rounded-lg font-semibold text-lg flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl transition-all duration-300"
               >
                 <span>Add to Cart</span>
               </motion.button>
@@ -186,27 +194,27 @@ export default function ProductDetailPage() {
                     addToWishlist(product)
                   }
                 }}
-                className="p-4 border border-[#CBAE8E]/30 rounded-lg hover:bg-[#F5F2EB] transition-colors"
+                className="p-4 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors"
               >
                 <Heart 
                   size={24} 
-                  className={isInWishlist(product.id) ? "text-[#D4AF37] fill-[#D4AF37]" : "text-[#A89F91]"} 
+                  className={isInWishlist(product.id) ? "text-gray-800 fill-gray-800" : "text-gray-600"} 
                 />
               </motion.button>
               
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-4 border border-[#CBAE8E]/30 rounded-lg hover:bg-[#F5F2EB]"
+                className="p-4 border border-gray-300 rounded-lg hover:bg-gray-100"
               >
-                <Share2 size={24} className="text-[#A89F91]" />
+                <Share2 size={24} className="text-gray-600" />
               </motion.button>
             </div>
 
             {/* Description */}
             <div>
               <h3 className="text-lg font-semibold mb-3">Description</h3>
-              <p className="text-[#A89F91]/80 leading-relaxed">{product.description}</p>
+              <p className="text-gray-600 leading-relaxed">{product.description}</p>
             </div>
 
             {/* Product Details */}
@@ -281,19 +289,19 @@ export default function ProductDetailPage() {
               <h3 className="text-lg font-semibold mb-4">Key Features</h3>
               <ul className="space-y-2">
                 <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-gray-800 rounded-full"></div>
                   <span className="text-gray-700">18K {product.material} Band</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-gray-800 rounded-full"></div>
                   <span className="text-gray-700">Premium Quality {product.material}</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-gray-800 rounded-full"></div>
                   <span className="text-gray-700">Lifetime Warranty</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+                  <div className="w-2 h-2 bg-gray-800 rounded-full"></div>
                   <span className="text-gray-700">Free Shipping & Returns</span>
                 </li>
               </ul>
@@ -309,7 +317,7 @@ export default function ProductDetailPage() {
                 onClick={() => setActiveTab('care')}
                 className={`border-b-2 py-2 px-1 text-sm font-medium ${
                   activeTab === 'care' 
-                    ? 'border-yellow-500 text-yellow-600' 
+                    ? 'border-gray-800 text-gray-800' 
                     : 'border-transparent text-gray-500 hover:text-gray-700'
                 }`}
               >
@@ -319,7 +327,7 @@ export default function ProductDetailPage() {
                 onClick={() => setActiveTab('shipping')}
                 className={`border-b-2 py-2 px-1 text-sm font-medium ${
                   activeTab === 'shipping' 
-                    ? 'border-yellow-500 text-yellow-600' 
+                    ? 'border-gray-800 text-gray-800' 
                     : 'border-transparent text-gray-500 hover:text-gray-700'
                 }`}
               >
@@ -329,7 +337,7 @@ export default function ProductDetailPage() {
                 onClick={() => setActiveTab('size')}
                 className={`border-b-2 py-2 px-1 text-sm font-medium ${
                   activeTab === 'size' 
-                    ? 'border-yellow-500 text-yellow-600' 
+                    ? 'border-gray-800 text-gray-800' 
                     : 'border-transparent text-gray-500 hover:text-gray-700'
                 }`}
               >

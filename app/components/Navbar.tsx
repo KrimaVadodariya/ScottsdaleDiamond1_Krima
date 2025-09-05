@@ -21,6 +21,8 @@ export default function Navbar() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
   const { items } = useCart()
   const { items: wishlistItems } = useWishlist()
   const isCategoryPage = pathname.startsWith('/category/')
@@ -30,17 +32,27 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      const currentScrollY = window.scrollY
+      setIsScrolled(currentScrollY > 50)
+      
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false)
+      } else {
+        setIsVisible(true)
+      }
+      
+      setLastScrollY(currentScrollY)
     }
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [lastScrollY])
 
   return (
     <motion.nav
       initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-[#FFFAF3]/95 backdrop-blur-md shadow-lg transition-all duration-300"
+      animate={{ y: isVisible ? 0 : -100 }}
+      transition={{ duration: 0.3 }}
+      className="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-md shadow-lg transition-all duration-300"
     >
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-4">
@@ -50,10 +62,15 @@ export default function Navbar() {
               whileHover={{ scale: 1.02 }}
               className="flex items-center space-x-2 cursor-pointer"
             >
-              <Image src="/logo.png" alt="Logo" width={32} height={32} className="h-6 w-6 sm:h-8 sm:w-8" />
-              <span className="text-lg sm:text-2xl font-bold text-[#D4AF37]">
-                 Scottsdale Diamond
-              </span>
+              <Image src="/logo.png" alt="Logo" width={32} height={52} className=" sm:h-11 sm:w-8" />
+              <div className="flex flex-col leading-none">
+                <span className="text-sm sm:text-lg font-bold text-gray-800 tracking-wide">
+                  Scottsdale & Diamond
+                </span>
+                <span className="text-xs sm:text-sm font-medium text-gray-600 uppercase tracking-widest">
+                  Company
+                </span>
+              </div>
             </motion.div>
           </Link>
           
@@ -65,8 +82,8 @@ export default function Navbar() {
                   whileHover={{ y: -2 }}
                   className={`text-base font-medium tracking-wide transition-all duration-200 ${
                     pathname === item.href
-                      ? 'text-[#D4AF37] border-b-2 border-[#D4AF37] pb-1'
-                      : 'text-[#A89F91] hover:text-[#D4AF37]'
+                      ? 'text-gray-800 border-b-2 border-gray-800 pb-1'
+                      : 'text-gray-600 hover:text-gray-800'
                   }`}
                 >
                   {item.name}
@@ -80,20 +97,20 @@ export default function Navbar() {
             <div className="hidden lg:block relative group">
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="flex items-center space-x-2 px-4 py-2 rounded-full border bg-[#F5F2EB] border-[#CBAE8E] hover:border-[#D4AF37] transition-all duration-300"
+                className="flex items-center space-x-2 px-4 py-2 rounded-full border bg-white/50 border-gray-300 hover:border-gray-800 transition-all duration-300"
               >
-                <Search className="h-4 w-4 text-[#A89F91]" />
+                <Search className="h-4 w-4 text-gray-600" />
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="bg-transparent border-none outline-none text-sm w-32 text-[#A89F91] placeholder:text-[#A89F91]/60"
+                  className="bg-transparent border-none outline-none text-sm w-32 text-gray-600 placeholder:text-gray-400"
                 />
               </motion.div>
             </div>
             
             <Link href="/wishlist">
-              <motion.button className="relative p-2 rounded-full hover:bg-[#F5F2EB]">
-                <Heart className="h-5 w-5 text-[#A89F91]" />
+              <motion.button className="relative p-2 rounded-full hover:bg-gray-100">
+                <Heart className="h-5 w-5 text-gray-600" />
                 {wishlistItems.length > 0 && (
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
                     {wishlistItems.length}
@@ -103,10 +120,10 @@ export default function Navbar() {
             </Link>
             
             <Link href="/cart">
-              <motion.button className="relative p-2 rounded-full hover:bg-[#F5F2EB]">
-                <ShoppingCart className="h-5 w-5 text-[#A89F91]" />
+              <motion.button className="relative p-2 rounded-full hover:bg-gray-100">
+                <ShoppingCart className="h-5 w-5 text-gray-600" />
                 {items.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-amber-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
+                  <span className="absolute -top-1 -right-1 bg-gray-800 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
                     {items.length}
                   </span>
                 )}
@@ -117,9 +134,9 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-full hover:bg-[#F5F2EB]"
+            className="md:hidden p-2 rounded-full hover:bg-gray-100"
           >
-            {isMobileMenuOpen ? <X className="h-6 w-6 text-[#A89F91]" /> : <Menu className="h-6 w-6 text-[#A89F91]" />}
+            {isMobileMenuOpen ? <X className="h-6 w-6 text-gray-600" /> : <Menu className="h-6 w-6 text-gray-600" />}
           </button>
         </div>
 
@@ -128,22 +145,22 @@ export default function Navbar() {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="md:hidden bg-[#FFFAF3] border-t border-[#CBAE8E]/30 py-4"
+            className="md:hidden bg-white border-t border-gray-300 py-4"
           >
             <div className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <Link key={item.name} href={item.href} onClick={() => setIsMobileMenuOpen(false)}>
                   <div className={`px-4 py-2 text-base font-medium ${
-                    pathname === item.href ? 'text-[#D4AF37]' : 'text-[#A89F91]'
+                    pathname === item.href ? 'text-gray-800' : 'text-gray-600'
                   }`}>
                     {item.name}
                   </div>
                 </Link>
               ))}
-              <div className="flex items-center justify-center space-x-4 pt-4 border-t border-[#CBAE8E]/30">
+              <div className="flex items-center justify-center space-x-4 pt-4 border-t border-gray-300">
                 <Link href="/wishlist" onClick={() => setIsMobileMenuOpen(false)}>
-                  <button className="relative p-2 rounded-full hover:bg-[#F5F2EB]">
-                    <Heart className="h-5 w-5 text-[#A89F91]" />
+                  <button className="relative p-2 rounded-full hover:bg-gray-100">
+                    <Heart className="h-5 w-5 text-gray-600" />
                     {wishlistItems.length > 0 && (
                       <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
                         {wishlistItems.length}
@@ -152,10 +169,10 @@ export default function Navbar() {
                   </button>
                 </Link>
                 <Link href="/cart" onClick={() => setIsMobileMenuOpen(false)}>
-                  <button className="relative p-2 rounded-full hover:bg-[#F5F2EB]">
-                    <ShoppingCart className="h-5 w-5 text-[#A89F91]" />
+                  <button className="relative p-2 rounded-full hover:bg-gray-100">
+                    <ShoppingCart className="h-5 w-5 text-gray-600" />
                     {items.length > 0 && (
-                      <span className="absolute -top-1 -right-1 bg-amber-600 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
+                      <span className="absolute -top-1 -right-1 bg-gray-800 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
                         {items.length}
                       </span>
                     )}

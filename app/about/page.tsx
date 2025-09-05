@@ -34,7 +34,7 @@ export default function AboutPage() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3 }}
-            className="text-xs text-[#D4AF37] mb-6 font-light tracking-[0.3em] uppercase"
+            className="text-xs text-gray-400 mb-6 font-light tracking-[0.3em] uppercase"
           >
             Proudly AAPI Female Founded & Led
           </motion.p>
@@ -43,11 +43,11 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="text-6xl md:text-8xl font-light text-white fw-700 mb-8 leading-tight tracking-wide"
+            className="text-5xl md:text-8xl font-light text-white fw-700 mb-8 leading-tight tracking-wide"
           >
-            We are <span className="italic">Scottsdale Diamond</span>™
+            We are <span className="italic">Scottsdale & Diamond Company</span>
           </motion.h1>
-          
+
           <motion.p 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -72,17 +72,16 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-center mb-20"
           >
-            <h2 className="text-6xl font-extralight text-[#A89F91] mb-6 tracking-wide">Our Heritage</h2>
-            <div className="w-24 h-px bg-[#D4AF37] mx-auto"></div>
+            <h2 className="text-6xl font-extralight text-gray-600 mb-6 tracking-wide">Our Heritage</h2>
+            <div className="w-24 h-px bg-gray-800 mx-auto"></div>
           </motion.div>
-            {/* <h2 className="text-4xl font-light text-[#A89F91] mb-8">Our Heritage</h2> */}
-            <p className="text-xl text-[#A89F91] leading-relaxed">
-              At Scottsdale Diamond Company, heritage is more than the past—it is the quiet confidence we inherit, 
+            <p className="text-xl text-gray-600 leading-relaxed">
+              At Scottsdale & Diamond Company, heritage is more than the past—it is the quiet confidence we inherit, 
               the timeless beauty we choose, and the elegance we carry forward. Our story begins with a reverence for craftsmanship. Every diamond, every gold setting, every clasp 
               is a testament to artistry passed down through generations of jewelers who understood that true luxury 
               is not loud—it is enduring.
             </p>
-            <p className="text-lg text-[#A89F91] leading-relaxed">
+            <p className="text-lg text-gray-600 leading-relaxed">
               We draw inspiration from Scottsdale itself—a place where desert light meets refined leisure, where 
               moments are savored, and elegance is lived, not performed. This spirit informs every collection we 
               create: classic, sunlit, and sophisticated, with a touch of old-world grace. Heritage also means responsibility. Each piece is thoughtfully sourced and ethically crafted, designed 
@@ -126,7 +125,7 @@ export default function AboutPage() {
       </section>
 
       {/* Philosophy Section */}
-      <section className="bg-[#F5F2EB]">
+      <section className="bg-gray-50">
         {/* Top Text */}
         <div className="py-20">
           <motion.div
@@ -134,18 +133,17 @@ export default function AboutPage() {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-center max-w-6xl mx-auto px-8 space-y-8"
           >
-            <p className="text-4xl text-[#A89F91] leading-relaxed">
+            <p className="text-4xl text-gray-600 leading-relaxed">
               "We design jewelry meant to be lived in—crafted with enduring quality and understated elegance. Each piece carries quiet confidence, becoming part of your story today and a treasure for tomorrow."            
             </p>
           </motion.div>
         </div>
-
       </section>
 
       {/* Design Section */}
       <section className="grid grid-cols-2 min-h-screen">
         {/* Left - Image */}
-        <div className=" bg-[#F5F2EB] relative  ">
+        <div className=" bg-gray-50 relative  ">
           <div className=" relative h-full">
             <Image
               src="/about3.webp"
@@ -157,7 +155,7 @@ export default function AboutPage() {
         </div>
         
         {/* Right - Text content */}
-        <div className="bg-[#F5F2EB] flex items-center justify-center px-16">
+        <div className="bg-gray-50 flex items-center justify-center px-16">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -167,13 +165,13 @@ export default function AboutPage() {
               Timeless Craft, Ethical Care
             </h3>
             
-            <p className="text-xl text-[#A89F91] leading-relaxed mb-5" >
+            <p className="text-xl text-gray-600 leading-relaxed mb-5" >
                   In a world where fine jewelry often hides behind inflated markups and opaque 
                   practices, Scottsdale Diamond Company chooses a different path. We believe luxury 
                   should feel effortless and honest, rooted in integrity as much as in beauty.            
             </p>
 
-            <p className="text-xl text-[#A89F91] leading-relaxed">
+            <p className="text-xl text-gray-600 leading-relaxed">
                   Our pieces are thoughtfully crafted with ethically sourced diamonds and responsibly 
                   refined metals, designed to reflect both sophistication and conscience. Every creation 
                   meets the highest standards of quality while honoring the trust of our customers—and the 
@@ -184,15 +182,18 @@ export default function AboutPage() {
       </section>
 
       {/* Process Section */}
-      <section className="py-32 bg-gradient-to-br from-[#FFFAF3] to-[#F5F2EB]">
+      <section className="py-32 bg-gradient-to-br from-gray-100 via-white to-gray-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-200/20 via-white/30 to-gray-100/20 animate-pulse" style={{animationDuration: '8s'}} />
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gray-300/10 rounded-full blur-3xl animate-pulse" style={{animationDelay: '2s'}} />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-white/40 rounded-full blur-2xl animate-pulse" style={{animationDelay: '4s'}} />
         <div className="max-w-7xl mx-auto px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-center mb-20"
           >
-            <h2 className="text-6xl font-extralight text-[#A89F91] mb-6 tracking-wide">How It Works</h2>
-            <div className="w-24 h-px bg-[#D4AF37] mx-auto"></div>
+            <h2 className="text-6xl font-extralight text-gray-600 mb-6 tracking-wide">How It Works</h2>
+            <div className="w-24 h-px bg-gray-800 mx-auto"></div>
           </motion.div>
           
           <div className="grid md:grid-cols-1 lg:grid-cols-5 gap-12 mb-20">
@@ -229,13 +230,13 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 whileHover={{ y: -10 }}
                 transition={{ delay: index * 0.15, duration: 0.6 }}
-                className="text-center p-6 border border-[#CBAE8E]/30 rounded-lg hover:border-[#D4AF37]/50 transition-colors"
+                className="text-center p-6 border border-gray-300 rounded-lg hover:border-gray-800 transition-colors bg-white/80 backdrop-blur-sm shadow-lg"
               >
-                <div className="w-16 h-16 bg-[#D4AF37] text-white rounded-full flex items-center justify-center text-lg font-bold mx-auto mb-6">
+                <div className="w-16 h-16 bg-gray-800 text-white rounded-full flex items-center justify-center text-lg font-bold mx-auto mb-6">
                   {item.step}
                 </div>
-                <h3 className="text-2xl font-light text-[#A89F91] mb-4 tracking-wide">{item.title}</h3>
-                <p className="text-[#A89F91] leading-relaxed opacity-80">{item.description}</p>
+                <h3 className="text-2xl font-light text-gray-600 mb-4 tracking-wide">{item.title}</h3>
+                <p className="text-gray-600 leading-relaxed opacity-80">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -244,18 +245,18 @@ export default function AboutPage() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-center max-w-4xl mx-auto bg-white/50 backdrop-blur-sm rounded-3xl p-12 border border-white/20"
+            className="text-center max-w-4xl mx-auto bg-white/60 backdrop-blur-sm rounded-3xl p-12 border border-gray-200 shadow-xl relative z-10"
           >
-            <h3 className="text-4xl font-extralight text-[#A89F91] mb-6 tracking-wide">Start Your Custom Journey</h3>
-            <p className="text-xl text-[#A89F91] leading-relaxed mb-10 opacity-90">
+            <h3 className="text-4xl font-extralight text-gray-600 mb-6 tracking-wide">Start Your Custom Journey</h3>
+            <p className="text-xl text-gray-600 leading-relaxed mb-10 opacity-90">
               A custom piece from Scottsdale Diamond Company isn't just a design—it's a legacy in the making.<br/>
               Let's begin something unforgettable.
             </p>
             <Link href="/boutique">
               <motion.button
-                whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(212, 175, 55, 0.3)" }}
+                whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(0, 0, 0, 0.3)" }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-[#D4AF37] to-[#B8941F] text-white px-12 py-4 rounded-full font-medium text-lg tracking-wide shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center gap-3"
+                className="bg-gradient-to-r from-gray-800 to-gray-700 text-white px-12 py-4 rounded-full font-medium text-lg tracking-wide shadow-lg hover:shadow-xl transition-all duration-300 inline-flex items-center gap-3"
               >
                 Talk to a Diamond Expert
                 <motion.span
@@ -272,22 +273,25 @@ export default function AboutPage() {
       </section>
 
       {/* Values Section */}
-      <section className="px-8 py-20 bg-white">
-        <div className="max-w-6xl mx-auto">
+      <section className="px-8 py-20 bg-gradient-to-br from-white via-gray-50 to-gray-100 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-tr from-gray-100/30 via-white/20 to-gray-200/30 animate-pulse" style={{animationDuration: '10s'}} />
+        <div className="absolute top-1/4 right-1/3 w-72 h-72 bg-gray-200/20 rounded-full blur-3xl animate-pulse" style={{animationDelay: '3s'}} />
+        <div className="absolute bottom-1/3 left-1/4 w-64 h-64 bg-white/50 rounded-full blur-2xl animate-pulse" style={{animationDelay: '6s'}} />
+        <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="text-center mb-20"
           >
-            <h2 className="text-6xl font-extralight text-[#A89F91] mb-6 tracking-wide">What Drives Us </h2>
-            <div className="w-24 h-px bg-[#D4AF37] mx-auto"></div>
+            <h2 className="text-6xl font-extralight text-gray-600 mb-6 tracking-wide">What Drives Us </h2>
+            <div className="w-24 h-px bg-gray-800 mx-auto"></div>
           </motion.div>
           
           <div className="grid md:grid-cols-3 gap-12">
             {[
               {
                 title: "Quality",
-                description: "We believe true luxury is built to last. That’s why we use only the finest diamonds and precious metals, crafted with meticulous care to meet the highest standards."
+                description: "We believe true luxury is built to last. That's why we use only the finest diamonds and precious metals, crafted with meticulous care to meet the highest standards."
               },
               {
                 title: "Authenticity",
@@ -303,57 +307,16 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2 }}
-                className="text-center"
+                className="text-center bg-white/70 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-200"
               >
-                <h3 className="text-2xl font-light text-[#D4AF37] mb-4">{value.title}</h3>
-                <p className="text-lg text-[#A89F91] leading-relaxed">{value.description}</p>
+                <h3 className="text-2xl font-light text-gray-800 mb-4">{value.title}</h3>
+                <p className="text-lg text-gray-600 leading-relaxed">{value.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
-
-
-      {/* Founder Section */}
-      <section className="grid grid-cols-2 min-h-screen">
-        {/* Left - Text content */}
-        <div className="bg-white flex items-center justify-center px-16">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="max-w-md"
-          >
-            <h2 className="text-4xl font-light text-[#A89F91] italic mb-6 leading-tight">
-              Meet Our<br/>
-              Founder
-            </h2>
-            
-            <h3 className="text-2xl font-medium text-[#D4AF37] mb-4">Maria Santos</h3>
-            
-            <p className="text-base text-[#A89F91] leading-relaxed mb-6">
-              With over 35 years of experience in luxury jewelry design, Maria founded Scottsdale Diamond with a vision to create timeless pieces that celebrate life's most precious moments.
-            </p>
-            
-            <p className="text-base text-[#A89F91] leading-relaxed">
-              Her passion for exceptional craftsmanship and dedication to quality has made Scottsdale Diamond a trusted name in luxury jewelry, serving discerning clients who appreciate artistry and elegance.
-            </p>
-          </motion.div>
-        </div>
-        
-        {/* Right - Image */}
-        <div className="relative p-16">
-          <div className="relative h-full">
-            <Image
-              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop&crop=face"
-              alt="Maria Santos - Founder"
-              fill
-              className="object-cover rounded-lg"
-            />
-          </div>
-        </div>
-      </section>
-
-<Footer />
+      <Footer />
     </div>
   )
 }

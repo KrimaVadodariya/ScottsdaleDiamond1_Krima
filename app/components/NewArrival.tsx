@@ -1,15 +1,15 @@
 export default function NewArrival() {
   return (
-    <section className="py-20 bg-gradient-to-br from-[#F5F2EB] via-[#FFFAF3] to-[#CBAE8E]/30 overflow-hidden">
+    <section className="py-20 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#A89F91] mb-4">The Latest Spark</h2>
-          <p className="text-lg sm:text-xl text-[#A89F91]/70">Discover our latest collections</p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">The Latest Spark</h2>
+          <p className="text-lg sm:text-xl text-gray-600">Discover our latest collections</p>
         </div>
         
         <div className="flex flex-col lg:flex-row gap-6 items-center lg:items-end justify-center">
           {/* Evil Eye Collection - Small */}
-          <div className="relative w-full max-w-64 h-80 lg:w-64 rounded-3xl overflow-hidden group cursor-pointer shadow-2xl shadow-[#A89F91]/20">
+          <div className="relative w-full max-w-64 h-80 lg:w-64 rounded-3xl overflow-hidden group cursor-pointer shadow-2xl shadow-gray-500/20">
             <img
               src="/ring1.webp"
               alt="Ring"
@@ -23,7 +23,7 @@ export default function NewArrival() {
           </div>
 
           {/* Honey Bee Collection - Large */}
-          <div className="relative w-full max-w-80 h-96 lg:w-80 rounded-3xl overflow-hidden group cursor-pointer shadow-2xl shadow-[#D4AF37]/30">
+          <div className="relative w-full max-w-80 h-96 lg:w-80 rounded-3xl overflow-hidden group cursor-pointer shadow-2xl shadow-gray-800/30">
             <img
               src="/bracelet2.avif"
               alt="bracelet"
@@ -37,7 +37,7 @@ export default function NewArrival() {
           </div>
 
           {/* Glo Collection - Biggest (Center) */}
-          <div className="relative w-full max-w-96 h-[28rem] lg:w-96 rounded-3xl overflow-hidden group cursor-pointer shadow-2xl shadow-[#D4AF37]/40">
+          <div className="relative w-full max-w-96 h-[28rem] lg:w-96 rounded-3xl overflow-hidden group cursor-pointer shadow-2xl shadow-gray-800/40">
             <img
               src="/pendent2.jpg"
               alt="pendent"
@@ -51,7 +51,7 @@ export default function NewArrival() {
           </div>
 
           {/* Peacock Collection - Large */}
-          <div className="relative w-full max-w-80 h-96 lg:w-80 rounded-3xl overflow-hidden group cursor-pointer shadow-2xl shadow-[#CBAE8E]/30">
+          <div className="relative w-full max-w-80 h-96 lg:w-80 rounded-3xl overflow-hidden group cursor-pointer shadow-2xl shadow-gray-600/30">
             <img
               src="/earring2.webp"
               alt="earring"
@@ -65,7 +65,7 @@ export default function NewArrival() {
           </div>
 
           {/* Aruna Collection - Small */}
-          <div className="relative w-full max-w-64 h-80 lg:w-64 rounded-3xl overflow-hidden group cursor-pointer shadow-2xl shadow-[#A89F91]/20">
+          <div className="relative w-full max-w-64 h-80 lg:w-64 rounded-3xl overflow-hidden group cursor-pointer shadow-2xl shadow-gray-500/20">
             <img
               src="/nacklace2.jpg"
               alt="nacklace"
