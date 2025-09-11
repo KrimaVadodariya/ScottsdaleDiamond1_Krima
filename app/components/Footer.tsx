@@ -118,8 +118,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-600 text-xs sm:text-sm mb-4 md:mb-0 text-center md:text-left">
               © 2024 Scottsdale & Diamond Company. All rights reserved. <br />
-              Designed & Developed by <span className="text-gray-800 font-medium">Technova Technologies</span>
-
+              Designed & Developed by <a href="https://www.technovatechnologies.com/" target="_blank" rel="noopener noreferrer" className="text-gray-800 font-medium hover:text-gray-600 transition-colors">Technova Technologies</a>
             </p>
 
             <div className="flex flex-wrap justify-center space-x-4 sm:space-x-6 text-xs sm:text-sm text-gray-600">

@@ -140,11 +140,11 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
   
   if (!blogPost) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center mt-6">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">Blog Post Not Found</h1>
           <Link href="/blog">
-            <button className="bg-yellow-600 text-white px-6 py-3 rounded-full font-medium">
+            <button className="bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-full font-medium mt-6">
               Back to Blog
             </button>
           </Link>
@@ -154,17 +154,17 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col pt-20">
+    <div className="min-h-screen bg-white flex flex-col pt-20 ">
       <div className="max-w-4xl mx-auto px-6 flex-1">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="mb-8"
+          className="mb-8 mt-6"
         >
           <Link href="/blog">
             <motion.button
               whileHover={{ x: -5 }}
-              className="flex items-center bg-white/20 hover:bg-white/30 text-gray-800 px-6 py-3 rounded-full font-medium"
+              className="flex items-center bg-gray-800 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium"
             >
               <ArrowLeft size={20} className="mr-2" />
               Back to Blog
@@ -175,7 +175,7 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
         <motion.article
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl border border-yellow-200/50"
+          className="bg-white backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl border border-gray-300 mb-6"
         >
           <div className="relative h-96">
             <Image
@@ -186,7 +186,7 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
             <div className="absolute bottom-8 left-8 right-8">
-              <span className="bg-yellow-600/90 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-4 inline-block">
+              <span className="bg-gray-800/90 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mb-4 inline-block">
                 {blogPost.category}
               </span>
               <h1 className="text-4xl font-space font-bold text-white mb-4">
@@ -207,14 +207,14 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
               <div className="flex space-x-4">
                 <motion.button
                   whileHover={{ scale: 1.1 }}
-                  className="flex items-center space-x-2 bg-yellow-100 hover:bg-yellow-200 text-yellow-700 px-4 py-2 rounded-full font-medium"
+                  className="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium"
                 >
                   <Heart size={16} />
                   <span>Like</span>
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.1 }}
-                  className="flex items-center space-x-2 bg-yellow-100 hover:bg-yellow-200 text-yellow-700 px-4 py-2 rounded-full font-medium"
+                  className="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-full font-medium"
                 >
                   <Share2 size={16} />
                   <span>Share</span>
@@ -224,13 +224,13 @@ export default function BlogPostPage({ params }: { params: { id: string } }) {
               <div className="flex space-x-2">
                 <motion.button
                   whileHover={{ scale: 1.1 }}
-                  className="p-2 bg-gray-100 hover:bg-yellow-100 rounded-full text-gray-600 hover:text-yellow-600"
+                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-600 hover:text-gray-800"
                 >
                   <Instagram size={18} />
                 </motion.button>
                 <motion.button
                   whileHover={{ scale: 1.1 }}
-                  className="p-2 bg-gray-100 hover:bg-yellow-100 rounded-full text-gray-600 hover:text-yellow-600"
+                  className="p-2 bg-gray-100 hover:bg-gray-200 rounded-full text-gray-600 hover:text-gray-800"
                 >
                   <Twitter size={18} />
                 </motion.button>
