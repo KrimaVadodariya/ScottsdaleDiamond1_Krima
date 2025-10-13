@@ -2,6 +2,7 @@ import './globals.css'
 import { Lato } from 'next/font/google'
 import Navbar from './components/Navbar'
 import Preloader from './components/Preloader'
+import WelcomePopup from './components/WelcomePopup'
 
 import { CartProvider } from './context/CartContext'
 import { WishlistProvider } from './context/WishlistContext'
@@ -29,12 +30,12 @@ export default function RootLayout({
               backgroundImage: 'url(https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1920)'
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-white/95 via-gray-50/90 to-slate-100/95" />
-          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-gray-100/40 animate-pulse" style={{animationDuration: '8s'}} />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-bg/95 via-secondary-bg/90 to-accent/95" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-primary-bg/30 to-secondary-bg/40 animate-pulse" style={{animationDuration: '8s'}} />
           
           {/* Dynamic Floating Elements */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="absolute top-10 left-5 w-32 h-32 bg-gradient-to-br from-white/40 to-gray-200/30 rounded-full animate-spin blur-lg" style={{animationDuration: '20s'}} />
+            <div className="absolute top-10 left-5 w-32 h-32 bg-gradient-to-br from-accent/40 to-secondary-bg/30 rounded-full animate-spin blur-lg" style={{animationDuration: '20s'}} />
             <div className="absolute top-32 right-12 w-24 h-24 bg-gradient-to-tr from-gray-100/50 to-slate-200/40 rounded-full animate-bounce blur-md" style={{animationDuration: '3s'}} />
             <div className="absolute top-64 left-1/3 w-40 h-40 bg-gradient-to-bl from-gray-200/35 to-white/45 rounded-full morph-animation blur-xl" style={{animationDelay: '2s'}} />
             <div className="absolute top-96 right-1/4 w-20 h-20 bg-gradient-to-r from-slate-100/40 to-gray-300/30 rounded-full animate-pulse blur-sm" />
@@ -73,6 +74,7 @@ export default function RootLayout({
               <WishlistProvider>
                 <Preloader />
                 <Navbar />
+                <WelcomePopup />
                 <main className="pt-19 relative z-10">
                   {children}
                 </main>

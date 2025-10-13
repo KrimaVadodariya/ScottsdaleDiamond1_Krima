@@ -250,9 +250,17 @@ export default function JewelryPage() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
-                whileHover={{ y: -4 }}
-                className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden cursor-pointer group border border-gray-200 hover:border-gray-400"
+                whileHover={{ 
+                  y: -8,
+                  boxShadow: '0 20px 40px rgba(0, 0, 0, 0.15), inset 0 -5px 15px rgba(0, 0, 0, 0.05)',
+                  transition: { duration: 0.4 }
+                }}
+                className="bg-white rounded-3xl shadow-lg transition-all duration-400 overflow-hidden cursor-pointer group border border-gray-200 hover:border-gray-300"
+                style={{
+                  boxShadow: '0 8px 25px rgba(0, 0, 0, 0.1)'
+                }}
               >
+
               {/* Image Container */}
               <div className="relative aspect-square overflow-hidden rounded-t-3xl">
                 <Image
@@ -261,7 +269,6 @@ export default function JewelryPage() {
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                 />
-                
                 {/* Wishlist Button */}
                 <motion.button
                   whileHover={{ scale: 1.1 }}

@@ -136,11 +136,12 @@ export default function HomePage() {
             {/*<Sparkles className="text-yellow-400" size={60} /> */}
           </motion.div>
           
-           <h1 className="text-3xl sm:text-4xl lg:text-5xl pt-6 font-space font-black text-white mb-6 leading-tight text-start">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl pt-6 font-space font-black text-white mb-6 leading-tight text-start">
             NOW TRENDING
             <br />
-            {/* <span className="text-yellow-400">JEWELRY</span> */}
-          </h1>
+          </h1> 
+          
+           
           
           <p className="text-lg sm:text-xl lg:text-2xl text-gray-200 mb-8 font-light">
             Stack it. Layer it. Own it.
@@ -172,7 +173,7 @@ export default function HomePage() {
       </motion.section>
 
       {/* Categories Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-primary-bg">
         <div className="mx-8">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -180,10 +181,10 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-space font-bold text-gray-800 mb-4">
+           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-space font-bold text-text-primary mb-4">
              Shop By Category
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600">
+            <p className="text-lg sm:text-xl text-text-secondary">
               Discover the perfect piece for every moment
             </p>
           </motion.div>
@@ -202,7 +203,7 @@ export default function HomePage() {
                     className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   />
                 </Link>
-                <h3 className="text-lg font-medium text-gray-800 mt-3">
+                <h3 className="text-lg font-medium text-text-primary mt-3">
                   {category.name}
                 </h3>
               </div>
@@ -212,7 +213,7 @@ export default function HomePage() {
       </section>
 
       {/* Unique Design Section */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-secondary-bg">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Left - Text Content */}
@@ -223,17 +224,17 @@ export default function HomePage() {
               className="space-y-6"
             >
               <div className="inline-block">
-                <span className="bg-gray-100 text-gray-800 px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wider">
+                <span className="bg-accent text-text-primary px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wider">
                   Unique by Design ✨
                 </span>
               </div>
               
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 leading-tight">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight">
                 At Scottsdale & Diamond Company,
-                <span className="block text-gray-600 text-2xl sm:text-3xl mt-2">what kind of life will this belong to?</span>
+                <span className="block text-text-secondary text-2xl sm:text-3xl mt-2">what kind of life will this belong to?</span>
               </h2>
               
-              <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
+              <div className="space-y-6 text-lg text-text-secondary leading-relaxed">
                 <p>
                   Our designs are more than settings and stones — they're moments made tangible. 
                   Minimal yet timeless, each creation is sketched with intention, crafted with precision, 
@@ -246,7 +247,7 @@ export default function HomePage() {
                   unforgettable enough for every day in between.
                 </p>
                 
-                <p className="text-gray-800 font-medium">
+                <p className="text-text-primary font-medium">
                   Because true luxury isn't loud. It's lasting. And it's uniquely yours.
                 </p>
               </div>
@@ -256,7 +257,7 @@ export default function HomePage() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="bg-gray-800 hover:bg-gray-700 text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+                    className="bg-cta hover:bg-highlight text-white px-8 py-3 rounded-lg font-semibold transition-colors"
                   >
                     Explore Collection
                   </motion.button>
@@ -265,7 +266,7 @@ export default function HomePage() {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors"
+                    className="border-2 border-cta text-cta hover:bg-cta hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors"
                   >
                     Custom Design
                   </motion.button>
@@ -303,8 +304,8 @@ export default function HomePage() {
 
 
       {/* Customer Reviews Section */}
-      <section className="py-17 pb-10 bg-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-gray-100/30 via-white to-gray-100/30"></div>
+      <section className="py-17 pb-10 bg-primary-bg relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-secondary-bg/30 via-primary-bg to-secondary-bg/30"></div>
         <div className="max-w-7xl mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -318,10 +319,10 @@ export default function HomePage() {
               className="inline-block mb-6"
             >
             </motion.div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-space font-bold text-gray-800 mb-6">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-space font-bold text-text-primary mb-6">
               What Our Customers Say
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg sm:text-xl text-text-secondary max-w-2xl mx-auto">
               Real stories from our jewelry lovers around the world 
             </p>
           </motion.div>
@@ -404,9 +405,9 @@ export default function HomePage() {
                   whileInView={{ opacity: 1, y: 0, scale: 1 }}
                   whileHover={{ y: -10, scale: 1.02 }}
                   transition={{ duration: 0.6, delay: (index % 5) * 0.1 }}
-                  className="bg-white backdrop-blur-lg border border-gray-300 rounded-3xl p-8 min-w-[380px] max-w-[380px] shadow-xl hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex-shrink-0"
+                  className="bg-primary-bg backdrop-blur-lg border border-accent rounded-3xl p-8 min-w-[380px] max-w-[380px] shadow-xl hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex-shrink-0"
                 >
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-100/50 via-gray-200/20 to-gray-300/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-secondary-bg/50 via-accent/20 to-highlight/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                   
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-6">
@@ -423,13 +424,13 @@ export default function HomePage() {
                         ))}
                       </div>
                       {review.verified && (
-                        <span className="text-xs text-gray-800 font-bold bg-gray-100 px-3 py-1 rounded-full border border-gray-300">
+                        <span className="text-xs text-text-primary font-bold bg-secondary-bg px-3 py-1 rounded-full border border-accent">
                           ✓ VERIFIED
                         </span>
                       )}
                     </div>
                     
-                    <p className="text-gray-600 text-lg leading-relaxed mb-8 font-medium">
+                    <p className="text-text-secondary text-lg leading-relaxed mb-8 font-medium">
                       "{review.review}"
                     </p>
                     
@@ -447,9 +448,9 @@ export default function HomePage() {
                         </div>
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-bold text-gray-800 text-lg">{review.name}</h4>
-                        <p className="text-gray-500 text-sm">{review.location}</p>
-                        <p className="text-gray-800 text-sm font-medium mt-1">{review.product}</p>
+                        <h4 className="font-bold text-text-primary text-lg">{review.name}</h4>
+                        <p className="text-text-secondary text-sm">{review.location}</p>
+                        <p className="text-text-primary text-sm font-medium mt-1">{review.product}</p>
                       </div>
                     </div>
                   </div>

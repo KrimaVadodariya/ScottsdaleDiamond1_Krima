@@ -52,7 +52,7 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: isVisible ? 0 : -100 }}
       transition={{ duration: 0.3 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-md shadow-lg transition-all duration-300"
+      className="fixed top-0 left-0 right-0 z-50 bg-primary-bg/70 backdrop-blur-md shadow-lg transition-all duration-300"
     >
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-4">
@@ -63,12 +63,12 @@ export default function Navbar() {
               className="flex items-center space-x-2 cursor-pointer"
             >
               <Image src="/logo.png" alt="Logo" width={32} height={52} className=" sm:h-11 sm:w-8" />
-              <div className="flex flex-col leading-none">
-                <span className="text-sm sm:text-lg font-bold text-gray-800 tracking-wide">
-                  Scottsdale & Diamond
+              <div className="flex flex-col leading-tight">
+                <span className="text-base sm:text-xl font-bold text-text-primary tracking-[0.2em] uppercase">
+                  SCOTTSDALE
                 </span>
-                <span className="text-xs sm:text-sm font-medium text-gray-600 uppercase tracking-widest">
-                  Company
+                <span className="text-xs sm:text-sm font-bold text-text-secondary tracking-[0.15em] uppercase">
+                  DIAMOND COMPANY
                 </span>
               </div>
             </motion.div>
@@ -82,8 +82,8 @@ export default function Navbar() {
                   whileHover={{ y: -2 }}
                   className={`text-base font-medium tracking-wide transition-all duration-200 ${
                     pathname === item.href
-                      ? 'text-gray-800 border-b-2 border-gray-800 pb-1'
-                      : 'text-gray-600 hover:text-gray-800'
+                      ? 'text-text-primary border-b-2 border-cta pb-1'
+                      : 'text-text-secondary hover:text-text-primary'
                   }`}
                 >
                   {item.name}
@@ -97,22 +97,22 @@ export default function Navbar() {
             <div className="hidden lg:block relative group">
               <motion.div
                 whileHover={{ scale: 1.02 }}
-                className="flex items-center space-x-2 px-4 py-2 rounded-full border bg-white/50 border-gray-300 hover:border-gray-800 transition-all duration-300"
+                className="flex items-center space-x-2 px-4 py-2 rounded-full border bg-primary-bg/50 border-accent hover:border-cta transition-all duration-300"
               >
-                <Search className="h-4 w-4 text-gray-600" />
+                <Search className="h-4 w-4 text-text-secondary" />
                 <input
                   type="text"
                   placeholder="Search..."
-                  className="bg-transparent border-none outline-none text-sm w-32 text-gray-600 placeholder:text-gray-400"
+                  className="bg-transparent border-none outline-none text-sm w-32 text-text-secondary placeholder:text-text-secondary/60"
                 />
               </motion.div>
             </div>
             
             <Link href="/wishlist">
-              <motion.button className="relative p-2 rounded-full hover:bg-gray-100">
-                <Heart className="h-5 w-5 text-gray-600" />
+              <motion.button className="relative p-2 rounded-full hover:bg-secondary-bg">
+                <Heart className="h-5 w-5 text-text-secondary" />
                 {wishlistItems.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
+                  <span className="absolute -top-1 -right-1 bg-cta text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
                     {wishlistItems.length}
                   </span>
                 )}
@@ -120,10 +120,10 @@ export default function Navbar() {
             </Link>
             
             <Link href="/cart">
-              <motion.button className="relative p-2 rounded-full hover:bg-gray-100">
-                <ShoppingCart className="h-5 w-5 text-gray-600" />
+              <motion.button className="relative p-2 rounded-full hover:bg-secondary-bg">
+                <ShoppingCart className="h-5 w-5 text-text-secondary" />
                 {items.length > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-gray-800 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
+                  <span className="absolute -top-1 -right-1 bg-text-primary text-white text-xs rounded-full h-4 w-4 flex items-center justify-center font-semibold">
                     {items.length}
                   </span>
                 )}
@@ -132,9 +132,9 @@ export default function Navbar() {
             
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-full hover:bg-gray-100 ml-2"
+              className="lg:hidden p-2 rounded-full hover:bg-secondary-bg ml-2"
             >
-              {isMobileMenuOpen ? <X className="h-6 w-6 text-gray-600" /> : <Menu className="h-6 w-6 text-gray-600" />}
+              {isMobileMenuOpen ? <X className="h-6 w-6 text-text-secondary" /> : <Menu className="h-6 w-6 text-text-secondary" />}
             </button>
           </div>
         </div>
@@ -144,13 +144,13 @@ export default function Navbar() {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="lg:hidden bg-white border-t border-gray-300 py-4"
+            className="lg:hidden bg-primary-bg border-t border-accent py-4"
           >
             <div className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <Link key={item.name} href={item.href} onClick={() => setIsMobileMenuOpen(false)}>
                   <div className={`px-4 py-2 text-base font-medium ${
-                    pathname === item.href ? 'text-gray-800' : 'text-gray-600'
+                    pathname === item.href ? 'text-text-primary' : 'text-text-secondary'
                   }`}>
                     {item.name}
                   </div>

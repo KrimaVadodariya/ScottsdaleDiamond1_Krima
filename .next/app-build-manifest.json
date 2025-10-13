@@ -12,20 +12,50 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
-    "/jewelry/page": [
+    "/financing-options/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/jewelry/page.js"
+      "static/chunks/app/financing-options/page.js"
     ],
-    "/product/[id]/page": [
+    "/accessibility/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/product/[id]/page.js"
+      "static/chunks/app/accessibility/page.js"
     ],
-    "/about/page": [
+    "/diamond-guide/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/about/page.js"
+      "static/chunks/app/diamond-guide/page.js"
+    ],
+    "/gemstone-guide/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/gemstone-guide/page.js"
+    ],
+    "/birthstone-guide/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/birthstone-guide/page.js"
+    ],
+    "/ring-sizer-guide/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/ring-sizer-guide/page.js"
+    ],
+    "/shipping-policy/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/shipping-policy/page.js"
+    ],
+    "/jewelry-care/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/jewelry-care/page.js"
+    ],
+    "/track-order/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/track-order/page.js"
     ],
     "/boutique/page": [
       "static/chunks/webpack.js",
@@ -33,35 +63,10 @@
       "static/css/app/boutique/page.css",
       "static/chunks/app/boutique/page.js"
     ],
-    "/blog/page": [
+    "/faq/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/blog/page.js"
-    ],
-    "/cart/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/cart/page.js"
-    ],
-    "/wishlist/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/wishlist/page.js"
-    ],
-    "/category/[slug]/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/category/[slug]/page.js"
-    ],
-    "/checkout/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/checkout/page.js"
-    ],
-    "/not-found": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/not-found.js"
+      "static/chunks/app/faq/page.js"
     ]
   }
 }

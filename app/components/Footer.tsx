@@ -1,133 +1,88 @@
-import { Sparkles, Mail, Phone, MapPin, Instagram, Twitter, Facebook, Heart } from 'lucide-react'
+import { Mail, Phone, Instagram, Facebook } from 'lucide-react'
 import Link from 'next/link'
-import Image from 'next/image'
-import { motion } from 'framer-motion'
 
 export default function Footer() {
   return (
-    <footer className="bg-white py-16 px-6  border-t border-gray-300">
-      <div className="max-w-6xl mx-auto">
-        {/* Contact CTA Section */}
-        <div className="bg-gray-50 rounded-2xl p-8 mb-12 text-center border border-gray-300">
-          <div className="flex items-center justify-center mb-4">
-            <Heart className="text-gray-800 mr-2" size={24} />
-            <h3 className="text-2xl font-bold text-gray-800">Stay Connected</h3>
-          </div>
-          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            Join our community for exclusive offers, styling tips, and first access to new collections!
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <div className="flex space-x-4">
-              <a href="#" className="p-3 bg-gray-800 text-white rounded-full hover:bg-gray-700 hover:scale-110 transition-all duration-300">
-                <Instagram size={20} />
-              </a>
-              <a href="#" className="p-3 bg-gray-800 text-white rounded-full hover:bg-gray-700 hover:scale-110 transition-all duration-300">
-                <Twitter size={20} />
-              </a>
-              <a href="#" className="p-3 bg-gray-800 text-white rounded-full hover:bg-gray-700 hover:scale-110 transition-all duration-300">
-                <Facebook size={20} />
-              </a>
-            </div>
-            <div className="flex items-center space-x-4 text-sm">
-              <div className="flex items-center text-gray-600">
-                <Mail className="mr-2" size={16} />
-                hello@luxejewelry.com
-              </div>
-              <div className="flex items-center text-gray-600">
-                <Phone className="mr-2" size={16} />
-                +1 (555) 123-4567
-              </div>
-            </div>
-          </div>
-        </div>
+    <footer className="pt-12 px-0 border-t" style={{backgroundColor: '#efede9ff', borderColor: '#EFE9E3'}}>
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {/* Education */}
           <div>
-            <div className="flex items-center space-x-2 mb-4">
-              <Link href="/">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="flex items-center space-x-2 cursor-pointer"
-            >
-              <Image src="/logo.png" alt="Logo" width={32} height={52} />
-              <div className="flex flex-col leading-none">
-                <span className="text-lg font-bold text-gray-800 tracking-wide">
-                  Scottsdale & Diamond
-                </span>
-                <span className="text-sm font-medium text-gray-600 uppercase tracking-widest">
-                  Company
-                </span>
-              </div>
-            </motion.div>
-          </Link>
+            <h4 className="text-sm font-semibold mb-4 uppercase tracking-wide" style={{color: '#2F2F2F'}}>EDUCATION</h4>
+            <div className="space-y-2">
+              <Link href="/diamond-guide" className="block text-sm transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>Diamond Guide</Link>
+              <Link href="/gemstone-guide" className="block text-sm transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>Colored Gems Guide</Link>
+              <Link href="/birthstone-guide" className="block text-sm transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>Birthstones Guide</Link>
+              <Link href="/ring-sizer-guide" className="block text-sm transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>Size Guide</Link>
             </div>
-            <p className="text-gray-600 mb-4">
-              Crafting beautiful jewelry for life's special moments.
+          </div>
+
+          {/* Orders */}
+          <div>
+            <h4 className="text-sm font-semibold mb-4 uppercase tracking-wide" style={{color: '#2F2F2F'}}>ORDERS</h4>
+            <div className="space-y-2">
+              <Link href="/shipping-policy" className="block text-sm transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>Free Shipping Both Ways</Link>
+              <Link href="/jewelry-care" className="block text-sm transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>Caring For Your Jewelry</Link>
+              <Link href="/track-order" className="block text-sm transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>Track Your Order</Link>
+            </div>
+          </div>
+
+          {/* Customer Care */}
+          <div>
+            <h4 className="text-sm font-semibold mb-4 uppercase tracking-wide" style={{color: '#2F2F2F'}}>CUSTOMER CARE</h4>
+            <div className="space-y-2">
+              <Link href="#" className="block text-sm transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>Contact Us</Link>
+              <Link href="#" className="flex items-center text-sm transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>
+                <Mail size={16} className="mr-2" />
+                Email Us
+              </Link>
+              <Link href="#" className="flex items-center text-sm transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>
+                <Phone size={16} className="mr-2" />
+                1-844-400-0065
+              </Link>
+              <Link href="/faq" className="block text-sm transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>FAQs</Link>
+              <Link href="/financing-options" className="block text-sm transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>Financing Options</Link>
+              <Link href="/accessibility" className="block text-sm transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>Accessibility</Link>
+            </div>
+          </div>
+
+          {/* Newsletter */}
+          <div>
+            <h4 className="text-sm font-semibold mb-4 uppercase tracking-wide" style={{color: '#2F2F2F'}}>JOIN THE DIAMOND COMMUNITY</h4>
+            <p className="text-sm mb-4" style={{color: '#6D6157'}}>
+              Sign up for our newsletter to stay up to date on the latest designs and exciting jewelry news.
             </p>
-            <div className="flex items-center text-gray-600 mb-2">
-              <MapPin className="mr-2" size={16} />
-              <span className="text-sm">123 Luxury Ave, NYC 10001</span>
+            <div className="flex border" style={{borderColor: '#D4C2A8'}}>
+              <input
+                type="email"
+                placeholder="Email Address"
+                className="flex-1 px-3 py-2 text-sm focus:outline-none" style={{backgroundColor: '#FAF8F3', color: '#2F2F2F'}}
+              />
+              <button className="px-4 py-2 text-sm font-medium transition-colors" style={{backgroundColor: '#CBAE9B', color: '#FAF8F3'}} onMouseEnter={(e) => (e.target as HTMLElement).style.backgroundColor = '#9C7E6A'} onMouseLeave={(e) => (e.target as HTMLElement).style.backgroundColor = '#CBAE9B'}>
+                send
+              </button>
             </div>
-          </div>
-
-          <div>
-            <h4 className="text-lg font-bold mb-4 text-gray-800">Quick Links</h4>
-            <div className="space-y-3">
-              <Link href="/jewelry" className="block text-gray-600 hover:text-gray-800 transition-colors hover:translate-x-1 duration-300">
-                → Jewelry Collection
-              </Link>
-              <Link href="/boutique" className="block text-gray-600 hover:text-gray-800 transition-colors hover:translate-x-1 duration-300">
-                → Personal Styling
-              </Link>
-              <Link href="/blog" className="block text-gray-600 hover:text-gray-800 transition-colors hover:translate-x-1 duration-300">
-                → Style Blog
-              </Link>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-lg font-bold mb-4 text-gray-800">Collections</h4>
-            <div className="space-y-3">
-              <Link href="/jewelry" className="block text-gray-600 hover:text-gray-800 transition-colors hover:translate-x-1 duration-300">
-                → Ring
-              </Link>
-              <Link href="/jewelry" className="block text-gray-600 hover:text-gray-800 transition-colors hover:translate-x-1 duration-300">
-                → Necklace
-              </Link>
-              <Link href="/jewelry" className="block text-gray-600 hover:text-gray-800 transition-colors hover:translate-x-1 duration-300">
-                → Earring
-              </Link>
-              <Link href="/jewelry" className="block text-gray-600 hover:text-gray-800 transition-colors hover:translate-x-1 duration-300">
-                → Bracelet
-              </Link>
-            </div>
-          </div>
-
-          <div>
-            <h4 className="text-lg font-bold mb-4 text-gray-800">Customer Care</h4>
-            <div className="space-y-3">
-              <p className="text-gray-600 text-sm">📞 Mon-Sat 9AM-7PM EST</p>
-              <p className="text-gray-600 text-sm">✨ Free shipping over $200</p>
-              <p className="text-gray-600 text-sm">🔄 30-day returns</p>
-              <p className="text-gray-600 text-sm">💎 Lifetime warranty</p>
+            <div className="flex items-center space-x-3 mt-4">
+              <span className="text-sm font-medium" style={{color: '#D4C2A8'}}>BLOG</span>
+              <div className="flex space-x-2">
+                <Instagram size={16} className="cursor-pointer transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'} />
+                <Facebook size={16} className="cursor-pointer transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'} />
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-300 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-600 text-xs sm:text-sm mb-4 md:mb-0 text-center md:text-left">
-              © 2024 Scottsdale & Diamond Company. All rights reserved. <br />
-              Designed & Developed by <a href="https://www.technovatechnologies.com/" target="_blank" rel="noopener noreferrer" className="text-gray-800 font-medium hover:text-gray-600 transition-colors">Technova Technologies</a>
-            </p>
 
-            <div className="flex flex-wrap justify-center space-x-4 sm:space-x-6 text-xs sm:text-sm text-gray-600">
-              <a href="#" className="hover:text-gray-800 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-gray-800 transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-gray-800 transition-colors">Size Guide</a>
-            </div>
-          </div>
-        </div>
+      </div>
+      
+      {/* Copyright */}
+      <div className="py-4 text-center border-t w-full" style={{backgroundColor: '#EFE9E3', borderColor: '#D4C2A8'}}>
+        <p className="text-xs" style={{color: '#6D6157'}}>
+          © 2025 Scottsdale Diamond. All Rights Reserved | 
+          <Link href="#" className="transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>Disclaimer</Link> | 
+          <Link href="#" className="transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>T&C</Link>
+        </p>
       </div>
     </footer>
   )
