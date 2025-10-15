@@ -76,18 +76,13 @@ export default function AboutPage() {
             <div className="w-16 sm:w-20 lg:w-24 h-px bg-gray-800 mx-auto"></div>
           </motion.div>
             <p className="text-base sm:text-lg lg:text-xl text-gray-600 leading-relaxed mb-6">
-              At Scottsdale & Diamond Company, heritage is more than the past—it is the quiet confidence we inherit, 
-              the timeless beauty we choose, and the elegance we carry forward. Our story begins with a reverence for craftsmanship. Every diamond, every gold setting, every clasp 
-              is a testament to artistry passed down through generations of jewelers who understood that true luxury 
-              is not loud—it is enduring.
+              For more than seven years, we’ve turned your stories into precious keepsakes — crafted by hand, shaped by emotion, and designed with intention. 
+              What began as a small boutique rooted in personal relationships now grows into an online experience built on the same trust and craftsmanship. 
+              Book your consultation today, and let us create something made just for you — with a free quote within 24 hours. 
             </p>
             <p className="text-sm sm:text-base lg:text-lg text-gray-600 leading-relaxed">
-              We draw inspiration from Scottsdale itself—a place where desert light meets refined leisure, where 
-              moments are savored, and elegance is lived, not performed. This spirit informs every collection we 
-              create: classic, sunlit, and sophisticated, with a touch of old-world grace. Heritage also means responsibility. Each piece is thoughtfully sourced and ethically crafted, designed 
-              to be as lasting as the memories it celebrates. Jewelry that begins with one generation and becomes 
-              the treasure of the next.Scottsdale Diamond Company is not just about the jewelry you wear today—it's about the story you pass on tomorrow.
-
+              We craft pieces that hold meaning — shaped by your journey, your growth, and your voice.
+              Every design begins with your story and becomes part of it.
             </p>
             
           </motion.div>
@@ -178,6 +173,57 @@ export default function AboutPage() {
                   generations who will wear our jewelry after them.
             </p>
           </motion.div>
+        </div>
+      </section>
+      
+      {/* Founder Section */}
+      <section className="py-16 sm:py-20 lg:py-24" style={{backgroundColor: '#FAF8F3'}}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-center mb-12 sm:mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extralight mb-4 sm:mb-6 tracking-wide" style={{color: '#2F2F2F'}}>Meet Our Founder</h2>
+            <div className="w-16 sm:w-20 h-px mx-auto" style={{backgroundColor: '#2F2F2F'}}></div>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="relative aspect-square rounded-2xl overflow-hidden" 
+              style={{backgroundColor: '#EFE9E3'}}
+            >
+              <Image
+                src="/founder.jpg"
+                alt="Founder Portrait"
+                fill
+                className="object-cover"
+              />
+            </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              className="space-y-6"
+            >
+              <h3 className="text-2xl sm:text-3xl font-light" style={{color: '#2F2F2F'}}>Janvi Shah</h3>
+              <p className="text-sm uppercase tracking-wider" style={{color: '#6D6157'}}>Founder & Creative Director</p>
+              
+              <div className="space-y-4 text-base sm:text-lg leading-relaxed" style={{color: '#6D6157'}}>
+                <p>
+                  "I founded Scottsdale Diamond Company with a simple belief: jewelry should tell your story, not ours. Every piece we create begins with understanding who you are and what matters most to you."
+                </p>
+                <p>
+                  "After seven years in this industry, I've learned that the most beautiful jewelry isn't just about the diamonds or gold—it's about the moments they represent and the confidence they inspire."
+                </p>
+                <p>
+                  "Our commitment to ethical sourcing and transparent practices reflects my personal values. When you wear our jewelry, you're not just wearing something beautiful—you're wearing something meaningful."
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -316,6 +362,8 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+
       <Footer />
     </div>
   )

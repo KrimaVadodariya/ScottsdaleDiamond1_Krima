@@ -11,10 +11,11 @@ import { useWishlist } from '../context/WishlistContext'
 
 const navItems = [
   { name: 'Home', href: '/' },
-  { name: 'Jewelry', href: '/jewelry' },
+  { name: 'Shop', href: '/jewelry' },
   { name: 'About Us', href: '/about' },
   { name: 'Boutique', href: '/boutique' },
-  { name: 'Blog', href: '/blog' },
+  { name: 'Journal', href: '/blog' },
+  { name: 'Contact', href: '/contact' },
 ]
 
 export default function Navbar() {
@@ -127,6 +128,15 @@ export default function Navbar() {
                     {items.length}
                   </span>
                 )}
+              </motion.button>
+            </Link>
+            
+            <Link href="/login">
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                className="p-2 rounded-full hover:bg-secondary-bg"
+              >
+                <User className="h-5 w-5 text-text-secondary" />
               </motion.button>
             </Link>
             

@@ -10,9 +10,11 @@ import { useCart } from '../context/CartContext'
 import { useWishlist } from '../context/WishlistContext'
 import { useAuth } from '../context/AuthContext'
 import { useRouter } from 'next/navigation'
-import { jewelryItems, jewelryCategories, subcategories, materials, colors, sortOptions, priceRanges } from '../data/jewelryData'
+import { subcategories, materials, colors, sortOptions, priceRanges } from '../data/jewelryData'
 
 export default function JewelryPage() {
+  const [products, setProducts] = useState([])
+  const [loading, setLoading] = useState(true)
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [sortBy, setSortBy] = useState('newest')
   const [showFilters, setShowFilters] = useState(false)
@@ -26,27 +28,37 @@ export default function JewelryPage() {
   const { requireAuth } = useAuth()
   const router = useRouter()
 
-  const filteredItems = jewelryItems.filter(item => {
-    const categoryMatch = selectedCategory === 'all' || item.category === selectedCategory
-    const typeMatch = selectedType === 'all' || item.category === selectedType
-    const materialMatch = selectedMaterials.includes('all') || selectedMaterials.includes(item.material)
-    const colorMatch = selectedColor === 'all' || item.color === selectedColor
-    const subcategoryMatch = selectedSubcategory === 'all' || item.subcategory === selectedSubcategory
-    const priceMatch = item.priceValue >= selectedPriceRange.min && item.priceValue <= selectedPriceRange.max
+  useEffect(() => {
+    fetchProducts()
+  }, [])
+
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch('/api/products')
+      const data = await res.json()
+      setProducts(data)
+    } catch (error) {
+      console.error('Error fetching products:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const filteredItems = products.filter(item => {
+    const categoryMatch = selectedCategory === 'all' || item.category.toLowerCase() === selectedCategory.toLowerCase()
+    const priceMatch = item.price >= selectedPriceRange.min && item.price <= selectedPriceRange.max
     
-    return categoryMatch && typeMatch && materialMatch && colorMatch && subcategoryMatch && priceMatch
+    return categoryMatch && priceMatch && item.status === 'active'
   }).sort((a, b) => {
     switch (sortBy) {
       case 'price-low':
-        return a.priceValue - b.priceValue
+        return a.price - b.price
       case 'price-high':
-        return b.priceValue - a.priceValue
-      case 'popular':
-        return b.reviews - a.reviews
-      case 'rating':
-        return b.rating - a.rating
+        return b.price - a.price
+      case 'newest':
+        return new Date(b.createdAt) - new Date(a.createdAt)
       default:
-        return a.id - b.id
+        return new Date(b.createdAt) - new Date(a.createdAt)
     }
   })
 
@@ -76,21 +88,9 @@ export default function JewelryPage() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => setSelectedCategory('ring')}
+            onClick={() => setSelectedCategory('necklaces')}
             className={`px-6 py-3 rounded-full font-semibold text-sm uppercase tracking-wide transition-all ${
-              selectedCategory === 'ring'
-                ? 'bg-gray-800 text-white shadow-lg'
-                : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-300'
-            }`}
-          >
-            Rings
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => setSelectedCategory('necklace')}
-            className={`px-6 py-3 rounded-full font-semibold text-sm uppercase tracking-wide transition-all ${
-              selectedCategory === 'necklace'
+              selectedCategory === 'necklaces'
                 ? 'bg-gray-800 text-white shadow-lg'
                 : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-300'
             }`}
@@ -112,9 +112,9 @@ export default function JewelryPage() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => setSelectedCategory('bracelet')}
+            onClick={() => setSelectedCategory('bracelets')}
             className={`px-6 py-3 rounded-full font-semibold text-sm uppercase tracking-wide transition-all ${
-              selectedCategory === 'bracelet'
+              selectedCategory === 'bracelets'
                 ? 'bg-gray-800 text-white shadow-lg'
                 : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-300'
             }`}
@@ -230,7 +230,12 @@ export default function JewelryPage() {
           </div>
 
           {/* Jewelry Grid */}
-          {filteredItems.length === 0 ? (
+          {loading ? (
+            <div className="text-center py-16">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-800 mx-auto mb-4"></div>
+              <p className="text-gray-600">Loading products...</p>
+            </div>
+          ) : filteredItems.length === 0 ? (
             <div className="text-center py-16">
               <div className="bg-white rounded-lg p-12 shadow-sm border border-gray-300 max-w-md mx-auto">
                 <div className="text-6xl mb-4">💎</div>
@@ -244,7 +249,7 @@ export default function JewelryPage() {
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 mb-8"
             >
             {filteredItems.map((item, index) => (
-            <Link href={`/product/${item.id}`} key={item.id}>
+            <Link href={`/product/${item._id}`} key={item._id}>
               <motion.div
                 layout
                 initial={{ opacity: 0, y: 30 }}
@@ -264,7 +269,7 @@ export default function JewelryPage() {
               {/* Image Container */}
               <div className="relative aspect-square overflow-hidden rounded-t-3xl">
                 <Image
-                  src={item.image}
+                  src={item.images?.[0] || '/placeholder-jewelry.jpg'}
                   alt={item.name}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
@@ -276,25 +281,25 @@ export default function JewelryPage() {
                   onClick={(e) => {
                     e.preventDefault()
                     e.stopPropagation()
-                    if (isInWishlist(item.id)) {
-                      removeFromWishlist(item.id)
+                    if (isInWishlist(item._id)) {
+                      removeFromWishlist(item._id)
                     } else {
                       addToWishlist({
-                        id: item.id,
+                        id: item._id,
                         name: item.name,
-                        price: item.price,
-                        image: item.image,
+                        price: `$${item.price}`,
+                        image: item.images?.[0],
                         category: item.category
                       })
                     }
                   }}
                   className={`absolute top-4 right-4 p-2 rounded-full transition-all shadow-lg backdrop-blur-sm ${
-                    isInWishlist(item.id) 
+                    isInWishlist(item._id) 
                       ? 'bg-gray-800 text-white' 
                       : 'bg-white/90 text-gray-600 hover:bg-gray-800 hover:text-white'
                   }`}
                 >
-                  <Heart className={isInWishlist(item.id) ? 'fill-current' : ''} size={18} />
+                  <Heart className={isInWishlist(item._id) ? 'fill-current' : ''} size={18} />
                 </motion.button>
                 
                 {/* Category Badge */}
@@ -304,10 +309,11 @@ export default function JewelryPage() {
                   </span>
                 </div>
                 
-                {/* Rating */}
+                {/* Stock Badge */}
                 <div className="absolute bottom-4 right-4 bg-white/95 backdrop-blur-sm px-3 py-1 rounded-full flex items-center space-x-1 shadow-lg border border-gray-300">
-                  <Star className="text-gray-800 fill-current" size={14} />
-                  <span className="text-sm font-semibold text-gray-600">{item.rating}</span>
+                  <span className="text-sm font-semibold text-gray-600">
+                    {item.stock > 0 ? `${item.stock} in stock` : 'Out of stock'}
+                  </span>
                 </div>
               </div>
               
@@ -322,24 +328,26 @@ export default function JewelryPage() {
                   </p>
                 </div>
                 
-                {/* Tags */}
-                <div className="flex gap-2 mb-4">
-                  <span className="px-3 py-1 bg-gray-100 text-gray-600 text-xs rounded-full font-medium border border-gray-300">
-                    {item.material.replace('-', ' ')}
-                  </span>
-                  <span className="px-3 py-1 bg-gray-200 text-gray-600 text-xs rounded-full font-medium">
-                    {item.subcategory}
-                  </span>
-                </div>
+                {/* Featured Badge */}
+                {item.featured && (
+                  <div className="flex gap-2 mb-4">
+                    <span className="px-3 py-1 bg-yellow-100 text-yellow-800 text-xs rounded-full font-medium border border-yellow-300">
+                      ⭐ Featured
+                    </span>
+                  </div>
+                )}
                 
-                {/* Price and Rating */}
+                {/* Price and Status */}
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-2xl font-bold text-gray-800">
-                    {item.price}
+                    ${item.price}
                   </span>
-                  <div className="flex items-center text-sm text-gray-600">
-                    <Star className="text-gray-800 fill-current mr-1" size={16} />
-                    <span className="font-semibold">{item.rating} ({item.reviews})</span>
+                  <div className="flex items-center text-sm">
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      item.stock > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+                    }`}>
+                      {item.stock > 0 ? 'In Stock' : 'Out of Stock'}
+                    </span>
                   </div>
                 </div>
 

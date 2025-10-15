@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, useContext, useState, ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState, ReactNode } from 'react'
 
 interface WishlistItem {
   id: number
@@ -21,8 +21,72 @@ interface WishlistContextType {
 
 const WishlistContext = createContext<WishlistContextType | undefined>(undefined)
 
+function getCurrentUserId() {
+  try {
+    const raw = localStorage.getItem('user')
+    if (!raw) return 'guest'
+    const parsed = JSON.parse(raw)
+    return parsed?.id || 'guest'
+  } catch {
+    return 'guest'
+  }
+}
+
+function storageKey(userId: string) {
+  return `wishlist:${userId}`
+}
+
 export function WishlistProvider({ children }: { children: ReactNode }) {
+  const [userId, setUserId] = useState<string>('guest')
   const [items, setItems] = useState<WishlistItem[]>([])
+
+  // initial load
+  useEffect(() => {
+    const uid = getCurrentUserId()
+    setUserId(uid)
+    try {
+      const saved = localStorage.getItem(storageKey(uid))
+      if (saved) setItems(JSON.parse(saved))
+    } catch {}
+  }, [])
+
+  // persist
+  useEffect(() => {
+    try {
+      localStorage.setItem(storageKey(userId), JSON.stringify(items))
+    } catch {}
+  }, [items, userId])
+
+  // react to user changes and storage
+  useEffect(() => {
+    const handleUserChange = () => {
+      const uid = getCurrentUserId()
+      setUserId(uid)
+      try {
+        const saved = localStorage.getItem(storageKey(uid))
+        setItems(saved ? JSON.parse(saved) : [])
+      } catch {
+        setItems([])
+      }
+    }
+
+    const handleStorage = (e: StorageEvent) => {
+      if (e.key === 'user') handleUserChange()
+      if (e.key === storageKey(userId)) {
+        try {
+          const saved = localStorage.getItem(storageKey(userId))
+          setItems(saved ? JSON.parse(saved) : [])
+        } catch {}
+      }
+    }
+
+    window.addEventListener('user:changed', handleUserChange as any)
+    window.addEventListener('storage', handleStorage)
+    return () => {
+      window.removeEventListener('user:changed', handleUserChange as any)
+      window.removeEventListener('storage', handleStorage)
+    }
+  }, [userId])
 
   const addToWishlist = (item: WishlistItem) => {
     setItems(prev => {

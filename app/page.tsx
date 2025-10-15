@@ -8,35 +8,44 @@ import { useEffect, useRef, useState } from 'react'
 import Footer from './components/Footer'
 import TrustSection from './components/TrustSection'
 import NewArrival from './components/NewArrival'
-
-const categories = [
-  {
-    id: 1,
-    name: 'RINGS',
-    image: '/ring1.webp'
-  },
-  {
-    id: 2,
-    name: 'NECKLACES',
-    image: '/nacklace1.webp'
-  },
-  {
-    id: 3,
-    name: 'EARRINGS',
-    image: '/earring1.jpeg'
-  },
-  {
-    id: 4,
-    name: 'BRACELETS',
-    image: '/bracelet.avif'
-  },
-  
-  
-]
+import MainContentSlider from './components/MainContentSlider'
+import CustomerReviews from './components/CustomerReviews'
 
 export default function HomePage() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [scrollPosition, setScrollPosition] = useState(0)
+  const [products, setProducts] = useState([])
+  const [categories, setCategories] = useState([])
+  const [loading, setLoading] = useState(true)
+  
+  useEffect(() => {
+    fetchProducts()
+  }, [])
+  
+  const fetchProducts = async () => {
+    try {
+      const res = await fetch('/api/products')
+      const data = await res.json()
+      setProducts(data)
+      
+      // Extract unique categories from products
+      const uniqueCategories = [...new Set(data.map(p => p.category))]
+      const categoryData = uniqueCategories.map((cat, index) => {
+        const categoryProducts = data.filter(p => p.category === cat)
+        return {
+          id: index + 1,
+          name: cat,
+          image: categoryProducts[0]?.images?.[0] || '/placeholder.jpg',
+          count: categoryProducts.length
+        }
+      })
+      setCategories(categoryData)
+    } catch (error) {
+      console.error('Error fetching products:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
   
   // Duplicate categories for infinite loop
   const infiniteCategories = [...categories, ...categories]
@@ -67,6 +76,8 @@ export default function HomePage() {
   }
 
   useEffect(() => {
+    if (categories.length === 0) return
+    
     const interval = setInterval(() => {
       if (scrollRef.current) {
         const itemWidth = scrollRef.current.clientWidth / 3 // Show 3 items at once
@@ -88,7 +99,7 @@ export default function HomePage() {
     }, 3000)
 
     return () => clearInterval(interval)
-  }, [])
+  }, [categories])
 
   return (
     <div className="min-h-screen">
@@ -96,18 +107,17 @@ export default function HomePage() {
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="h-screen flex items-center relative overflow-hidden"
+        className="h-screen flex items-center relative overflow-hidden bg-primary-bg"
       >
         <div className="absolute inset-0">
           <Image
-          src="/hero.jpg"
-            //src="https://assets.bounceexchange.com/assets/uploads/clients/4821/creatives/6fd81332b04cace4b6bf8ae8e2810b18.jpg"
+            src="/hero1.png"
             alt="Jewelry Background"
             fill
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-text-primary/70 via-text-primary/50 to-transparent" />
         </div>
         {/* <div className="absolute inset-0">
           <video
@@ -136,15 +146,20 @@ export default function HomePage() {
             {/*<Sparkles className="text-yellow-400" size={60} /> */}
           </motion.div>
           
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl pt-6 font-space font-black text-white mb-6 leading-tight text-start">
-            NOW TRENDING
-            <br />
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl pt-6 font-space font-black text-primary-bg mb-6 leading-tight text-start">
+            Jewelry That Evolves With You
           </h1> 
           
-           
-          
-          <p className="text-lg sm:text-xl lg:text-2xl text-gray-200 mb-8 font-light">
-            Stack it. Layer it. Own it.
+          <p className="text-lg sm:text-xl text-primary-bg mb-8 font-light leading-relaxed">
+            Every chapter of your life deserves something timeless to remember it by.
+            From milestones to quiet shifts, we craft pieces that move with your story — not apart from it.
+            Each design begins with who you are today and grows with who you're becoming.
+            Because jewelry should do more than shine — it should belong to you.
+          </p> 
+
+          <p className="text-lg sm:text-xl text-primary-bg mb-8 font-light leading-relaxed">
+            If you don't see somthing in our initial collection you like,
+            send us a picture and within 48 hours we will provide you a freequote.
           </p> 
 
           <div className="flex space-x-4">
@@ -152,10 +167,9 @@ export default function HomePage() {
               <motion.button
                 whileHover={{ scale: 1.05, x: 5 }}
                 whileTap={{ scale: 0.95 }}
-                className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4  font-bold text-lg transition-all duration-300"
+                className="bg-cta text-primary-bg hover:bg-highlight px-8 py-4 font-bold text-lg transition-all duration-300 shadow-lg"
               >
                 Shop Now
-                {/* <ArrowRight className="ml-2" size={20} /> */}
               </motion.button>
             </Link>
 
@@ -163,305 +177,113 @@ export default function HomePage() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4  font-bold text-lg transition-all duration-300"
+                className="border-2 border-accent text-primary-bg hover:bg-accent hover:text-text-primary px-8 py-4 font-bold text-lg transition-all duration-300"
               >
-                Customize
+                Book Your consultation 
               </motion.button>
             </Link>
           </div>
         </motion.div>
       </motion.section>
 
+      {/* Main Content Slider */}
+      <MainContentSlider products={products} />
+
       {/* Categories Section */}
-      <section className="py-20 bg-primary-bg">
-        <div className="mx-8">
+      <section className="py-20" style={{backgroundColor: '#FAF8F3'}}>
+        <div className="max-w-7xl mx-auto px-8">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-space font-bold text-text-primary mb-4">
+            <div className="flex items-center justify-center mb-6">
+              <div className="h-px w-20" style={{backgroundColor: '#D4C2A8'}} />
+              <span className="mx-4 text-3xl">💎</span>
+              <div className="h-px w-20" style={{backgroundColor: '#D4C2A8'}} />
+            </div>
+            
+           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-space font-bold mb-4" style={{color: '#2F2F2F'}}>
              Shop By Category
             </h2>
-            <p className="text-lg sm:text-xl text-text-secondary">
+            <p className="text-lg sm:text-xl" style={{color: '#6D6157'}}>
               Discover the perfect piece for every moment
             </p>
+            
+            <div className="flex items-center justify-center mt-6">
+              <div className="h-px w-32" style={{backgroundColor: '#D4C2A8'}} />
+            </div>
           </motion.div>
           
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-            {categories.map((category) => (
-              <div key={category.id} className="text-center">
-                <Link 
-                  href={`/category/${category.name.toLowerCase().replace(' ', '-')}`}
-                  className="relative aspect-square cursor-pointer group rounded-lg overflow-hidden block"
-                >
-                  <Image
-                    src={category.image}
-                    alt={category.name}
-                    fill
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                  />
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="animate-pulse">
+                  <div className="bg-gray-200 rounded-2xl h-80"></div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {categories.map((category, index) => (
+                <Link key={category.id} href={`/jewelry?category=${category.name}`}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    whileHover={{ y: -10 }}
+                    className="group cursor-pointer"
+                  >
+                    <div className="relative overflow-hidden rounded-2xl shadow-xl backdrop-blur-sm" style={{backgroundColor: '#EFE9E3', borderColor: '#D4C2A8', borderWidth: '1px'}}>
+                      <div className="relative aspect-[4/3] overflow-hidden">
+                        <Image
+                          src={category.image}
+                          alt={category.name}
+                          fill
+                          className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+                      </div>
+                      
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold mb-3" style={{color: '#2F2F2F'}}>
+                          {category.name}
+                        </h3>
+                        <p className="text-sm mb-4" style={{color: '#6D6157'}}>
+                          {category.count} items available
+                        </p>
+                        
+                        <motion.button
+                          whileHover={{ x: 5 }}
+                          className="flex items-center font-medium transition-colors"
+                          style={{color: '#CBAE9B'}}
+                        >
+                          Shop Now
+                          <ArrowRight size={16} className="ml-2" />
+                        </motion.button>
+                      </div>
+                    </div>
+                  </motion.div>
                 </Link>
-                <h3 className="text-lg font-medium text-text-primary mt-3">
-                  {category.name}
-                </h3>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
-      {/* Unique Design Section */}
-      <section className="py-20 bg-secondary-bg">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left - Text Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-6"
-            >
-              <div className="inline-block">
-                <span className="bg-accent text-text-primary px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wider">
-                  Unique by Design ✨
-                </span>
-              </div>
-              
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-text-primary leading-tight">
-                At Scottsdale & Diamond Company,
-                <span className="block text-text-secondary text-2xl sm:text-3xl mt-2">what kind of life will this belong to?</span>
-              </h2>
-              
-              <div className="space-y-6 text-lg text-text-secondary leading-relaxed">
-                <p>
-                  Our designs are more than settings and stones — they're moments made tangible. 
-                  Minimal yet timeless, each creation is sketched with intention, crafted with precision, 
-                  and finished to feel like it's always been yours.
-                </p>
-                
-                <p>
-                  From the curve of a ring to the polish of a clasp, subtle details set our pieces apart — 
-                  elegant enough for milestone celebrations, effortless enough for golden-hour dinners, 
-                  unforgettable enough for every day in between.
-                </p>
-                
-                <p className="text-text-primary font-medium">
-                  Because true luxury isn't loud. It's lasting. And it's uniquely yours.
-                </p>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
-                <Link href="/jewelry">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-cta hover:bg-highlight text-white px-8 py-3 rounded-lg font-semibold transition-colors"
-                  >
-                    Explore Collection
-                  </motion.button>
-                </Link>
-                <Link href="/boutique">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="border-2 border-cta text-cta hover:bg-cta hover:text-white px-8 py-3 rounded-lg font-semibold transition-colors"
-                  >
-                    Custom Design
-                  </motion.button>
-                </Link>
-              </div>
-            </motion.div>
-            
-            {/* Right - Image */}
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/Home2.png"
-                  alt="Artisan crafting jewelry"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-800/30 to-transparent"></div>
-              </div>
-              
-              
-              
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
+      {/* New Arrivals Section */}
       <NewArrival />
+
+      {/* Trust Section */}
       <TrustSection />
 
+      {/* Customer Reviews */}
+      <CustomerReviews />
 
-
-      {/* Customer Reviews Section */}
-      <section className="py-17 pb-10 bg-primary-bg relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary-bg/30 via-primary-bg to-secondary-bg/30"></div>
-        <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center mb-16"
-          >
-            <motion.div
-              animate={{ rotate: [0, 5, -5, 0] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="inline-block mb-6"
-            >
-            </motion.div>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-space font-bold text-text-primary mb-6">
-              What Our Customers Say
-            </h2>
-            <p className="text-lg sm:text-xl text-text-secondary max-w-2xl mx-auto">
-              Real stories from our jewelry lovers around the world 
-            </p>
-          </motion.div>
-
-          <div className="relative">
-            <motion.div
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              className="flex space-x-6"
-            >
-              {[
-                {
-                  name: "Sarah Johnson",
-                  location: "New York, NY",
-                  rating: 5,
-                  review: "Absolutely stunning custom engagement ring! The team brought my vision to life perfectly. The quality is exceptional and the service was outstanding. 💍",
-                  product: "Custom Engagement Ring",
-                  image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=80&h=80&fit=crop&crop=face",
-                  verified: true
-                },
-                {
-                  name: "Michael Chen",
-                  location: "Los Angeles, CA",
-                  rating: 5,
-                  review: "Best jewelry shopping experience ever! The staff was knowledgeable and patient. My wife absolutely loves her anniversary necklace. ✨",
-                  product: "Diamond Necklace",
-                  image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face",
-                  verified: true
-                },
-                {
-                  name: "Emma Rodriguez",
-                  location: "Chicago, IL",
-                  rating: 5,
-                  review: "The custom design process was amazing! They listened to every detail and created the perfect piece. I get compliments every day! 🌟",
-                  product: "Custom Bracelet",
-                  image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=80&h=80&fit=crop&crop=face",
-                  verified: true
-                },
-                {
-                  name: "David Wilson",
-                  location: "Miami, FL",
-                  rating: 5,
-                  review: "Top-notch quality and service. The watch I purchased is absolutely gorgeous and arrived exactly as described. Highly recommend! ⌚",
-                  product: "Luxury Watch",
-                  image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=80&h=80&fit=crop&crop=face",
-                  verified: true
-                },
-                {
-                  name: "Lisa Park",
-                  location: "Seattle, WA",
-                  rating: 5,
-                  review: "Incredible craftsmanship and attention to detail. The earrings are absolutely gorgeous and the customer service was exceptional throughout. 👂",
-                  product: "Diamond Earrings",
-                  image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=face",
-                  verified: true
-                }
-              ].concat([
-                {
-                  name: "Sarah Johnson",
-                  location: "New York, NY",
-                  rating: 5,
-                  review: "Absolutely stunning custom engagement ring! The team brought my vision to life perfectly. The quality is exceptional and the service was outstanding. 💍",
-                  product: "Custom Engagement Ring",
-                  image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=80&h=80&fit=crop&crop=face",
-                  verified: true
-                },
-                {
-                  name: "Michael Chen",
-                  location: "Los Angeles, CA",
-                  rating: 5,
-                  review: "Best jewelry shopping experience ever! The staff was knowledgeable and patient. My wife absolutely loves her anniversary necklace. ✨",
-                  product: "Diamond Necklace",
-                  image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face",
-                  verified: true
-                }
-              ]).map((review, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 50, scale: 0.9 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  whileHover={{ y: -10, scale: 1.02 }}
-                  transition={{ duration: 0.6, delay: (index % 5) * 0.1 }}
-                  className="bg-primary-bg backdrop-blur-lg border border-accent rounded-3xl p-8 min-w-[380px] max-w-[380px] shadow-xl hover:shadow-2xl transition-all duration-500 relative overflow-hidden group flex-shrink-0"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-secondary-bg/50 via-accent/20 to-highlight/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  
-                  <div className="relative z-10">
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex text-yellow-400 text-xl">
-                        {[...Array(review.rating)].map((_, i) => (
-                          <motion.span
-                            key={i}
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ delay: i * 0.1 + (index % 5) * 0.2 }}
-                          >
-                            ⭐
-                          </motion.span>
-                        ))}
-                      </div>
-                      {review.verified && (
-                        <span className="text-xs text-text-primary font-bold bg-secondary-bg px-3 py-1 rounded-full border border-accent">
-                          ✓ VERIFIED
-                        </span>
-                      )}
-                    </div>
-                    
-                    <p className="text-text-secondary text-lg leading-relaxed mb-8 font-medium">
-                      "{review.review}"
-                    </p>
-                    
-                    <div className="flex items-center space-x-4">
-                      <div className="relative">
-                        <Image
-                          src={review.image}
-                          alt={review.name}
-                          width={60}
-                          height={60}
-                          className="rounded-full object-cover border-3 border-white shadow-lg"
-                        />
-                        <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full border-2 border-white flex items-center justify-center">
-                          <span className="text-white text-xs">✓</span>
-                        </div>
-                      </div>
-                      <div className="flex-1">
-                        <h4 className="font-bold text-text-primary text-lg">{review.name}</h4>
-                        <p className="text-text-secondary text-sm">{review.location}</p>
-                        <p className="text-text-primary text-sm font-medium mt-1">{review.product}</p>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-          
-        </div>
-      </section>
-      <Footer />      
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }
+
