@@ -4,6 +4,18 @@ import { useState } from 'react'
 import { Save, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import dynamic from 'next/dynamic';
+
+// Define the props interface for CategoryManager
+interface CategoryManagerProps {
+  onSelect: (category: string) => void;
+}
+
+// Dynamically import the CategoryManager component with SSR disabled
+const CategoryManager = dynamic<CategoryManagerProps>(
+  () => import('@/components/CategoryManager'),
+  { ssr: false }
+)
 
 export default function NewBlog() {
   const router = useRouter()
@@ -12,22 +24,60 @@ export default function NewBlog() {
     excerpt: '',
     content: '',
     image: '',
+    imageFile: null as File | null,
     author: '',
-    category: 'Style Guide',
+    category: '',
     readTime: '',
     status: 'draft',
     featured: false
   })
   const [isLoading, setIsLoading] = useState(false)
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setFormData(prev => ({
+        ...prev,
+        image: URL.createObjectURL(file),
+        imageFile: file
+      }))
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
+    
     try {
+      let imageUrl = formData.image
+      
+      // If there's a file to upload
+      if (formData.imageFile) {
+        const formDataFile = new FormData()
+        formDataFile.append('file', formData.imageFile)
+        formDataFile.append('upload_preset', 'your_cloudinary_upload_preset')
+        
+        // Upload to Cloudinary or your file storage service
+        const uploadRes = await fetch('https://api.cloudinary.com/v1_1/your_cloud_name/image/upload', {
+          method: 'POST',
+          body: formDataFile
+        })
+        
+        if (!uploadRes.ok) throw new Error('Image upload failed')
+        const uploadData = await uploadRes.json()
+        imageUrl = uploadData.secure_url
+      }
+      
+      // Remove the imageFile from the data being sent to the API
+      const { imageFile, ...dataToSend } = formData
+      
       const res = await fetch('/api/blogs', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({
+          ...dataToSend,
+          image: imageUrl
+        })
       })
       if (res.ok) {
         router.push('/admin/blog?success=created')
@@ -90,19 +140,14 @@ export default function NewBlog() {
 
               <div className="space-y-2">
                 <label className="block text-sm font-semibold" style={{ color: '#2F2F2F' }}>Category *</label>
-                <select
-                  value={formData.category}
-                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="w-full p-4 rounded-xl focus:outline-none focus:ring-2 transition-all"
-                  style={{ backgroundColor: '#FAF8F3', borderColor: '#D4C2A8', borderWidth: '2px', color: '#2F2F2F' }}
-                >
-                  <option>Style Guide</option>
-                  <option>Sustainability</option>
-                  <option>Care Tips</option>
-                  <option>Trends</option>
-                  <option>Education</option>
-                  <option>Bridal</option>
-                </select>
+                <div className="p-4 rounded-xl" style={{ backgroundColor: '#FAF8F3', borderColor: '#D4C2A8', borderWidth: '2px' }}>
+                  <CategoryManager 
+                    onSelect={(category) => setFormData({ ...formData, category })}
+                  />
+                  {!formData.category && (
+                    <p className="text-sm text-red-500 mt-1">Please select a category</p>
+                  )}
+                </div>
               </div>
 
               <div className="space-y-2">
@@ -126,16 +171,30 @@ export default function NewBlog() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <label className="block text-sm font-semibold" style={{ color: '#2F2F2F' }}>Cover Image URL *</label>
-                <input
-                  type="url"
-                  required
-                  placeholder="https://..."
-                  value={formData.image}
-                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-                  className="w-full p-4 rounded-xl focus:outline-none focus:ring-2 transition-all"
-                  style={{ backgroundColor: '#FAF8F3', borderColor: '#D4C2A8', borderWidth: '2px', color: '#2F2F2F' }}
-                />
+                <label className="block text-sm font-semibold" style={{ color: '#2F2F2F' }}>Cover Image *</label>
+                <div className="flex flex-col space-y-2">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="block w-full text-sm text-gray-500
+                      file:mr-4 file:py-2 file:px-4
+                      file:rounded-full file:border-0
+                      file:text-sm file:font-semibold
+                      file:bg-white file:text-amber-700
+                      hover:file:bg-amber-50"
+                  />
+                  {formData.image && (
+                    <div className="mt-2">
+                      <p className="text-sm text-gray-600 mb-1">Preview:</p>
+                      <img 
+                        src={formData.image} 
+                        alt="Preview" 
+                        className="h-32 w-full object-cover rounded-lg"
+                      />
+                    </div>
+                  )}
+                </div>
               </div>
 
               <div className="space-y-2">

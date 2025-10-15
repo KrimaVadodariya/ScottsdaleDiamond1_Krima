@@ -129,9 +129,9 @@ export default function ProductsAdmin() {
                   </td>
                   <td className="px-6 py-4">
                     <div className="flex space-x-2">
-                      <button className="p-2 rounded-lg" style={{backgroundColor: '#D4C2A8', color: '#2F2F2F'}}>
+                      {/* <button className="p-2 rounded-lg" style={{backgroundColor: '#D4C2A8', color: '#2F2F2F'}}>
                         <Eye size={16} />
-                      </button>
+                      </button> */}
                       <Link href={`/admin/products/edit/${product._id}`}>
                         <button className="p-2 rounded-lg" style={{backgroundColor: '#CBAE9B', color: '#FAF8F3'}}>
                           <Edit size={16} />

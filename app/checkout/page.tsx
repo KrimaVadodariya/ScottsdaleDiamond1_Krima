@@ -32,10 +32,52 @@ export default function CheckoutPage() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Payment processing logic would go here
-    alert('Payment processed successfully!')
+    
+    try {
+      const orderData = {
+        items: items.map(item => ({
+          name: item.name,
+          price: parseFloat(item.price),
+          quantity: item.quantity,
+          image: item.image
+        })),
+        total: total,
+        shippingAddress: {
+          name: `${formData.firstName} ${formData.lastName}`,
+          address: formData.address,
+          city: formData.city,
+          zipCode: formData.zipCode,
+          email: formData.email
+        },
+        paymentMethod: paymentMethod
+      }
+
+      const response = await fetch('/api/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData)
+      })
+
+      const result = await response.json()
+      
+      if (response.ok) {
+        // Clear cart on successful order
+        const { clearCart } = useCart()
+        clearCart()
+        
+        // Redirect to order confirmation
+        window.location.href = `/account/orders/${result.order._id}?success=true`
+      } else {
+        throw new Error(result.error || 'Failed to place order')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      alert('Failed to place order. Please try again.')
+    }
   }
 
   return (

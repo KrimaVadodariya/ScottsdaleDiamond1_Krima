@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
-import Order from '../../../../models/Order'
+import Order from '@/models/Order'
 import { cookies } from 'next/headers'
 
 const connectDB = async () => {
@@ -34,6 +34,7 @@ export async function GET() {
       return NextResponse.json({ error: 'Invalid token payload' }, { status: 401 })
     }
 
+    // Fetch orders only for the logged-in user
     const orders = await Order.find({ customerEmail: email }).sort({ createdAt: -1 })
     return NextResponse.json(orders)
   } catch (error) {
