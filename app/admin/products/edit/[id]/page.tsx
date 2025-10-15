@@ -21,7 +21,12 @@ export default function EditProduct() {
   })
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadingData, setIsLoadingData] = useState(true)
-  const [popup, setPopup] = useState({ isOpen: false, type: 'success', title: '', message: '' })
+  const [popup, setPopup] = useState<{ isOpen: boolean; type: 'success' | 'error'; title: string; message: string }>({ 
+    isOpen: false, 
+    type: 'success', 
+    title: '', 
+    message: '' 
+  })
 
   useEffect(() => {
     fetchProduct()

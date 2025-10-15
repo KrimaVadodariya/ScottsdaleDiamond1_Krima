@@ -11,7 +11,7 @@ const slides = [
     id: 1,
     title: "BESPOKE WITHOUT THE RISK. BRILLIANCE WITHOUT THE MINING.",
     description: "London's most liberating fine jewellery experience. Bespoke design with lab-grown diamonds, zero pressure, and room to grow — because the best moments aren't rushed. They're chosen.",
-    image: "/h3.webp",
+    image: "/h1.png",
     imageAlt: "Bespoke jewelry crafting",
     badge: null,
     buttons: [
@@ -25,7 +25,7 @@ const slides = [
     id: 2,
     title: "INTRODUCING OUR FIRST READY-MADE COLLECTION",
     description: "We're excited to announce the launch of our inaugural ready-made jewelry collection! Carefully curated pieces that embody our signature style, now available instantly on our website and Amazon.",
-    image: "/h1.jpg",
+    image: "/h2.png",
     imageAlt: "Ready-made jewelry collection",
     badge: "🎉 New Launch",
     features: [
@@ -44,7 +44,7 @@ const slides = [
     id: 3,
     title: "A LITTLE CHANGE. A LOT OF POWER.",
     description: "Sometimes the smallest adjustments create the most profound transformations. Our jewelry doesn't just accessorize your style — it amplifies your confidence, celebrates your milestones, and becomes part of your story.",
-    image: "/h2.jpg",
+    image: "/h3.png",
     imageAlt: "Jewelry transformation",
     badge: null,
     powerPoints: [

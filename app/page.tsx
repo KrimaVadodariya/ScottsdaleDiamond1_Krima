@@ -29,8 +29,8 @@ export default function HomePage() {
       setProducts(data)
       
       // Extract unique categories from products
-      const uniqueCategories = [...new Set(data.map(p => p.category))]
-      const categoryData = uniqueCategories.map((cat, index) => {
+      const uniqueCategories = Array.from(new Set(data.map((p: { category: string }) => p.category)))
+      const categoryData = uniqueCategories.map((cat: string, index: number) => {
         const categoryProducts = data.filter(p => p.category === cat)
         return {
           id: index + 1,
@@ -187,7 +187,7 @@ export default function HomePage() {
       </motion.section>
 
       {/* Main Content Slider */}
-      <MainContentSlider products={products} />
+      <MainContentSlider />
 
       {/* Categories Section */}
       <section className="py-20" style={{backgroundColor: '#FAF8F3'}}>

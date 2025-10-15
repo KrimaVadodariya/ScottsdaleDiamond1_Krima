@@ -1,85 +1,47 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
+import { useRef, useEffect } from 'react'
 
 export default function NewArrival() {
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(true)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
-    fetchProducts()
+    // Ensure video plays when component mounts
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.log('Video autoplay was prevented:', error)
+      })
+    }
   }, [])
 
-  const fetchProducts = async () => {
-    try {
-      const res = await fetch('/api/products')
-      const data = await res.json()
-      setProducts(data.slice(0, 5))
-    } catch (error) {
-      console.error('Error fetching products:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  if (loading) {
-    return (
-      <section className="py-20 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">The Latest Spark</h2>
-            <p className="text-lg sm:text-xl text-gray-600">Discover our latest collections</p>
-          </div>
-          <div className="flex justify-center">
-            <div className="animate-pulse bg-gray-200 rounded-3xl h-96 w-96"></div>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  if (products.length === 0) {
-    return (
-      <section className="py-20 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">The Latest Spark</h2>
-            <p className="text-lg sm:text-xl text-gray-600">New products coming soon...</p>
-          </div>
-        </div>
-      </section>
-    )
-  }
-
-  const sizes = ['max-w-64 h-80', 'max-w-80 h-96', 'max-w-96 h-[28rem]', 'max-w-80 h-96', 'max-w-64 h-80']
-  const textSizes = ['text-3xl', 'text-3xl sm:text-4xl', 'text-4xl sm:text-5xl lg:text-6xl', 'text-3xl sm:text-4xl', 'text-2xl sm:text-3xl']
-
   return (
-    <section className="py-20 bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4">The Latest Spark</h2>
-          <p className="text-lg sm:text-xl text-gray-600">Discover our latest collections</p>
-        </div>
-        
-        <div className="flex flex-col lg:flex-row gap-6 items-center lg:items-end justify-center">
-          {products.map((product, index) => (
-            <Link key={product._id} href={`/jewelry?product=${product._id}`}>
-              <div className={`relative w-full ${sizes[index] || sizes[0]} lg:w-${sizes[index]?.split(' ')[1]?.replace('max-w-', '') || '64'} rounded-3xl overflow-hidden group cursor-pointer shadow-2xl shadow-gray-500/20`}>
-                <img
-                  src={product.images?.[0] || '/placeholder.jpg'}
-                  alt={product.name}
-                  className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#A89F91]/80 via-[#A89F91]/20 to-transparent" />
-                <div className="absolute bottom-6 left-6 text-[#FFFAF3]">
-                  <h2 className={`${textSizes[index] || textSizes[0]} font-serif italic mb-1`}>{product.name}</h2>
-                  <p className="text-sm opacity-90">${product.price}</p>
-                </div>
-              </div>
-            </Link>
-          ))}
+    <section className="relative h-screen flex items-center overflow-hidden">
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0">
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src="/video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+      </div>
+      
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div className="max-w-2xl text-white">
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-light leading-none tracking-tight mb-8">
+            We didn't follow the diamond rules,
+            <span className="block mt-4 font-bold tracking-tight">WE REWROTE THEM.</span>
+          </h2>
+          <p className="text-xl md:text-2xl font-light leading-relaxed mb-10 max-w-xl">
+            The first designer jewellery house to work exclusively with lab-grown diamonds, from day one.
+          </p>
         </div>
       </div>
     </section>

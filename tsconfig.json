@@ -23,7 +23,9 @@
     "jsx": "preserve",
     "plugins": [
       {
-        "name": "next"
+        "name": "next",
+        "target": "es2015",
+        "downlevelIteration": true
       }
     ]
   },
