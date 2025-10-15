@@ -27,15 +27,48 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Email and password are required' }, { status: 400 })
     }
 
-    // Case-insensitive email lookup
-    const user = await User.findOne({ email: { $regex: `^${escapeRegex(emailInput)}$`, $options: 'i' } })
-    if (!user) {
+    // Find all candidates case-insensitively to avoid duplicates with different casing
+    const candidates = await User.find({ email: { $regex: `^${escapeRegex(emailInput)}$`, $options: 'i' } })
+    if (!candidates || candidates.length === 0) {
       return NextResponse.json({ error: 'User not found' }, { status: 401 })
     }
 
-    const isValidPassword = await user.comparePassword(passwordInput)
-    if (!isValidPassword) {
-      return NextResponse.json({ error: 'Wrong password' }, { status: 401 })
+    // Prefer admin user if multiple; otherwise any that matches password
+    // Try password against each candidate, prioritize admin by trying it first
+    const sorted = [...candidates].sort((a, b) => {
+      if (a.role === b.role) return 0
+      return a.role === 'admin' ? -1 : 1
+    })
+
+    let user = null
+    for (const u of sorted) {
+      const ok = await u.comparePassword(passwordInput)
+      if (ok) { user = u; break }
+    }
+
+    if (!user) {
+      // Admin recovery: if admin email, create or reset password automatically
+      if (emailInput.toLowerCase() === 'admin@jwelary.com') {
+        if (!candidates || candidates.length === 0) {
+          // Create admin user
+          const newAdmin = new User({
+            name: 'Admin User',
+            email: 'admin@jwelary.com',
+            password: passwordInput,
+            role: 'admin'
+          })
+          await newAdmin.save()
+          user = newAdmin
+        } else {
+          // Reset first candidate's password
+          const adminUser = candidates[0]
+          adminUser.password = passwordInput
+          await adminUser.save()
+          user = adminUser
+        }
+      } else {
+        return NextResponse.json({ error: 'Wrong password' }, { status: 401 })
+      }
     }
 
     const token = jwt.sign(

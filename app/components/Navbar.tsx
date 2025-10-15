@@ -18,6 +18,78 @@ const navItems = [
   { name: 'Contact', href: '/contact' },
 ]
 
+function getStoredUser() {
+  try {
+    const raw = localStorage.getItem('user')
+    return raw ? JSON.parse(raw) : null
+  } catch {
+    return null
+  }
+}
+
+function AccountMenu() {
+  const [user, setUser] = useState<any | null>(null)
+  const router = usePathname()
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    const sync = () => setUser(getStoredUser())
+    sync()
+    const onStorage = (e: StorageEvent) => {
+      if (e.key === 'user') sync()
+    }
+    const onCustom = () => sync()
+    window.addEventListener('storage', onStorage)
+    window.addEventListener('user:changed', onCustom as any)
+    return () => {
+      window.removeEventListener('storage', onStorage)
+      window.removeEventListener('user:changed', onCustom as any)
+    }
+  }, [])
+
+  if (!user) {
+    return (
+      <Link href="/login">
+        <motion.button whileHover={{ scale: 1.05 }} className="p-2 rounded-full hover:bg-secondary-bg">
+          <User className="h-5 w-5 text-text-secondary" />
+        </motion.button>
+      </Link>
+    )
+  }
+
+  const logout = () => {
+    try {
+      localStorage.removeItem('user')
+      window.dispatchEvent(new Event('user:changed'))
+    } catch {}
+    window.location.href = '/'
+  }
+
+  return (
+    <div className="relative">
+      <button onClick={() => setOpen(!open)} className="p-2 rounded-full hover:bg-secondary-bg">
+        <User className="h-5 w-5 text-text-secondary" />
+      </button>
+      {open && (
+        <div className="absolute right-0 mt-2 w-56 rounded-lg shadow-xl z-50" style={{ backgroundColor: '#EFE9E3', borderColor: '#D4C2A8', borderWidth: '1px' }}>
+          <div className="px-4 py-3 border-b" style={{ borderColor: '#D4C2A8' }}>
+            <div className="font-semibold" style={{ color: '#2F2F2F' }}>{user.name}</div>
+            <div className="text-sm" style={{ color: '#6D6157' }}>{user.email}</div>
+          </div>
+          <div className="py-2">
+            <Link href="/account" className="block px-4 py-2 hover:bg-primary-bg">Overview</Link>
+            <Link href="/account/profile" className="block px-4 py-2 hover:bg-primary-bg">Profile</Link>
+            <Link href="/account/orders" className="block px-4 py-2 hover:bg-primary-bg">Order History</Link>
+            <Link href="/account/transactions" className="block px-4 py-2 hover:bg-primary-bg">Transactions</Link>
+            <Link href="/account/track-order" className="block px-4 py-2 hover:bg-primary-bg">Track Order</Link>
+            <button onClick={logout} className="w-full text-left px-4 py-2 hover:bg-primary-bg">Logout</button>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function Navbar() {
   const pathname = usePathname()
   const [isScrolled, setIsScrolled] = useState(false)
@@ -131,14 +203,8 @@ export default function Navbar() {
               </motion.button>
             </Link>
             
-            <Link href="/login">
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                className="p-2 rounded-full hover:bg-secondary-bg"
-              >
-                <User className="h-5 w-5 text-text-secondary" />
-              </motion.button>
-            </Link>
+            {/* Account / Login */}
+            <AccountMenu />
             
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

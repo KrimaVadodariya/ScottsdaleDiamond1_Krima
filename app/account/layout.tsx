@@ -29,7 +29,7 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
 
   return (
     <div className="min-h-screen pt-19" style={{ backgroundColor: '#FAF8F3' }}>
-      <div className="max-w-6xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div className="max-w-6xl mx-auto px-4 py-0 pt-12 mt-20 grid grid-cols-1 md:grid-cols-4 gap-6">
         {/* Sidebar */}
         <aside className="md:col-span-1 rounded-2xl p-6 shadow-lg" style={{ backgroundColor: '#EFE9E3', borderColor: '#D4C2A8', borderWidth: '1px' }}>
           <div className="mb-6">
@@ -42,31 +42,31 @@ export default function AccountLayout({ children }: { children: React.ReactNode 
 
           <nav className="space-y-2">
             <Link href="/account">
-              <div className="flex items-center space-x-3 px-4 py-2 rounded-lg cursor-pointer" style={{ color: '#2F2F2F', backgroundColor: '#FAF8F3' }}>
+              <div className="flex items-center space-x-3 px-4 py-2 mb-5 rounded-lg cursor-pointer" style={{ color: '#2F2F2F', backgroundColor: '#FAF8F3' }}>
                 <Grid size={18} />
                 <span>Overview</span>
               </div>
             </Link>
             <Link href="/account/profile">
-              <div className="flex items-center space-x-3 px-4 py-2 rounded-lg cursor-pointer" style={{ color: '#2F2F2F', backgroundColor: '#FAF8F3' }}>
+              <div className="flex items-center space-x-3 px-4 py-2 mb-5 rounded-lg cursor-pointer" style={{ color: '#2F2F2F', backgroundColor: '#FAF8F3' }}>
                 <User size={18} />
                 <span>Profile</span>
               </div>
             </Link>
             <Link href="/account/orders">
-              <div className="flex items-center space-x-3 px-4 py-2 rounded-lg cursor-pointer" style={{ color: '#2F2F2F', backgroundColor: '#FAF8F3' }}>
+              <div className="flex items-center space-x-3 px-4 py-2 mb-5 rounded-lg cursor-pointer" style={{ color: '#2F2F2F', backgroundColor: '#FAF8F3' }}>
                 <Package size={18} />
                 <span>Order History</span>
               </div>
             </Link>
             <Link href="/account/transactions">
-              <div className="flex items-center space-x-3 px-4 py-2 rounded-lg cursor-pointer" style={{ color: '#2F2F2F', backgroundColor: '#FAF8F3' }}>
+              <div className="flex items-center space-x-3 px-4 py-2 mb-5 rounded-lg cursor-pointer" style={{ color: '#2F2F2F', backgroundColor: '#FAF8F3' }}>
                 <CreditCard size={18} />
                 <span>Transactions</span>
               </div>
             </Link>
             <Link href="/account/track-order">
-              <div className="flex items-center space-x-3 px-4 py-2 rounded-lg cursor-pointer" style={{ color: '#2F2F2F', backgroundColor: '#FAF8F3' }}>
+              <div className="flex items-center space-x-3 px-4 py-2 mb-5 rounded-lg cursor-pointer" style={{ color: '#2F2F2F', backgroundColor: '#FAF8F3' }}>
                 <Truck size={18} />
                 <span>Track Order</span>
               </div>
