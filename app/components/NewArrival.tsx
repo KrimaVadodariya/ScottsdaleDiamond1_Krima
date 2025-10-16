@@ -33,8 +33,8 @@ export default function NewArrival() {
       </div>
       
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full">
-        <div className="max-w-2xl text-white">
+      <div className="relative z-10 max-w-7xl mx-3 px-6 w-full">
+        <div className="max-w-3xl text-white">
           <h2 className="text-5xl md:text-6xl lg:text-7xl font-serif font-light leading-none tracking-tight mb-8">
             We didn't follow the diamond rules,
             <span className="block mt-4 font-bold tracking-tight">WE REWROTE THEM.</span>

@@ -157,10 +157,10 @@ export default function HomePage() {
             Because jewelry should do more than shine — it should belong to you.
           </p> 
 
-          <p className="text-lg sm:text-xl text-primary-bg mb-8 font-light leading-relaxed">
+          {/* <p className="text-lg sm:text-xl text-primary-bg mb-8 font-light leading-relaxed">
             If you don't see somthing in our initial collection you like,
             send us a picture and within 48 hours we will provide you a freequote.
-          </p> 
+          </p>  */}
 
           <div className="flex space-x-4">
             <Link href="/jewelry">
@@ -274,6 +274,90 @@ export default function HomePage() {
 
       {/* New Arrivals Section */}
       <NewArrival />
+
+      {/* Centered Text Section */}
+      <section className="w-full py-16 md:py-24" style={{ backgroundColor: '#FAF8F3' }}>
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="bg-white p-8 md:p-12 rounded-lg shadow-md text-center" style={{ border: '1px solid #D4C2A8' }}>
+            <h2 className="text-4xl md:text-5xl font-serif font-light mb-8" style={{ color: '#2F2F2F' }}>
+              Timeless Elegance, <br/><span className="font-bold">Modern Craftsmanship</span>
+            </h2>
+            <div className="h-px w-32 mx-auto mb-8" style={{ backgroundColor: '#D4C2A8' }}></div>
+            <p className="text-lg leading-relaxed mb-10" style={{ color: '#6D6157' }}>
+              If you don't see something in our initial collection you like,
+              send us a picture and within 48 hours we will provide you a free quote.
+            </p>
+            <Link 
+              href="/boutique" 
+              className="inline-block px-8 py-3 rounded-full font-medium transition-all duration-300"
+              style={{
+                backgroundColor: '#CBAE9B',
+                color: '#2F2F2F',
+                border: '1px solid #D4C2A8',
+                boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+              }}
+              onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#9C7E6A'}
+              onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#CBAE9B'}
+            >
+              Get Your Free Quote
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Horizontal Scrolling Banner */}
+      <section className="py-12 overflow-hidden bg-white">
+        <div className="relative">
+          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent z-10"></div>
+          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent z-10"></div>
+          
+          <div className="flex items-center space-x-8 py-6 animate-scroll whitespace-nowrap">
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+              <div key={item} className="inline-flex flex-col items-center justify-center px-8">
+                <div className="w-32 h-32 rounded-full overflow-hidden mb-4 border-2 border-gold-200">
+                  <Image 
+                    src={`/banner-${item}.jpg`} 
+                    alt={`Brand ${item}`}
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span className="text-lg font-medium text-gray-700">Brand {item}</span>
+              </div>
+            ))}
+            {/* Duplicate items for seamless loop */}
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
+              <div key={`duplicate-${item}`} className="inline-flex flex-col items-center justify-center px-8">
+                <div className="w-32 h-32 rounded-full overflow-hidden mb-4 border-2 border-gold-200">
+                  <Image 
+                    src={`/banner-${item}.jpg`} 
+                    alt={`Brand ${item}`}
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <span className="text-lg font-medium text-gray-700">Brand {item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <style jsx global>{`
+        @keyframes scroll {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(-50% - 1rem)); }
+        }
+        .animate-scroll {
+          display: inline-block;
+          animation: scroll 30s linear infinite;
+        }
+        .animate-scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
 
       {/* Trust Section */}
       <TrustSection />
