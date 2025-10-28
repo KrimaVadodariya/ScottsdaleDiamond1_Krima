@@ -17,17 +17,17 @@ export default function HomePage() {
   const [products, setProducts] = useState([])
   const [categories, setCategories] = useState([])
   const [loading, setLoading] = useState(true)
-  
+
   useEffect(() => {
     fetchProducts()
   }, [])
-  
+
   const fetchProducts = async () => {
     try {
       const res = await fetch('/api/products')
       const data = await res.json()
       setProducts(data)
-      
+
       // Extract unique categories from products
       const uniqueCategories = Array.from(new Set(data.map((p: { category: string }) => p.category)))
       const categoryData = uniqueCategories.map((cat: string, index: number) => {
@@ -46,7 +46,7 @@ export default function HomePage() {
       setLoading(false)
     }
   }
-  
+
   // Duplicate categories for infinite loop
   const infiniteCategories = [...categories, ...categories]
 
@@ -64,7 +64,7 @@ export default function HomePage() {
       const itemWidth = scrollRef.current.clientWidth / 3
       const maxPosition = itemWidth * categories.length
       let newPosition = scrollPosition + itemWidth
-      
+
       if (newPosition >= maxPosition) {
         scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' })
         setScrollPosition(0)
@@ -77,21 +77,21 @@ export default function HomePage() {
 
   useEffect(() => {
     if (categories.length === 0) return
-    
+
     const interval = setInterval(() => {
       if (scrollRef.current) {
         const itemWidth = scrollRef.current.clientWidth / 3 // Show 3 items at once
-        
+
         setScrollPosition(prev => {
           const newPosition = prev + itemWidth
           const maxPosition = itemWidth * categories.length
-          
+
           // Reset to beginning when we've scrolled through original set
           if (newPosition >= maxPosition) {
             scrollRef.current?.scrollTo({ left: 0, behavior: 'auto' })
             return 0
           }
-          
+
           scrollRef.current?.scrollTo({ left: newPosition, behavior: 'smooth' })
           return newPosition
         })
@@ -131,7 +131,7 @@ export default function HomePage() {
           </video>
           <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
         </div> */}
-        
+
         <motion.div
           initial={{ x: -100, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -145,17 +145,17 @@ export default function HomePage() {
           >
             {/*<Sparkles className="text-yellow-400" size={60} /> */}
           </motion.div>
-          
+
           <h1 className="text-3xl sm:text-4xl lg:text-5xl pt-6 font-space font-black text-primary-bg mb-6 leading-tight text-start">
             Jewelry That Evolves With You
-          </h1> 
-          
+          </h1>
+
           <p className="text-lg sm:text-xl text-primary-bg mb-8 font-light leading-relaxed">
             Every chapter of your life deserves something timeless to remember it by.
             From milestones to quiet shifts, we craft pieces that move with your story — not apart from it.
             Each design begins with who you are today and grows with who you're becoming.
             Because jewelry should do more than shine — it should belong to you.
-          </p> 
+          </p>
 
           {/* <p className="text-lg sm:text-xl text-primary-bg mb-8 font-light leading-relaxed">
             If you don't see somthing in our initial collection you like,
@@ -179,7 +179,7 @@ export default function HomePage() {
                 whileTap={{ scale: 0.95 }}
                 className="border-2 border-accent text-primary-bg hover:bg-accent hover:text-text-primary px-8 py-4 font-bold text-lg transition-all duration-300"
               >
-                Book Your consultation 
+                Book Your consultation
               </motion.button>
             </Link>
           </div>
@@ -190,7 +190,7 @@ export default function HomePage() {
       <MainContentSlider />
 
       {/* Categories Section */}
-      <section className="py-20" style={{backgroundColor: '#FAF8F3'}}>
+      <section className="py-20" style={{ backgroundColor: '#FAF8F3' }}>
         <div className="max-w-7xl mx-auto px-8">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -199,23 +199,23 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <div className="flex items-center justify-center mb-6">
-              <div className="h-px w-20" style={{backgroundColor: '#D4C2A8'}} />
+              <div className="h-px w-20" style={{ backgroundColor: '#D4C2A8' }} />
               <span className="mx-4 text-3xl">💎</span>
-              <div className="h-px w-20" style={{backgroundColor: '#D4C2A8'}} />
+              <div className="h-px w-20" style={{ backgroundColor: '#D4C2A8' }} />
             </div>
-            
-           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-space font-bold mb-4" style={{color: '#2F2F2F'}}>
-             Shop By Category
+
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-space font-bold mb-4" style={{ color: '#2F2F2F' }}>
+              Shop By Category
             </h2>
-            <p className="text-lg sm:text-xl" style={{color: '#6D6157'}}>
+            <p className="text-lg sm:text-xl" style={{ color: '#6D6157' }}>
               Discover the perfect piece for every moment
             </p>
-            
+
             <div className="flex items-center justify-center mt-6">
-              <div className="h-px w-32" style={{backgroundColor: '#D4C2A8'}} />
+              <div className="h-px w-32" style={{ backgroundColor: '#D4C2A8' }} />
             </div>
           </motion.div>
-          
+
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {[1, 2, 3].map((i) => (
@@ -235,7 +235,7 @@ export default function HomePage() {
                     whileHover={{ y: -10 }}
                     className="group cursor-pointer"
                   >
-                    <div className="relative overflow-hidden rounded-2xl shadow-xl backdrop-blur-sm" style={{backgroundColor: '#EFE9E3', borderColor: '#D4C2A8', borderWidth: '1px'}}>
+                    <div className="relative overflow-hidden rounded-2xl shadow-xl backdrop-blur-sm" style={{ backgroundColor: '#EFE9E3', borderColor: '#D4C2A8', borderWidth: '1px' }}>
                       <div className="relative aspect-[4/3] overflow-hidden">
                         <Image
                           src={category.image}
@@ -245,19 +245,19 @@ export default function HomePage() {
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                       </div>
-                      
+
                       <div className="p-6">
-                        <h3 className="text-xl font-bold mb-3" style={{color: '#2F2F2F'}}>
+                        <h3 className="text-xl font-bold mb-3" style={{ color: '#2F2F2F' }}>
                           {category.name}
                         </h3>
-                        <p className="text-sm mb-4" style={{color: '#6D6157'}}>
+                        <p className="text-sm mb-4" style={{ color: '#6D6157' }}>
                           {category.count} items available
                         </p>
-                        
+
                         <motion.button
                           whileHover={{ x: 5 }}
                           className="flex items-center font-medium transition-colors"
-                          style={{color: '#CBAE9B'}}
+                          style={{ color: '#CBAE9B' }}
                         >
                           Shop Now
                           <ArrowRight size={16} className="ml-2" />
@@ -280,15 +280,15 @@ export default function HomePage() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="bg-white p-8 md:p-12 rounded-lg shadow-md text-center" style={{ border: '1px solid #D4C2A8' }}>
             <h2 className="text-4xl md:text-5xl font-serif font-light mb-8" style={{ color: '#2F2F2F' }}>
-              Timeless Elegance, <br/><span className="font-bold">Modern Craftsmanship</span>
+              Timeless Elegance, <br /><span className="font-bold">Modern Craftsmanship</span>
             </h2>
             <div className="h-px w-32 mx-auto mb-8" style={{ backgroundColor: '#D4C2A8' }}></div>
             <p className="text-lg leading-relaxed mb-10" style={{ color: '#6D6157' }}>
               If you don't see something in our initial collection you like,
               send us a picture and within 48 hours we will provide you a free quote.
             </p>
-            <Link 
-              href="/boutique" 
+            <Link
+              href="/boutique"
               className="inline-block px-8 py-3 rounded-full font-medium transition-all duration-300"
               style={{
                 backgroundColor: '#CBAE9B',
@@ -305,42 +305,14 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Horizontal Scrolling Banner */}
-      <section className="py-12 overflow-hidden bg-white">
-        <div className="relative">
-          <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-white to-transparent z-10"></div>
-          <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-white to-transparent z-10"></div>
-          
-          <div className="flex items-center space-x-8 py-6 animate-scroll whitespace-nowrap">
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-              <div key={item} className="inline-flex flex-col items-center justify-center px-8">
-                <div className="w-32 h-32 rounded-full overflow-hidden mb-4 border-2 border-gold-200">
-                  <Image 
-                    src={`/banner-${item}.jpg`} 
-                    alt={`Brand ${item}`}
-                    width={128}
-                    height={128}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <span className="text-lg font-medium text-gray-700">Brand {item}</span>
-              </div>
-            ))}
-            {/* Duplicate items for seamless loop */}
-            {[1, 2, 3, 4, 5, 6, 7, 8].map((item) => (
-              <div key={`duplicate-${item}`} className="inline-flex flex-col items-center justify-center px-8">
-                <div className="w-32 h-32 rounded-full overflow-hidden mb-4 border-2 border-gold-200">
-                  <Image 
-                    src={`/banner-${item}.jpg`} 
-                    alt={`Brand ${item}`}
-                    width={128}
-                    height={128}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <span className="text-lg font-medium text-gray-700">Brand {item}</span>
-              </div>
-            ))}
+      {/* Celebrity & Events Banner */}
+      <section className="py-3 bg-white overflow-hidden">
+        <div className="overflow-hidden whitespace-nowrap">
+          <div className="animate-scroll text-lg font-medium" style={{ color: '#6D6157' }}>
+            <span className="text-l font-bold " style={{ color: '#2F2F2F' }}>Worn By Celebrities : </span>
+            Taylor Swift • Kyle Richards • Sydney Sweeney • Dame Helen Mirren • Kelly Osbourne • Priyanka Chopra • Lily Allen
+            <span className="text-l font-bold ms-5" style={{ color: '#2F2F2F' }}>Featured At Events : </span>
+            The Academy Awards • The Golden Globes • The Met Gala • The BAFTA Awards • Cannes Film Festival • The Grammy Awards • The Emmy Awards • The Brit Awards • amfAR Gala • The Academy Awards • The Golden Globes • The Met Gala • The BAFTA Awards
           </div>
         </div>
       </section>
