@@ -72,8 +72,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
-
       </div>
       
       {/* Copyright */}
@@ -83,6 +81,9 @@ export default function Footer() {
           <Link href="#" className="transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>Disclaimer</Link> | 
           <Link href="#" className="transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>T&C</Link>
         </p>
+        <p className="text-xs" style={{color: '#6D6157'}}>
+          Developed By &nbsp; 
+          <Link href="https://www.technovatechnologies.com/" className="transition-colors" style={{color: '#6D6157'}} onMouseEnter={(e) => (e.target as HTMLElement).style.color = '#CBAE9B'} onMouseLeave={(e) => (e.target as HTMLElement).style.color = '#6D6157'}>Technova Technologies</Link>        </p>
       </div>
     </footer>
   )
